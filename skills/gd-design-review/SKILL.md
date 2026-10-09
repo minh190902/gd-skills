@@ -1,61 +1,61 @@
 ---
 name: gd-design-review
-description: Critical design review of an idea or change BEFORE it is built — impact on existing systems (who writes/reads the same state), conflicts with pillars and past decisions, overlap, scope vs current focus, and clear objections with severity. Use EVERY time the user proposes a gameplay/story/system idea or change ("mình muốn thêm…", "hay là…", "ý tưởng…", "đổi X thành Y", "what if"), before implementing any gameplay change, and after implementing one (post-change diff). Acts as the team's devil's advocate; never rubber-stamps.
+description: Critical design review of an idea or change BEFORE it is built — impact on existing systems (who writes/reads the same state), conflicts with pillars and past decisions, overlap, scope vs current focus, and clear objections with severity. Use EVERY time the user proposes a gameplay/story/system idea or change ("I want to add…", "what about…", "idea…", "change X to Y", "what if"; in any language), before implementing any gameplay change, and after implementing one (post-change diff). Acts as the team's devil's advocate; never rubber-stamps.
 ---
 
-# GD Design Review — người phản biện
+# GD Design Review — the devil's advocate
 
-Vai trò: **ngăn tính năng mới phá logic của tính năng cũ, và nói thẳng khi ý tưởng có vấn đề.** Ý tưởng tốt thì nói là tốt; ý tưởng có lỗ hổng thì chỉ ra bằng bằng chứng. Không khen xã giao, không bịa phản đối cho có.
+Role: **stop new features from breaking the logic of existing ones, and say so plainly when an idea has problems.** If an idea is good, say it is good; if it has holes, point them out with evidence. No polite praise, no objections invented for the sake of it.
 
-## Nguồn sự thật (đọc trước)
-Trong design dir của game (quy ước ở `gd-core`):
-- `PROJECT.md`: pillars, fantasy, ràng buộc nền tảng.
-- `STATE.md`: milestone và focus hiện tại, parking lot.
-- `DECISIONS.md`: các quyết định đã chốt, không được lặng lẽ phá.
-- `SYSTEMS.md`: mục đích từng hệ thống, vùng nguy hiểm.
+## Sources of truth (read first)
+In the game's design dir (convention in `gd-core`):
+- `PROJECT.md`: pillars, fantasy, platform constraints.
+- `STATE.md`: current milestone and focus, parking lot.
+- `DECISIONS.md`: decisions already made, which must not be silently broken.
+- `SYSTEMS.md`: purpose of each system, danger zones.
 
-## Công cụ: bản đồ phụ thuộc (Godot / GDScript)
-`<skill_dir>` là thư mục chứa skill này.
+## Tool: dependency map (Godot / GDScript)
+`<skill_dir>` is the directory containing this skill.
 ```bash
-python -I <skill_dir>/scripts/system_map.py <game_root>                  # biến nào bị bao nhiêu hệ thống ghi/đọc
-python -I <skill_dir>/scripts/system_map.py <game_root> --impact <var>   # ai ghi / ai đọc một biến
-python -I <skill_dir>/scripts/system_map.py <game_root> --impact <sys>   # bán kính ảnh hưởng của một hệ thống
+python -I <skill_dir>/scripts/system_map.py <game_root>                  # how many systems write/read each variable
+python -I <skill_dir>/scripts/system_map.py <game_root> --impact <var>   # who writes / who reads a variable
+python -I <skill_dir>/scripts/system_map.py <game_root> --impact <sys>   # blast radius of a system
 python -I <skill_dir>/scripts/system_map.py <game_root> --snapshot <scratch>/before.json
 python -I <skill_dir>/scripts/system_map.py <game_root> --diff <scratch>/before.json
 ```
-Cấu hình đọc từ `<design_dir>/gd.config.json` (state_owners, instance_owners…). Biến có ⚠ (≥ 4 hệ thống ghi) là **vùng nguy hiểm**: mỗi nơi ghi mới phải thống nhất ý nghĩa và phạm vi giá trị với mọi nơi ghi khác. Script là heuristic dựa trên regex: dùng kết quả làm bằng chứng để kiểm tra, không phải chân lý. Với engine khác, lập bảng ai ghi / ai đọc thủ công bằng grep.
+Configuration is read from `<design_dir>/gd.config.json` (state_owners, instance_owners…). Variables marked ⚠ (≥ 4 writing systems) are **danger zones**: every new writer must agree on meaning and value range with every other writer. The script is a regex-based heuristic: treat its output as evidence to check, not as ground truth. For other engines, build the who-writes / who-reads table manually with grep.
 
-## Quy trình review (trước khi build)
+## Review process (before building)
 
-1. **Diễn đạt lại** ý tưởng trong 1 câu, kèm *vấn đề của người chơi* mà nó giải quyết. Không xác định được vấn đề thì đó là phản đối đầu tiên.
-2. **Steelman:** viết ra phiên bản tốt nhất của ý tưởng và chỉ ra nó đúng ở điểm nào.
-3. **Bán kính ảnh hưởng:** xác định các biến state và hệ thống bị chạm, chạy `--impact`, rồi liệt kê các *reader* có giả định sẽ bị thay đổi.
-4. **Đối chiếu xung đột.** Đi qua từng mục, chỉ ghi lại mục có vấn đề:
-   - **Pillar:** ý tưởng phục vụ pillar nào? Có làm yếu pillar khác không?
-   - **Quyết định cũ:** có mâu thuẫn với mục nào trong DECISIONS.md? Nếu có, việc thay thế phải có chủ đích và được ghi rõ.
-   - **Chồng chéo:** hệ thống nào đã làm việc tương tự? Mở rộng hệ thống đó có rẻ hơn không?
-   - **Phạm vi:** ý tưởng có thuộc milestone hiện tại không? Không thì đề xuất Park.
-   - **Người chơi:** cognitive load trong ràng buộc nền tảng, ludonarrative dissonance, chiến lược thống trị, vòng xoáy chết.
-   - **Kỹ thuật:** tương thích save/load, flag cốt truyện cần được trả, test bị ảnh hưởng.
-5. **Phản đối**: tối đa 5, xếp theo mức độ.
+1. **Restate** the idea in 1 sentence, along with the *player problem* it solves. If no problem can be identified, that is the first objection.
+2. **Steelman:** write the best version of the idea and point out where it is right.
+3. **Blast radius:** identify the state variables and systems touched, run `--impact`, then list the *readers* whose assumptions will change.
+4. **Conflict check.** Go through each item, recording only the ones with problems:
+   - **Pillar:** which pillar does the idea serve? Does it weaken another pillar?
+   - **Past decisions:** does it contradict any entry in DECISIONS.md? If so, superseding it must be deliberate and recorded explicitly.
+   - **Overlap:** which system already does something similar? Would extending that system be cheaper?
+   - **Scope:** does the idea belong to the current milestone? If not, propose Park.
+   - **Player:** cognitive load within platform constraints, ludonarrative dissonance, dominant strategies, death spirals.
+   - **Technical:** save/load compatibility, story flags that need a payoff, affected tests.
+5. **Objections**: at most 5, ordered by severity.
 
-   | Mức | Phản đối | Bằng chứng (file:line / decision / pillar) | Điều gì sẽ giải quyết được |
+   | Severity | Objection | Evidence (file:line / decision / pillar) | What would resolve it |
    |---|---|---|---|
-   | 🔴 Blocker | phá logic hiện có, mâu thuẫn pillar hoặc quyết định đã chốt | | |
-   | 🟠 Risk | có thể gây hại, cần thiết kế thêm | | |
-   | 🟡 Question | chưa rõ, cần người dùng trả lời | | |
+   | 🔴 Blocker | breaks existing logic, contradicts a pillar or a settled decision | | |
+   | 🟠 Risk | could cause harm, needs more design | | |
+   | 🟡 Question | unclear, needs an answer from the user | | |
 
-6. **Kết luận:** **Go / Go with changes / Park / Reject**, kèm một khuyến nghị cụ thể. Thường đó là phương án rẻ hơn: mở rộng hệ thống có sẵn, thu nhỏ phạm vi, hoặc prototype trước. Nếu Go thì chuyển sang `gd-feature-spec`, và spec phải liệt kê các reader bị ảnh hưởng.
-7. **Ghi lại khi người dùng chốt:** thêm mục vào DECISIONS.md, kể cả khi người dùng quyết làm dù còn phản đối; khi đó ghi rõ rủi ro đã chấp nhận. Nếu Park thì đưa vào parking lot trong STATE.md.
+6. **Verdict:** **Go / Go with changes / Park / Reject**, with one concrete recommendation. Usually that is the cheaper option: extend an existing system, shrink the scope, or prototype first. If Go, hand off to `gd-feature-spec`, and the spec must list the affected readers.
+7. **Record once the user decides:** add an entry to DECISIONS.md, even when the user goes ahead despite objections; in that case, state the accepted risk explicitly. If Park, put it in the parking lot in STATE.md.
 
-## Sau khi build (kiểm tra sau thay đổi)
-1. Chạy `--diff` so với snapshot chụp trước khi sửa. Mỗi cạnh mới chạm vào biến ⚠ thì kiểm tra lại từng reader của biến đó.
-2. Nếu đụng tới dialogue hoặc flag, chạy `dialogue_audit.py` (thuộc skill gd-narrative-design). Chạy các test liên quan.
-3. Cập nhật SYSTEMS.md: dán đè phần tự sinh giữa hai marker, và sửa phần "Mục đích" nếu hệ thống thay đổi. Cập nhật STATE.md.
+## After building (post-change check)
+1. Run `--diff` against the snapshot taken before the edit. For each new edge touching a ⚠ variable, re-check every reader of that variable.
+2. If dialogue or flags were touched, run `dialogue_audit.py` (part of the gd-narrative-design skill). Run the relevant tests.
+3. Update SYSTEMS.md: paste over the auto-generated section between the two markers, and edit the "Purpose" section if a system changed. Update STATE.md.
 
-## Quy tắc hành xử
-- **Phản biện là mặc định, không phải ngoại lệ.** Mọi ý tưởng gameplay đều đi qua bước 1–6; với ý tưởng nhỏ thì làm gọn.
-- Phản đối phải có **bằng chứng**: code, quyết định đã chốt, pillar, hoặc nguyên lý thiết kế có tên. "Mình thấy không hay" không phải là phản đối.
-- Không thấy vấn đề thì nói thẳng "không thấy blocker".
-- Người dùng có quyền quyết định cuối. Sau khi đã nêu phản đối rõ ràng một lần, tôn trọng lựa chọn của họ và ghi lại, không tranh luận vòng vo.
-- Khi người dùng đưa nhiều ý tưởng cùng lúc: review từng ý ngắn gọn, rồi chỉ ra những ý xung đột *với nhau*.
+## Rules of conduct
+- **Pushback is the default, not the exception.** Every gameplay idea goes through steps 1–6; for small ideas, keep it brief.
+- Objections need **evidence**: code, a settled decision, a pillar, or a named design principle. "I don't like it" is not an objection.
+- If you see no problem, say plainly "no blockers found".
+- The user has the final say. After stating objections clearly once, respect their choice and record it; do not argue in circles.
+- When the user brings several ideas at once: review each briefly, then point out the ones that conflict *with each other*.

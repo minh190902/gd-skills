@@ -1,21 +1,21 @@
-# Feature Spec: <Tên tính năng>
+# Feature Spec: <Feature name>
 
 | Status | Owner | Version | Priority | Pillar(s) |
 |---|---|---|---|---|
 | WIP / Final | | v0.1 | P0/P1/P2 | |
 
 **Changelog**
-- YYYY-MM-DD v0.1 — tạo
+- YYYY-MM-DD v0.1 — created
 
 ---
 
 ## 1. Intention
-- **Vấn đề người chơi:** 
-- **Vì sao bây giờ:** 
-- **Trải nghiệm mong muốn (1 câu):** 
-- **Hành vi muốn khơi gợi:** 
-- **Fantasy check (theo PROJECT.md):** 
-- **Hệ thống hiện có gần nhất & vì sao không đủ:** 
+- **Player problem:** 
+- **Why now:** 
+- **Desired experience (1 sentence):** 
+- **Behavior to encourage:** 
+- **Fantasy check (per PROJECT.md):** 
+- **Closest existing system & why it isn't enough:** 
 
 ## 2. Functionality
 
@@ -25,45 +25,45 @@ Action → Feedback → Gain/Spend/Unlock → (meta) ...
 ```
 
 ### 2.2 Feature blocks
-| Hành động | Goal | Conditions | Player input | System response | Edge cases |
+| Action | Goal | Conditions | Player input | System response | Edge cases |
 |---|---|---|---|---|---|
 
 ### 2.3 State table
 | Input | Required state | Result | Feedback cue |
 |---|---|---|---|
 
-(FSM nếu ≥3 trạng thái: state · entry · exit · cue)
+(FSM if ≥3 states: state · entry · exit · cue)
 
 ### 2.4 Feedback levels
-| Mức | Khi nào | Hình/chữ trên màn hình | Audio |
+| Level | When | Visuals/text on screen | Audio |
 |---|---|---|---|
-| Nhỏ | | | |
-| Chuẩn | | | |
-| Lớn | | | |
+| Small | | | |
+| Standard | | | |
+| Big | | | |
 
 ### 2.5 Failure & transparency
-- Điều kiện thất bại:
-- Thất bại dạy gì:
-- Người chơi thấy / không thấy:
+- Failure conditions:
+- What failure teaches:
+- Player can see / cannot see:
 
 ## 3. Parameters
-| Tham số | Giá trị đầu | Đơn vị | Phạm vi | Nơi định nghĩa (Resource / config) | Ghi chú |
+| Parameter | Initial value | Unit | Range | Defined in (Resource / config) | Notes |
 |---|---|---|---|---|---|
 
 ## 4. Dependencies & Risks
-| System | Kiểu thay đổi | Rủi ro |
+| System | Change type | Risk |
 |---|---|---|
 | Event / signal bus | | |
 | Save / load | | |
 | Narrative / dialogue | | |
-| UI (màn nào) | | |
+| UI (which screen) | | |
 
-**Readers bị ảnh hưởng** (`system_map.py --impact`): 
+**Affected readers** (`system_map.py --impact`): 
 
-**Intent vs impact:** người chơi có thể lạm dụng/tối ưu mất ý đồ thế nào?
+**Intent vs impact:** how could players abuse/optimize away the design intent?
 
 ## 5. Validation
-| Giả thuyết | Cách kiểm | Ngưỡng thành công | Fallback |
+| Hypothesis | How to test | Success threshold | Fallback |
 |---|---|---|---|
 
 **Test cases:**

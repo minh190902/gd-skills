@@ -1,21 +1,21 @@
-# PROJECT — <Tên game>
+# PROJECT — <Game name>
 
-> Bối cảnh thiết kế mà mọi skill `gd-*` đọc trước khi đưa ý kiến. Giữ ngắn (≤ 2 trang) và đúng với hiện tại.
-> Cập nhật: YYYY-MM-DD
+> The design context every `gd-*` skill reads before giving an opinion. Keep it short (≤ 2 pages) and current.
+> Updated: YYYY-MM-DD
 
-## Định danh
-- **Thể loại / một câu pitch:** 
-- **Engine / ngôn ngữ:** 
-- **Nền tảng & ràng buộc** (orientation, input, độ dài phiên chơi): 
-- **Game tham chiếu / cảm hứng:** 
+## Identity
+- **Genre / one-line pitch:** 
+- **Engine / language:** 
+- **Platform & constraints** (orientation, input, session length): 
+- **Reference games / inspiration:** 
 
 ## Player fantasy
-- **Role** (người chơi trở thành ai): 
-- **Power** (họ làm được gì): 
-- **Responsibility** (họ chịu trách nhiệm cho điều gì): 
-- **Emotion** (cảm xúc chủ đạo): 
+- **Role** (who the player becomes): 
+- **Power** (what they can do): 
+- **Responsibility** (what they are responsible for): 
+- **Emotion** (dominant emotion): 
 
-## Pillars (3–5, dạng động từ + định tính)
+## Pillars (3–5, in the form verb + qualifier)
 1. 
 2. 
 3. 
@@ -24,19 +24,19 @@
 ```
 <Phase A> → <Phase B> → <Phase C> → ...
 ```
-Meta loop (điều gì kéo dài qua nhiều phiên): 
+Meta loop (what carries across sessions): 
 
-## Hệ thống chính (tóm tắt — chi tiết ở SYSTEMS.md)
+## Main systems (summary — details in SYSTEMS.md)
 - 
 
-## Vị trí dữ liệu & tài liệu
-| Thứ | Ở đâu |
+## Data & doc locations
+| Item | Where |
 |---|---|
 | GDD / PRD | |
-| Tham số gameplay (Resource / config) | |
-| Nội dung narrative | |
+| Gameplay parameters (Resource / config) | |
+| Narrative content | |
 | Tests | |
-| Quy chuẩn code / UI | |
+| Code / UI standards | |
 
-## Rủi ro thiết kế đã biết
+## Known design risks
 1. 

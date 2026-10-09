@@ -5,62 +5,62 @@ description: Plan playtests and turn playtest feedback into decisions — test g
 
 # GD Playtest & Iteration
 
-*Bẫy lớn nhất: thu thập feedback mà không hành động được.* Mục tiêu: từ build hoàn chỉnh → quyết định được ghi lại trong 72 giờ.
+*The biggest trap: collecting feedback you can't act on.* Goal: from a complete build → documented decisions within 72 hours.
 
-## Quy trình A — Lập kế hoạch playtest
+## Workflow A — Plan a playtest
 
-1. **Mục tiêu ≤ 2 câu**, chọn 1–2 hạng mục:
+1. **Goal ≤ 2 sentences**, pick 1–2 categories:
 
-   | Hạng mục | Câu hỏi | Tín hiệu đo |
+   | Category | Question | Measured signal |
    |---|---|---|
-   | Feel & Flow | Hành động cốt lõi có sướng? Loop dễ đọc? | Thời gian tới khi thành thạo, tỉ lệ input sai |
-   | Balance | Thử thách công bằng? Tài nguyên tạo căng thẳng? | Màn/wave thua, tài nguyên cuối màn, nhân vật chết |
-   | Clarity | Hiểu chuyện gì xảy ra và vì sao? | Tỉ lệ skip tutorial, số lần hỏi/do dự |
-   | Emotion | Cảm được đỉnh và đáy? | Tự báo cáo theo beat |
-   | Retention hook | Có muốn chơi phiên nữa? | Điểm ý định quay lại 1–5 |
+   | Feel & Flow | Does the core action feel good? Is the loop readable? | Time to mastery, input error rate |
+   | Balance | Are challenges fair? Do resources create tension? | Stages/waves lost, end-of-stage resources, character deaths |
+   | Clarity | Do players understand what happens and why? | Tutorial skip rate, number of questions/hesitations |
+   | Emotion | Do they feel the highs and lows? | Self-report per beat |
+   | Retention hook | Do they want another session? | Return-intent score 1–5 |
 
-2. **Loại test** (nhỏ & thường xuyên trước): nội bộ team → nội bộ mù (chưa biết game) → bạn bè/gia đình → nhóm tập trung → closed alpha → demo công khai.
-3. **Chọn tester** (3–5 người, trộn các kiểu): *blind* (onboarding) · *careful explorer* (giải thích thừa) · *optimizer* (khai thác) · *chaos agent* (giới hạn hệ thống).
-4. **Chuẩn bị capture** — kiểm tra trước khi test: quay màn hình điện thoại, think-aloud, log sự kiện (nếu có: thêm log tạm cho các sự kiện chính: bắt đầu/kết thúc màn, tài nguyên, nhân vật chết, lựa chọn dialogue), khảo sát 5 câu gắn với mục tiêu.
-5. **Kịch bản quan sát** cho người điều phối: *không bao giờ giải thích trong lúc test*; không sửa giữa chừng; ghi lại im lặng, thở dài, chỗ dừng lâu.
-6. Output: `<game_root>/docs/playtest/<YYYY-MM-DD>-plan.md` theo [templates/playtest.md](templates/playtest.md) (phần Plan). Ghi build/commit hash và changelog.
+2. **Test type** (small & frequent first): team internal → blind internal (hasn't seen the game) → friends/family → focus group → closed alpha → public demo.
+3. **Pick testers** (3–5 people, mixed types): *blind* (onboarding) · *careful explorer* (over-explains) · *optimizer* (exploits) · *chaos agent* (system limits).
+4. **Prepare capture** — check before testing: phone screen recording, think-aloud, event logs (if possible: add temporary logs for key events: stage start/end, resources, character deaths, dialogue choices), a 5-question survey tied to the goal.
+5. **Observation script** for the facilitator: *never explain during the test*; don't fix mid-session; note silences, sighs, long pauses.
+6. Output: `<game_root>/docs/playtest/<YYYY-MM-DD>-plan.md` using [templates/playtest.md](templates/playtest.md) (Plan section). Record the build/commit hash and changelog.
 
-## Quy trình B — Xử lý kết quả
+## Workflow B — Process results
 
-1. **Ghi lại bất ngờ** trước, rồi tách **triệu chứng** (lạc đường) khỏi **nguyên nhân** (thiếu chỉ dẫn).
-2. **Đọc tín hiệu hành vi:**
+1. **Record surprises** first, then separate **symptoms** (got lost) from **causes** (missing guidance).
+2. **Read behavioral signals:**
 
-   | Hành vi | Thường nghĩa là |
+   | Behavior | Usually means |
    |---|---|
-   | Dừng lâu | Ma sát hoặc quá tải |
-   | Lặp lại một hành động | Feedback không rõ / affordance hỏng |
-   | Bỏ qua thứ hiển nhiên | Phân cấp thị giác kém |
-   | Không phản ứng | Nhịp phẳng |
-   | Cười sai chỗ | Mâu thuẫn hoặc emergent play |
-   | Quay lui | Mục tiêu không rõ |
-   | Skip | Chán hoặc không tin tưởng |
-   | Im lặng đột ngột | Đỉnh căng thẳng (tốt) hoặc mất hứng |
+   | Long pause | Friction or overload |
+   | Repeating an action | Unclear feedback / broken affordance |
+   | Missing the obvious | Poor visual hierarchy |
+   | No reaction | Flat pacing |
+   | Laughing at the wrong moment | Contradiction or emergent play |
+   | Backtracking | Unclear goal |
+   | Skipping | Boredom or distrust |
+   | Sudden silence | Tension peak (good) or lost interest |
 
-   *"Người chơi không bao giờ sai. Nếu họ hiểu sai hệ thống, hệ thống đã thể hiện sai."* Nhưng đừng phản ứng thái quá với một người — tìm pattern qua các phiên.
-3. **Nghĩ theo hệ thống:** hành động nào kích hoạt nó, hệ thống phản hồi thế nào, lớp nào của Game Map bị vỡ.
-4. **Gom & phân loại:** theo pillar và mức độ → **Critical / Important / Nice-to-have** (parking lot). Fix ước tính >1 ngày → spike prototype trước.
-5. **Decision log:** Vấn đề · Thay đổi đề xuất · Owner · Hạn · Pillar phục vụ · Cách xác nhận ở lần test sau.
-6. Chuyển mỗi quyết định thành ticket (ghi vào backlog của dự án nếu người dùng đồng ý; quyết định quan trọng → DECISIONS.md) và gọi skill phù hợp: UX → `gd-ux-audit`, số → `gd-economy-balance`, truyện → `gd-narrative-design`, tính năng → `gd-feature-spec`/`gd-feature-audit`.
+   *"The player is never wrong. If they misunderstand the system, the system communicated it wrong."* But don't overreact to one person — look for patterns across sessions.
+3. **Think in systems:** which action triggers it, how the system responds, which layer of the Game Map is broken.
+4. **Group & triage:** by pillar and severity → **Critical / Important / Nice-to-have** (parking lot). Fixes estimated at >1 day → prototype spike first.
+5. **Decision log:** Problem · Proposed change · Owner · Deadline · Pillar served · How to validate in the next test.
+6. Turn each decision into a ticket (add to the project backlog if the user agrees; important decisions → DECISIONS.md) and call the appropriate skill: UX → `gd-ux-audit`, numbers → `gd-economy-balance`, story → `gd-narrative-design`, features → `gd-feature-spec`/`gd-feature-audit`.
 
-## Insight → Action (áp dụng cho MỌI phân tích)
-Pattern ("skip dialogue sau 10s") → hỏi vì sao → kiểm ngữ cảnh (onboarding hay endgame) → giả thuyết → bước tiếp theo (thử bản cắt ngắn) → theo dõi tác động.
+## Insight → Action (applies to EVERY analysis)
+Pattern ("skips dialogue after 10s") → ask why → check context (onboarding or endgame) → hypothesis → next step (try a shortened version) → track impact.
 
-Phân tích chỉ actionable nếu trả lời ít nhất một: *thay đổi gì, giữ gì, test gì, bỏ/hoãn gì, cái gì có khả năng hỏng/gây thích thú*. Test cuối: **có viết được thành một ticket sprint không?** Nếu không → còn là bình luận.
+An analysis is only actionable if it answers at least one of: *what to change, what to keep, what to test, what to cut/postpone, what is likely to break/delight*. Final test: **can it be written as a sprint ticket?** If not → it's still commentary.
 
-Cảnh báo dữ liệu: vài người trên Discord, cảm giác, ý kiến streamer, test 8 người = *tín hiệu*, không phải *dữ liệu*. Tương quan ≠ nhân quả.
+Data warning: a few people on Discord, gut feeling, streamer opinions, an 8-person test = *signal*, not *data*. Correlation ≠ causation.
 
-## Nhịp gợi ý
-Thứ Hai build + test · Thứ Tư quyết định · Thứ Sáu implement.
+## Suggested cadence
+Monday build + test · Wednesday decide · Friday implement.
 
 ## Checklist
-- [ ] Mục tiêu ≤ 2 câu
-- [ ] Build number + changelog đã chia sẻ
-- [ ] Capture đã kiểm tra trước
-- [ ] Phân loại trong 48 giờ
-- [ ] Mỗi hành động gắn với một pillar
-- [ ] Lần test tiếp theo đã lên lịch
+- [ ] Goal ≤ 2 sentences
+- [ ] Build number + changelog shared
+- [ ] Capture checked beforehand
+- [ ] Triaged within 48 hours
+- [ ] Every action tied to a pillar
+- [ ] Next test scheduled

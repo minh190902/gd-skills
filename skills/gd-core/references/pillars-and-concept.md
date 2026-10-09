@@ -1,51 +1,51 @@
 # Pillars, 1-Pager, Concept Doc, Idea Generation
 
-Nguồn: gamedesign.guide/practice (CC BY 4.0), diễn giải.
+Source: gamedesign.guide/practice (CC BY 4.0), paraphrased.
 
-## Design pillars — quy trình 5 bước
+## Design pillars — 5-step process
 
-Tính chất: Cụ thể, Khác biệt (phản ánh USP), Kiểm thử được, Xuyên suốt. **3–5 pillar**, mỗi cái 5–7 chữ, dạng *động từ + định tính*.
+Qualities: Specific, Distinctive (reflects the USP), Testable, Pervasive. **3–5 pillars**, each 5–7 words, in the form *verb + qualifier*.
 
-| Bước | Làm gì | Output |
+| Step | What to do | Output |
 |---|---|---|
-| 1. Vision sprint | Fantasy, đối tượng, khoảng trống thị trường | Vision 1 câu |
-| 2. Core experience map | Động từ, loop, emotion arc | Sơ đồ 1 trang |
-| 3. Gom chủ đề | Từ khóa lặp lại | Nhóm từ khóa |
-| 4. Nháp pillar | Động từ + định tính | 4–6 pillar thô |
-| 5. Stress-test | Paper/prototype test; cắt cái mơ hồ | 3–5 pillar cuối |
+| 1. Vision sprint | Fantasy, audience, market gap | 1-sentence vision |
+| 2. Core experience map | Verbs, loops, emotion arc | 1-page diagram |
+| 3. Cluster themes | Recurring keywords | Keyword groups |
+| 4. Draft pillars | Verb + qualifier | 4–6 rough pillars |
+| 5. Stress-test | Paper/prototype test; cut the vague ones | 3–5 final pillars |
 
-Checklist: mô tả trải nghiệm người chơi? Vừa 1 slide? QA viết được test case? Mọi core feature phục vụ ≥1 pillar? Cùng nhau thể hiện USP? Re-audit pillar mỗi milestone.
+Checklist: does it describe the player experience? Fits on 1 slide? Can QA write test cases from it? Does every core feature serve ≥1 pillar? Together, do they express the USP? Re-audit pillars every milestone.
 
 ## 1-Pager
 
-1. Title (+ subtitle) 2. Hook 1 câu (fantasy hoặc mâu thuẫn cốt lõi) 3. Genre + Platform 4. Target audience (tuổi/kỹ năng, động lực, game tham chiếu) 5. Core loop 6. USPs (3–5) 7. Pillars (3–5) 8. Theme / Fantasy / Setting (tone, visual, emotion arc) 9. Game tham chiếu (và vì sao) 10. Monetization 11. Team fit / Why us 12. Visual tùy chọn (moodboard, palette, tagline).
+1. Title (+ subtitle) 2. 1-sentence hook (fantasy or core conflict) 3. Genre + Platform 4. Target audience (age/skill, motivation, reference games) 5. Core loop 6. USPs (3–5) 7. Pillars (3–5) 8. Theme / Fantasy / Setting (tone, visuals, emotion arc) 9. Reference games (and why) 10. Monetization 11. Team fit / Why us 12. Optional visuals (moodboard, palette, tagline).
 
-Final check: fantasy rõ; loop dễ giải thích; khác biệt cả về hình ảnh lẫn thiết kế; monetization thực tế với thể loại; đối tượng tập trung và có lý do.
+Final check: clear fantasy; loop easy to explain; distinct both visually and in design; monetization realistic for the genre; audience focused and justified.
 
-## Game Concept Document (3–5 trang)
+## Game Concept Document (3–5 pages)
 
-Bảng tổng quan (Title, Pitch, Genre & Platform, Audience, Business model, USP) → 1. High-level concept → 2. World & Setting (theme, premise, địa điểm, phe phái, nhân vật, moodboard) → 3. Gameplay overview (core loop + sơ đồ, cấu trúc, điều khiển, progression, economy) → 4. Mechanics & Systems → 5. Art & Aesthetic → 6. Audio → 7. Tech stack → 8. Monetization & Business → 9. Competitive landscape (mini-SWOT) → 10. Production plan → Risk table → Next steps.
+Overview table (Title, Pitch, Genre & Platform, Audience, Business model, USP) → 1. High-level concept → 2. World & Setting (theme, premise, locations, factions, characters, moodboard) → 3. Gameplay overview (core loop + diagram, structure, controls, progression, economy) → 4. Mechanics & Systems → 5. Art & Aesthetic → 6. Audio → 7. Tech stack → 8. Monetization & Business → 9. Competitive landscape (mini-SWOT) → 10. Production plan → Risk table → Next steps.
 
 ## Idea generation
 
-- Phương pháp: Brainstorm, **SCAMPER** (Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse), Mind map, Game mashup, Reverse design (đổi loop của game có sẵn), Blue ocean (bỏ yếu tố quen thuộc, thêm hook). Phân kỳ trước, hội tụ sau.
+- Methods: Brainstorm, **SCAMPER** (Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse), Mind map, Game mashup, Reverse design (change the loop of an existing game), Blue ocean (drop familiar elements, add a hook). Diverge first, converge later.
 - **Idea card:** Idea, Genre, Core loop, Visual style, Player motivation, Why unique, One-line pitch.
-- **Chấm điểm:** Pros, Cons, Feasibility 1–5, Innovation 1–5, Audience fit 1–5; vẽ Innovation (X) × Feasibility (Y).
-- **Chọn:** ý tưởng được chọn, vì sao, rủi ro dự kiến, bước đầu (paper prototype → FTUE mockup → thống nhất team).
-- 5 bộ lọc thị trường: Desire (bằng chứng: wishlist, mod, clone), Contrast (nhận ra trong 5s), Feasibility (team nhỏ làm vertical slice được), Scalability, Meaning. Dùng AI làm *máy dò pattern*, không phải máy sinh ý tưởng.
+- **Scoring:** Pros, Cons, Feasibility 1–5, Innovation 1–5, Audience fit 1–5; plot Innovation (X) × Feasibility (Y).
+- **Selection:** the chosen idea, why, expected risks, first steps (paper prototype → FTUE mockup → team alignment).
+- 5 market filters: Desire (evidence: wishlists, mods, clones), Contrast (recognizable in 5s), Feasibility (a small team can build a vertical slice), Scalability, Meaning. Use AI as a *pattern detector*, not an idea generator.
 
-## Pitch — 3 "burn rate" cần tính
+## Pitch — 3 "burn rates" to estimate
 
-Creative (tinh thần team), **Narrative (người chơi tiêu thụ story nhanh cỡ nào)**, Mechanical (hệ thống cạn kiệt nhanh cỡ nào). Với game nặng narrative: ước lượng số phút nội dung mỗi stage vs. thời gian sản xuất mỗi stage.
+Creative (team morale), **Narrative (how fast players consume the story)**, Mechanical (how fast the systems get exhausted). For narrative-heavy games: estimate minutes of content per stage vs. production time per stage.
 
-## Tài liệu nào, khi nào
+## Which doc, when
 
-| Tài liệu | Khi |
+| Doc | When |
 |---|---|
-| Deconstruction | Trước khi lên ý tưởng |
-| 1-Pager / Concept | Để pitch hoặc làm rõ sớm |
-| GDD | **Sau khi hệ thống đã prototype** |
-| Narrative / Balance doc | Giữa production |
-| Pitch / Roadmap | Bên ngoài |
+| Deconstruction | Before ideation |
+| 1-Pager / Concept | To pitch or clarify early |
+| GDD | **After the systems have been prototyped** |
+| Narrative / Balance doc | Mid-production |
+| Pitch / Roadmap | External |
 
-Luật dừng viết: "Cái này có thể được" → prototype; "Không chắc cảm giác ra sao" → thử trong engine; "Đã viết 3 trang" → chơi 30 giây; "Mọi người đồng ý" → cho người chơi thử.
+Stop-writing rules: "This could work" → prototype; "Not sure how it feels" → try it in the engine; "Already wrote 3 pages" → play for 30 seconds; "Everyone agrees" → let players try it.

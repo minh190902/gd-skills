@@ -1,75 +1,75 @@
-# Game Map — tham chiếu chi tiết
+# Game Map — detailed reference
 
-Nguồn: gamedesign.guide/theory (CC BY 4.0), diễn giải.
+Source: gamedesign.guide/theory (CC BY 4.0), paraphrased.
 
-## Lớp Player
+## Player layer
 
-**Chuỗi:** Context → Need → Conflict/Gap → Motivation → Intention → Behavior.
+**Chain:** Context → Need → Conflict/Gap → Motivation → Intention → Behavior.
 
-| Yếu tố | Câu hỏi |
+| Element | Question |
 |---|---|
-| Context | Ai chơi, tâm trạng gì, ở đâu, bao nhiêu thời gian, thiết bị gì? |
-| Need | Họ muốn lấp khoảng trống nào? |
-| Conflict | Điều gì tạo căng thẳng? |
-| Motivation | Điều gì định hướng năng lượng? |
-| Intention | Họ đang *cố* làm gì? |
-| Behavior | Họ *thực sự* làm gì? |
+| Context | Who plays, in what mood, where, for how long, on what device? |
+| Need | What gap do they want to fill? |
+| Conflict | What creates tension? |
+| Motivation | What directs their energy? |
+| Intention | What are they *trying* to do? |
+| Behavior | What do they *actually* do? |
 
-**Loại gap** (không có gap = không có lý do chơi; chỉnh kích thước gap để lái động lực): thiếu công nhận → bảng xếp hạng; xả stress → combat; chán vặt → level ngắn; tò mò/thành thạo → pattern sâu hơn; giữ tâm trạng → loop thư giãn; thuộc về → chơi nhóm; **kiểm soát → sandbox/quản lý**; mới lạ giác quan → procedural.
+**Gap types** (no gap = no reason to play; tune the gap size to steer motivation): lack of recognition → leaderboards; stress relief → combat; boredom → short levels; curiosity/mastery → deeper patterns; mood maintenance → relaxing loops; belonging → group play; **control → sandbox/management**; sensory novelty → procedural.
 
-**Context profile:** Geography, Demographics, Emotional goal, Gaming history, Session pattern, Device setup, Preferred features, **Implication** (ưu tiên gì). Ví dụ người chơi mobile phiên 10–15 phút → ưu tiên rõ ràng, giảm thời gian chết, chia nội dung thành module.
+**Context profile:** Geography, Demographics, Emotional goal, Gaming history, Session pattern, Device setup, Preferred features, **Implication** (what to prioritize). Example: mobile players with 10–15 minute sessions → prioritize clarity, cut dead time, split content into modules.
 
-**Need → chiến lược:** Progression ↔ Competence (feedback thấy được, thất bại công bằng); Economy ↔ Control/Stability (thưởng dự đoán được, vai trò tài nguyên rõ); Narrative ↔ Purpose/Belonging (hệ quả, biểu tượng); UX ↔ Safety/Clarity; Social ↔ Relatedness.
+**Need → strategy:** Progression ↔ Competence (visible feedback, fair failure); Economy ↔ Control/Stability (predictable rewards, clear resource roles); Narrative ↔ Purpose/Belonging (consequences, symbols); UX ↔ Safety/Clarity; Social ↔ Relatedness.
 
-**Conflict types:** Personal, Systemic (khan hiếm, timer, fog), Social, Moral (dilemma), Cognitive. Mạnh nhất khi nhiều lớp: hệ thống + cảm xúc + danh tính. *Nếu người chơi không nhận ra hoặc không tác động được vào conflict, nó thành grind.*
+**Conflict types:** Personal, Systemic (scarcity, timers, fog), Social, Moral (dilemmas), Cognitive. Strongest when layered: system + emotion + identity. *If the player cannot perceive or affect the conflict, it becomes grind.*
 
-Mechanic → conflict ẩn: countdown → khẩn cấp; dialogue choice → căng thẳng đạo đức; trade tài nguyên → hy sinh; vai trò ẩn → tin/ngờ; bản đồ procedural → thiếu thông tin.
+Mechanic → hidden conflict: countdown → urgency; dialogue choice → moral tension; resource trade → sacrifice; hidden role → trust/suspicion; procedural map → missing information.
 
-### Mô hình động lực
+### Motivation models
 
-| Mô hình | Thành phần | Dùng khi |
+| Model | Components | Use for |
 |---|---|---|
 | SDT | Competence, Autonomy, Relatedness | Core loop, onboarding |
-| Quantic Foundry | Action, Social, Mastery, Achievement, Immersion, Creativity | Phân khúc tính năng/nội dung |
-| Bartle | Achiever, Explorer, Socializer, Killer | Online/social (thô cho single-player) |
-| Big Five | Openness→sandbox, Conscientiousness→strategy/sim… | Persona, độ khó, tone |
-| Flow | Challenge≈skill, mục tiêu rõ, feedback tức thì | Đường cong thử thách, boss |
+| Quantic Foundry | Action, Social, Mastery, Achievement, Immersion, Creativity | Segmenting features/content |
+| Bartle | Achiever, Explorer, Socializer, Killer | Online/social (crude for single-player) |
+| Big Five | Openness→sandbox, Conscientiousness→strategy/sim… | Personas, difficulty, tone |
+| Flow | Challenge≈skill, clear goals, immediate feedback | Challenge curve, bosses |
 
-**Công thức framework → loop (7 bước):** chọn MỘT framework → viết 1 dòng tension ("Người chơi thiếu…") → map mỗi motive vào 1 design lever → prototype micro-loop làm motive xuất hiện ~mỗi 30s → đo KPI (time-to-first-action, retry rate, session length) → chỉnh 1 núm mỗi sprint → dừng khi cải thiện chững lại.
+**Framework → loop recipe (7 steps):** pick ONE framework → write a 1-line tension ("The player lacks…") → map each motive to 1 design lever → prototype a micro-loop that surfaces the motive ~every 30s → measure KPIs (time-to-first-action, retry rate, session length) → adjust 1 knob per sprint → stop when improvement plateaus.
 
-Extrinsic (XP, loot) là mồi lửa; intrinsic (tò mò, thành thạo, ý nghĩa) là nhiên liệu. **Overjustification:** cơ chế có còn vui nếu bỏ phần thưởng? Nếu retention dựa vào frustration → thiết kế đang phục vụ compulsion.
+Extrinsic (XP, loot) is the kindling; intrinsic (curiosity, mastery, meaning) is the fuel. **Overjustification:** is the mechanic still fun without the reward? If retention relies on frustration → the design is serving compulsion.
 
-**Fogg B=MAP:** hành vi xảy ra khi Motivation, Ability, Prompt cùng có mặt. Chẩn đoán hành vi xấu: *"Hệ thống nào đã làm hành vi này có lợi hoặc khó bị phản chế?"*
+**Fogg B=MAP:** behavior happens when Motivation, Ability and Prompt are present together. To diagnose bad behavior: *"Which system made this behavior profitable or hard to counter?"*
 
-**Cognitive load:** intrinsic (độ phức tạp nhiệm vụ — quản lý), extraneous (UI tệ — loại bỏ), germane (công sức học — nuôi dưỡng). Kỹ thuật: progressive disclosure, phân cấp UI, chunking, tutorial theo ngữ cảnh. *Cấu trúc thắng tối giản.*
+**Cognitive load:** intrinsic (task complexity — manage it), extraneous (bad UI — eliminate it), germane (learning effort — nurture it). Techniques: progressive disclosure, UI hierarchy, chunking, contextual tutorials. *Structure beats minimalism.*
 
-**Frustration:** productive = constructive ("suýt được") / exploratory (có mẹo ẩn); destructive = punitive (thua không biết vì sao) / accidental (hành động ≠ ý định). Điểm gãy: Intention→Behavior ("không biết làm gì"), Behavior→Action ("bấm không ăn"), Action→Feedback ("không công bằng"), Feedback→Learning ("thôi kệ"). *Hệ thống tốt làm thất bại có thông tin; hệ thống tệ làm thất bại mang tính cá nhân.*
+**Frustration:** productive = constructive ("almost had it") / exploratory (hidden trick); destructive = punitive (lost without knowing why) / accidental (action ≠ intention). Break points: Intention→Behavior ("don't know what to do"), Behavior→Action ("input didn't register"), Action→Feedback ("unfair"), Feedback→Learning ("whatever"). *Good systems make failure informative; bad systems make failure personal.*
 
-## Lớp Structure
+## Structure layer
 
-- **Rule** = điều kiện cho phép/cấm/kích hoạt; **Mechanic** = động từ người chơi dùng, xây từ rules + objects. Rules (nguyên tử) → mechanics (phân tử) → systems (hệ sinh thái).
-- **Mechanic spec:** Name (động từ), Rules, Objects, Input, State checks, Action logic, Output/Feedback, Edge cases.
-- **Input / Output / Feedback:** Output = thay đổi state (hệ thống); Feedback = trình bày cảm giác (người chơi). Fairness cảm nhận phụ thuộc chất lượng I/O nhiều hơn balance.
-- **Game state:** Data (HP=42) ≠ State ("wounded") ≠ Feedback (nháy đỏ). Viết bảng *Input → Required State → Result*; mô hình FSM với entry/exit + cue cho mỗi chuyển trạng thái. Boolean chồng nhau → dùng enum/FSM.
-- **Action logic:** check điều kiện → áp kết quả → cập nhật state → bắn event (SFX/anim) → chain state/cooldown tiếp. *"Action logic định nghĩa sự thật. Feedback định nghĩa cảm giác."*
-- **Goal / Challenge / Reward** chia chung 3 cần gạt: **When** (thời điểm, nhịp), **Where** (vị trí), **What** (loại, hình thức). Challenge ≠ difficulty; là căng thẳng có mục đích. Reward loop: Action → Reward → Reinforcement → Re-engagement → Mastery → Deeper reward.
+- **Rule** = a condition that allows/forbids/triggers; **Mechanic** = a verb the player uses, built from rules + objects. Rules (atoms) → mechanics (molecules) → systems (ecosystems).
+- **Mechanic spec:** Name (verb), Rules, Objects, Input, State checks, Action logic, Output/Feedback, Edge cases.
+- **Input / Output / Feedback:** Output = state change (system); Feedback = sensory presentation (player). Perceived fairness depends on I/O quality more than on balance.
+- **Game state:** Data (HP=42) ≠ State ("wounded") ≠ Feedback (red flash). Write an *Input → Required State → Result* table; model an FSM with entry/exit + a cue for each state transition. Overlapping booleans → use an enum/FSM.
+- **Action logic:** check conditions → apply result → update state → fire event (SFX/anim) → chain the next state/cooldown. *"Action logic defines the truth. Feedback defines the feeling."*
+- **Goal / Challenge / Reward** share 3 levers: **When** (timing, rhythm), **Where** (location), **What** (type, form). Challenge ≠ difficulty; it is purposeful tension. Reward loop: Action → Reward → Reinforcement → Re-engagement → Mastery → Deeper reward.
 
-## Lớp Cognition
+## Cognition layer
 
-UX 5 khía cạnh: Clarity, Control, Feedback, Rhythm, Emotion. Chi tiết quy trình trong `gd-ux-audit`.
+UX has 5 aspects: Clarity, Control, Feedback, Rhythm, Emotion. The detailed process is in `gd-ux-audit`.
 
-## Lớp Dynamics
+## Dynamics layer
 
-- Mỗi loop phải cho người chơi: việc để làm **bây giờ**, mục tiêu **tiếp theo**, lý do **quay lại sau**.
-- Thang loop: Core (giây–phút), Mid (phút–giờ), Meta (ngày–tuần), Emergent (người chơi tự tạo).
-- Feedback dương (thưởng thành công, tăng tốc) vs âm (hạn chế bỏ xa, catch-up).
-- Progression tốt làm người chơi *có thêm lựa chọn*; progression tệ = cùng gameplay với số to hơn.
-- Regulators chi tiết: `gd-pacing-progression`, `gd-economy-balance`.
+- Every loop must give the player: something to do **now**, a **next** goal, and a reason to **come back later**.
+- Loop scale: Core (seconds–minutes), Mid (minutes–hours), Meta (days–weeks), Emergent (player-created).
+- Positive feedback (rewards success, accelerates) vs negative (limits runaway leaders, catch-up).
+- Good progression gives the player *more choices*; bad progression = the same gameplay with bigger numbers.
+- Regulators in detail: `gd-pacing-progression`, `gd-economy-balance`.
 
-## Lớp Perception
+## Perception layer
 
-- **Player fantasy** = Role + Power + Responsibility + Emotion; một loại fantasy phải chiếm ưu thế (Power, Nurture, Escape, Identity, Survival, Mystery).
-- **Theme** phải phát biểu được trong 1 câu và được cảm nhận qua hành động, không qua cutscene. Đổi theme mà không vỡ gì → theme quá nông.
-- **Feedback:** tức thì, rõ, nhiều lớp, **tỉ lệ với hệ quả** (boss chết > lính chết), nhất quán.
-- **Game feel:** feedback trong ~100–200 ms sau input (với text/turn-based chấp nhận ≥150 ms nhưng cần cue tức thì).
-- Narrative & emotion arc chi tiết: `gd-narrative-design`, `gd-pacing-progression`.
+- **Player fantasy** = Role + Power + Responsibility + Emotion; one fantasy type must dominate (Power, Nurture, Escape, Identity, Survival, Mystery).
+- **Theme** must be statable in 1 sentence and felt through actions, not cutscenes. If you can swap the theme without breaking anything → the theme is too shallow.
+- **Feedback:** immediate, clear, layered, **proportional to consequence** (boss death > grunt death), consistent.
+- **Game feel:** feedback within ~100–200 ms of input (text/turn-based games can accept ≥150 ms but need an immediate cue).
+- Narrative & emotion arc in detail: `gd-narrative-design`, `gd-pacing-progression`.

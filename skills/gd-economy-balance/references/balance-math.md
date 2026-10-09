@@ -1,38 +1,38 @@
-# Balance math — công thức tham chiếu
+# Balance math — reference formulas
 
-Phần ×1.2, two-option audit, bottom-up framework lấy từ gamedesign.guide (CC BY 4.0). Các công thức còn lại là kiến thức chuẩn ngành (Schreiber & Romero, *Game Balance*) do site chỉ nêu tên mà không có công thức.
+The ×1.2 section, two-option audit and bottom-up framework come from gamedesign.guide (CC BY 4.0). The remaining formulas are standard industry knowledge (Schreiber & Romero, *Game Balance*), since the site only names them without giving formulas.
 
-## Tăng trưởng theo tier
-- **Hình học (mặc định):** `value_n = base × r^(n−1)`, r ≈ 1.2. Level 6 ≫ level 1 nhưng 5 vs 6 vẫn là trận công bằng.
-- **Tuyến tính:** `value_n = base + k·(n−1)` — dùng khi muốn ý nghĩa mỗi bước giảm dần (tỉ lệ tăng tương đối giảm).
-- **Đa thức:** `value_n = a·n^p` (p 1.5–2.5) — đường cong XP phổ biến.
-- Chi phí nên tăng nhanh hơn sức mạnh một chút → efficiency (power/cost) giảm nhẹ theo tier, tạo lựa chọn giữa "nâng cái cũ" và "mua cái mới".
+## Tier growth
+- **Geometric (default):** `value_n = base × r^(n−1)`, r ≈ 1.2. Level 6 ≫ level 1, but 5 vs 6 is still a fair fight.
+- **Linear:** `value_n = base + k·(n−1)` — use when you want each step to matter less over time (relative growth rate decreases).
+- **Polynomial:** `value_n = a·n^p` (p 1.5–2.5) — a common XP curve.
+- Cost should grow slightly faster than power → efficiency (power/cost) declines slightly per tier, creating a choice between "upgrade the old" and "buy the new".
 
 ## Diminishing returns & soft cap
-- **Hyperbolic:** `effect = x / (x + K)` → effect 50% khi x = K; không bao giờ đạt 100%. Tốt cho % né, % giảm sát thương, tỉ lệ crit.
-- **Soft cap:** `effect = x` khi x ≤ C; `C + (x − C)·d` khi x > C (d ≈ 0.3–0.5).
-- **Log:** `effect = a·ln(1 + x/b)` — tăng nhanh lúc đầu, chậm dần.
+- **Hyperbolic:** `effect = x / (x + K)` → 50% effect when x = K; never reaches 100%. Good for dodge %, damage reduction %, crit chance.
+- **Soft cap:** `effect = x` when x ≤ C; `C + (x − C)·d` when x > C (d ≈ 0.3–0.5).
+- **Log:** `effect = a·ln(1 + x/b)` — grows fast at first, then slows.
 
 ## Damage formula
-- Trừ: `dmg = atk − def` → def cao có thể vô hiệu hóa hoàn toàn (cần sàn tối thiểu, vd. `max(dmg, atk·0.1)`).
-- Tỉ lệ: `dmg = atk × K/(K + def)` → không bao giờ 0, mỗi điểm def có giá trị giảm dần. Với K = def "chuẩn" ở tier đó, giảm 50%.
-- Time-to-kill: `TTK = HP / DPS`. Cân bằng role bằng TTK chứ không bằng chỉ số đơn lẻ.
+- Subtractive: `dmg = atk − def` → high def can fully negate damage (needs a minimum floor, e.g. `max(dmg, atk·0.1)`).
+- Ratio: `dmg = atk × K/(K + def)` → never 0, each point of def has diminishing value. With K = the "standard" def for that tier, 50% reduction.
+- Time-to-kill: `TTK = HP / DPS`. Balance roles by TTK, not by individual stats.
 
-## Kinh tế (Source → Pool → Sink)
-- **Faucet/sink ratio** mỗi stage = tổng thu / tổng chi bắt buộc. <1 → nợ (vòng xoáy chết nếu không có catch-up); ≈1.0–1.3 → khắc nghiệt; >1.5 → dư dả, pillar "khắc nghiệt" mất tác dụng.
-- **Lạm phát:** carry-over trung vị tăng đều mỗi stage → thêm sink có giá trị (đầu tư dài hạn, cosmetic, cải thiện thành) hoặc scale chi phí.
-- **Catch-up (feedback âm):** khoản vay, hero rẻ, nhiệm vụ phụ cứu trợ — tránh để một stage thua dẫn tới thua cả game.
-- **Snowball (feedback dương):** thắng → thưởng → mạnh hơn → thắng. Cần trần hoặc chi phí duy trì (lương là một chi phí duy trì tự nhiên).
+## Economy (Source → Pool → Sink)
+- **Faucet/sink ratio** per stage = total income / total mandatory spending. <1 → debt (death spiral without catch-up); ≈1.0–1.3 → harsh; >1.5 → abundant, the "harsh" pillar loses its effect.
+- **Inflation:** median carry-over rises steadily each stage → add meaningful sinks (long-term investment, cosmetics, base upgrades) or scale costs.
+- **Catch-up (negative feedback):** loans, cheap heroes, relief side quests — avoid letting one lost stage lose the whole game.
+- **Snowball (positive feedback):** win → reward → stronger → win. Needs a cap or upkeep cost (salary is a natural upkeep cost).
 
-## Tier table mẫu
-| Tier | Cost | Power | Efficiency (P/C) | Ghi chú |
+## Sample tier table
+| Tier | Cost | Power | Efficiency (P/C) | Notes |
 |---|---|---|---|---|
 
 ## Bottom-up framework
-Đơn vị nguyên tử (1 đòn đánh, 1 gold) → trao đổi tài nguyên → kinh tế hệ thống → nhịp progression → chiến lược nổi lên. Cân bằng từ dưới lên; kiểm tra từ trên xuống bằng playtest.
+Atomic unit (1 attack, 1 gold) → resource exchange → system economy → progression pacing → emergent strategy. Balance bottom-up; verify top-down through playtesting.
 
 ## Deliberate imbalance
-Được phép khi hệ sinh thái hấp thụ được (vũ khí mạnh nhưng có chi phí/ rủi ro, hero SSR đắt lương). Ghi rõ là chủ ý.
+Allowed when the ecosystem can absorb it (a strong weapon with a cost/risk, an SSR hero with an expensive salary). Document it as intentional.
 
-## Balance doc (khi cần tài liệu đầy đủ)
-Exec summary · System overview (flow + biến chính) · Player model (archetype, difficulty curve, reward pacing) · Balance theo hệ thống (công thức, giá trị, mục tiêu) · Math models & cost curves · Analytics/A-B · Feedback loops · Asymmetry & meta (pick rate, counter, buff/nerf log) · Tools · Simulation guidance.
+## Balance doc (when a full document is needed)
+Exec summary · System overview (flow + key variables) · Player model (archetypes, difficulty curve, reward pacing) · Balance per system (formulas, values, goals) · Math models & cost curves · Analytics/A-B · Feedback loops · Asymmetry & meta (pick rate, counters, buff/nerf log) · Tools · Simulation guidance.

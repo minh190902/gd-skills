@@ -5,51 +5,51 @@ description: Economy and balance design — resource sources/sinks, currency flo
 
 # GD Economy & Balance
 
-Balance là *"làm cho mọi lựa chọn đều đáng được cân nhắc"*: một trạng thái cân bằng động, phụ thuộc vào cảm nhận và thay đổi theo thời gian. Mục tiêu không phải là làm mọi thứ bằng nhau. Đọc `PROJECT.md` để biết ý định thiết kế, ví dụ kinh tế "khắc nghiệt" hay "rộng rãi", vì đó là chuẩn để đánh giá các con số.
+Balance is *"making every choice worth considering"*: a dynamic equilibrium that depends on perception and changes over time. The goal is not to make everything equal. Read `PROJECT.md` for the design intent, e.g. a "harsh" or "generous" economy, because that is the yardstick for judging the numbers.
 
-## Công cụ
-`<skill_dir>` là thư mục chứa skill này.
+## Tools
+`<skill_dir>` is the directory containing this skill.
 ```bash
-python -I <skill_dir>/scripts/economy_sim.py sim <model.json> --runs 2000   # Monte Carlo: nguồn thu → quỹ → khoản chi, theo từng stage
-python -I <skill_dir>/scripts/economy_sim.py curve 150 200 250 300 350       # so độ tăng giữa các tier với quy tắc ×1.2
+python -I <skill_dir>/scripts/economy_sim.py sim <model.json> --runs 2000   # Monte Carlo: sources → pool → sinks, per stage
+python -I <skill_dir>/scripts/economy_sim.py curve 150 200 250 300 350       # compare growth between tiers against the ×1.2 rule
 ```
-Định dạng model: xem docstring của script và [examples/sample_model.json](examples/sample_model.json). Ví dụ đó chỉ để minh họa; **luôn dùng số lấy từ code thật**. Lưu model của dự án vào `<game_root>/docs/balance/` để chạy lại về sau.
+Model format: see the script's docstring and [examples/sample_model.json](examples/sample_model.json). That example is for illustration only; **always use numbers taken from the real code**. Save the project's model under `<game_root>/docs/balance/` so it can be rerun later.
 
-## Quy trình
+## Workflow
 
-### 1. Xác định câu hỏi balance
-Viết thành một câu, ví dụ: "Ở giữa game, người chơi có phải bỏ một khoản chi mỗi màn không?" hoặc "Unit hiếm có luôn tốt hơn 2 unit thường không?". Chọn **loại balance**: toán học, cảm nhận, chiến lược, hay trải nghiệm.
+### 1. Define the balance question
+Write it as one sentence, e.g. "In the mid-game, does the player have to drop one expense every stage?" or "Is a rare unit always better than 2 common units?". Pick the **balance type**: mathematical, perceived, strategic, or experiential.
 
-### 2. Lấy số thật từ code, không đoán
-Tìm mọi nguồn thu, khoản chi và công thức trong data/Resource và code. Ghi thành bảng **Nguồn thu · Quỹ · Khoản chi · Loại khan hiếm**, mỗi con số kèm file:line. `system_map.py --impact <currency>` (thuộc gd-design-review) liệt kê mọi hệ thống đang thay đổi một loại tiền tệ.
+### 2. Take real numbers from code, don't guess
+Find every source, sink and formula in data/Resources and code. Record them as a **Source · Pool · Sink · Scarcity type** table, each number with its file:line. `system_map.py --impact <currency>` (part of gd-design-review) lists every system that changes a given currency.
 
-### 3. Mô hình hóa
-- **Kinh tế:** viết model JSON rồi chạy `sim`. Đọc 3 chỉ số:
-  - `deficit%`: tỉ lệ không trả nổi các khoản bắt buộc.
-  - `optional%`: tỉ lệ mua được các khoản chi tùy chọn.
-  - Lượng tiền mang sang màn sau (p50).
+### 3. Model it
+- **Economy:** write a JSON model and run `sim`. Read 3 metrics:
+  - `deficit%`: the rate of being unable to pay mandatory costs.
+  - `optional%`: the rate of being able to afford optional sinks.
+  - The amount of currency carried into the next stage (p50).
 
-  Điểm xuất phát cho kiểu kinh tế "khắc nghiệt nhưng công bằng": deficit 5–20% ở màn khó, optional 30–70%, và lượng tiền mang sang không tăng đều qua mọi màn. Đây là chỗ bắt đầu để playtest, không phải chân lý.
-- **Đường cong:** chạy `curve` cho mỗi chuỗi tier (phần thưởng, giá, HP, sức mạnh). Quy tắc kinh nghiệm là tăng khoảng ×1.2 mỗi tier. Bước nhảy lớn hơn ×1.3 chỉ nên có khi cố ý (sang chương mới, gặp boss).
-- **Sức mạnh và lựa chọn:** viết công thức và bảng tier với các cột giá · sức mạnh · hiệu suất (sức mạnh/giá). Xem [references/balance-math.md](references/balance-math.md) cho diminishing returns, soft cap, nguồn thu/khoản chi, feedback loop.
+  Starting point for a "harsh but fair" economy: deficit 5–20% on hard stages, optional 30–70%, and carry-over that does not grow steadily across every stage. This is a starting point for playtesting, not the truth.
+- **Curves:** run `curve` for each tier sequence (rewards, prices, HP, power). The rule of thumb is roughly ×1.2 growth per tier. Jumps larger than ×1.3 should only be intentional (new chapter, boss encounter).
+- **Power and choice:** write formulas and a tier table with columns cost · power · efficiency (power/cost). See [references/balance-math.md](references/balance-math.md) for diminishing returns, soft caps, sources/sinks, feedback loops.
 
-### 4. Kiểm tra chiến lược thống trị
-- **So hai lựa chọn cạnh tranh:** với mỗi lựa chọn, ghi sức mạnh, giới hạn và lối chơi. Có lựa chọn nào gần như bắt buộc phải chọn? Có lựa chọn nào vô dụng?
-- Liệt kê các vòng **feedback dương** (giàu càng giàu) và **feedback âm** (cơ chế giúp người chơi bắt kịp). Đánh dấu vòng nào có thể vượt tầm kiểm soát hoặc bị khai thác.
-- Ưu tiên cách khắc chế mềm hơn là chặn cứng.
+### 4. Check for dominant strategies
+- **Compare two competing options:** for each option, note power, limits and playstyle. Is any option practically mandatory? Is any option useless?
+- List **positive feedback** loops (rich get richer) and **negative feedback** loops (catch-up mechanics). Flag any loop that could spiral out of control or be exploited.
+- Prefer soft counters over hard blocks.
 
-### 5. Đề xuất thay đổi
-Lập bảng: Tham số · Giá trị cũ · Giá trị mới · File · Lý do · Kết quả sim trước/sau. Mỗi lần **chỉ đổi một nhóm tham số** để đo được tác động. Chạy lại sim để chứng minh thay đổi đạt mục tiêu. Ghi vào `<game_root>/docs/balance/<YYYY-MM-DD>-<topic>.md`. Thay đổi lớn thì qua `gd-design-review` và ghi vào DECISIONS.md.
+### 5. Propose changes
+Build a table: Parameter · Old value · New value · File · Reason · Sim result before/after. **Change only one parameter group at a time** so the impact is measurable. Rerun the sim to prove the change hits the goal. Write to `<game_root>/docs/balance/<YYYY-MM-DD>-<topic>.md`. Major changes go through `gd-design-review` and are recorded in DECISIONS.md.
 
-### 6. Xác nhận
-Số trên bảng tính chỉ là giả thuyết. Cần playtest để xác nhận (`gd-playtest`, nhóm mục tiêu Balance). Nếu công thức thay đổi thì thêm hoặc sửa test.
+### 6. Validate
+Spreadsheet numbers are only hypotheses. Playtesting is needed to confirm them (`gd-playtest`, Balance goal category). If a formula changes, add or update tests.
 
 ## Checklist
-- [ ] Mọi lựa chọn cốt lõi đều đáng chọn trong *một bối cảnh nào đó*
-- [ ] Không có lựa chọn bắt buộc phải chọn
-- [ ] Có thể khắc chế bằng kỹ năng hoặc kế hoạch
-- [ ] Phần thưởng tương xứng với công sức
-- [ ] Vẫn công bằng khi người chơi thất bại (có lối thoát khỏi vòng xoáy thua liên tục)
-- [ ] Mỗi nguồn thu có khoản chi tương ứng, tiền mang sang không lạm phát
-- [ ] Số liệu lấy từ code, có file:line, và đã chạy lại sim sau khi đổi
-- [ ] Monetization không phá pillar: không pay-to-win, tỉ lệ được công khai
+- [ ] Every core option is worth choosing in *some context*
+- [ ] No option is mandatory
+- [ ] Can be countered with skill or planning
+- [ ] Rewards are proportional to effort
+- [ ] Still fair when the player fails (there is a way out of a losing spiral)
+- [ ] Every source has a matching sink; carry-over does not inflate
+- [ ] Numbers come from code with file:line, and the sim was rerun after changes
+- [ ] Monetization does not break pillars: no pay-to-win, odds are disclosed

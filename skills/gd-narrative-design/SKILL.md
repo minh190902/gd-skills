@@ -5,67 +5,67 @@ description: Narrative design for branching, consequence-driven games — choice
 
 # GD Narrative Design
 
-Narrative design là *cách* câu chuyện được truyền tải qua hệ thống: flag, hệ quả, gameplay, UI. Scriptwriting là *nội dung* được kể. Skill này phụ trách phần đầu và kiểm soát chất lượng phần sau. Đọc `PROJECT.md` để biết các pillar liên quan tới câu chuyện và fantasy của người chơi.
+Narrative design is *how* the story is delivered through systems: flags, consequences, gameplay, UI. Scriptwriting is *what* is told. This skill owns the former and quality-checks the latter. Read `PROJECT.md` for the pillars related to the story and the player fantasy.
 
-## Công cụ: audit tĩnh (Godot + Dialogue Manager)
-`<skill_dir>` là thư mục chứa skill này.
+## Tool: static audit (Godot + Dialogue Manager)
+`<skill_dir>` is the directory containing this skill.
 ```bash
-python -I <skill_dir>/scripts/dialogue_audit.py <game_root>                 # toàn bộ
-python -I <skill_dir>/scripts/dialogue_audit.py <game_root> --stage stage_3 # bảng choice của các file có tên chứa "stage_3"
-python -I <skill_dir>/scripts/dialogue_audit.py <game_root> --json          # để xử lý tiếp
+python -I <skill_dir>/scripts/dialogue_audit.py <game_root>                 # everything
+python -I <skill_dir>/scripts/dialogue_audit.py <game_root> --stage stage_3 # choice table for files whose name contains "stage_3"
+python -I <skill_dir>/scripts/dialogue_audit.py <game_root> --json          # for further processing
 ```
-Báo cáo gồm:
-- Flag được set nhưng không chỗ nào đọc: hệ quả chưa bao giờ được trả, có thể là *choice illusion*.
-- Flag được đọc nhưng không chỗ nào set: nhánh không tới được, hoặc gõ sai tên.
-- Jump tới title không tồn tại.
-- Title không có đường nào dẫn tới.
-- Lựa chọn không có hệ quả gì.
-- Bảng lựa chọn và hệ quả.
+The report includes:
+- Flags that are set but never read: consequences that are never paid off, possibly a *choice illusion*.
+- Flags that are read but never set: unreachable branches, or a typo in the name.
+- Jumps to titles that do not exist.
+- Titles with no path leading to them.
+- Choices with no consequence at all.
+- The choice and consequence table.
 
-Tên hàm set/check flag lấy từ `gd.config.json` (`flag_set_fns`, `flag_read_fns`). Flag dựng bằng format string thì phải kiểm tra bằng tay. Với công cụ narrative khác (ink, Yarn…), lập bảng tương tự bằng grep.
+The flag set/check function names come from `gd.config.json` (`flag_set_fns`, `flag_read_fns`). Flags built with format strings must be checked by hand. For other narrative tools (ink, Yarn…), build a similar table with grep.
 
-**Chạy audit trước và sau mỗi lần sửa dialogue.** Không báo "xong" khi còn jump hỏng hoặc phát sinh flag được đọc mà không được set.
+**Run the audit before and after every dialogue edit.** Do not report "done" while there are broken jumps or newly introduced flags that are read but never set.
 
-## Quy trình A — Viết hoặc mở rộng một chương / màn
+## Workflow A — Write or extend a chapter / stage
 
-1. **Bối cảnh:** đọc nội dung chương trước, các entry point mà code gọi tới, và kết quả audit để biết flag nào từ trước *đang chờ được trả*.
-2. **Beat sheet:** Setup → Tension → Twist → Resolution, gắn với các phase của core loop. Ghi cảm xúc mục tiêu ở đầu, giữa và cuối, kèm **một beat cảm xúc thấp** làm khoảng thở.
-3. **Lựa chọn chính.** Thiết kế bằng bảng *trước khi viết lời thoại*:
+1. **Context:** read the previous chapter's content, the entry points the code calls into, and the audit results to know which earlier flags are *waiting for a payoff*.
+2. **Beat sheet:** Setup → Tension → Twist → Resolution, tied to the phases of the core loop. Note the target emotion at the start, middle and end, plus **one low-emotion beat** as breathing room.
+3. **Key choices.** Design them as a table *before writing dialogue*:
 
-   | Moment | Option | Kết quả cơ học (ngay) | Kết quả truyện (ngay) | Payoff về sau (chương, title) |
+   | Moment | Option | Mechanical outcome (immediate) | Story outcome (immediate) | Later payoff (chapter, title) |
    |---|---|---|---|---|
 
-   - Mỗi option phải khác nhau về *hành trình*, không chỉ khác câu chữ. Mỗi option cần ít nhất một hệ quả cơ học, hoặc một payoff về sau đã lên lịch.
-   - **Mỗi flag mới phải có ít nhất một chỗ đọc đã lên kế hoạch** (ghi ở cột Payoff). Không có thì bỏ flag, hoặc chuyển nó thành hệ quả tức thời.
-   - Option có điều kiện (dựa trên lịch sử của người chơi) là phần thưởng cho những gì họ đã làm. Hãy dùng nhiều, vì nó làm các quyết định cũ có trọng lượng.
-   - Ghi trước con số thay đổi trên nhãn option chỉ khi muốn người chơi chọn theo số. Với lựa chọn đạo đức thuần túy, cân nhắc ẩn số đi.
-   - Tránh option "đúng hiển nhiên". Một dilemma tốt là khi lựa chọn nào cũng mất một thứ người chơi quý.
-4. **Trả nợ payoff:** với mỗi flag cũ có liên quan, viết ít nhất một phản ứng: một dòng thoại có điều kiện, một option có điều kiện, một thay đổi trong gameplay, hoặc một biến thể epilogue.
-5. **Viết dialogue** theo quy ước có sẵn của dự án, giữ giọng nhân vật nhất quán với arc của họ.
-6. **Audit và sửa:** chạy script, sửa jump hỏng và flag mồ côi, dán bảng lựa chọn và hệ quả vào tài liệu thiết kế của chương.
-7. **Tích hợp hệ thống:** hệ quả có cần hook ngoài dialogue không? Nếu cần thêm hệ thống mới thì dùng `gd-design-review` rồi `gd-feature-spec`.
+   - Each option must differ in the *journey*, not just the wording. Each option needs at least one mechanical consequence, or a scheduled later payoff.
+   - **Every new flag must have at least one planned read** (noted in the Payoff column). If not, drop the flag or turn it into an immediate consequence.
+   - Conditional options (based on the player's history) reward what they have done. Use them generously, because they give past decisions weight.
+   - Show the numeric change on the option label only when you want the player to choose by the numbers. For purely moral choices, consider hiding the numbers.
+   - Avoid an "obviously right" option. A good dilemma is one where every choice costs something the player values.
+4. **Pay off debts:** for each relevant old flag, write at least one reaction: a conditional line, a conditional option, a gameplay change, or an epilogue variant.
+5. **Write dialogue** following the project's existing conventions, keeping each character's voice consistent with their arc.
+6. **Audit and fix:** run the script, fix broken jumps and orphan flags, and paste the choice and consequence table into the chapter's design doc.
+7. **System integration:** does a consequence need a hook outside dialogue? If a new system is needed, use `gd-design-review` then `gd-feature-spec`.
 
-## Quy trình B — Audit "lựa chọn của người chơi có quan trọng không?"
+## Workflow B — Audit "do the player's choices matter?"
 
-1. Chạy audit toàn bộ. Nhóm các flag set mà không đọc theo chương và theo nhân vật/arc.
-2. Phân loại từng flag:
-   - **(a) cần payoff:** lựa chọn lớn mà người chơi sẽ nhớ.
-   - **(b) chỉ để log/thống kê:** ghi chú rõ, có thể dùng cho epilogue.
-   - **(c) rác:** xóa.
-3. Với nhóm (a), đề xuất payoff cụ thể: chương nào, title nào, dạng gì. Ưu tiên payoff rẻ như một dòng thoại có điều kiện, một option có điều kiện, hoặc một biến thể epilogue.
-4. Kiểm tra 4 lớp của Thomas Grip cho từng chương (bảng ở [references/narrative-checklists.md](references/narrative-checklists.md)).
-5. Đầu ra: `<game_root>/docs/narrative/<YYYY-MM-DD>-consequence-audit.md`, với bảng flag → loại → payoff đề xuất → ticket.
+1. Run the full audit. Group flags that are set but never read by chapter and by character/arc.
+2. Classify each flag:
+   - **(a) needs payoff:** a major choice the player will remember.
+   - **(b) log/stats only:** document it clearly; it can be used for the epilogue.
+   - **(c) junk:** delete.
+3. For group (a), propose a concrete payoff: which chapter, which title, what form. Prefer cheap payoffs such as a conditional line, a conditional option, or an epilogue variant.
+4. Check Thomas Grip's 4 layers for each chapter (table in [references/narrative-checklists.md](references/narrative-checklists.md)).
+5. Output: `<game_root>/docs/narrative/<YYYY-MM-DD>-consequence-audit.md`, with a flag → type → proposed payoff → ticket table.
 
-## Quy trình C — Arc nhân vật / quest
+## Workflow C — Character arc / quest
 
-Dùng bảng Character Arc và checklist quest trong [references/narrative-checklists.md](references/narrative-checklists.md). Nếu nhân vật có thể chết hoặc vắng mặt, luôn viết **nhánh thay thế** cho mọi beat quan trọng của nhân vật đó.
+Use the Character Arc table and quest checklist in [references/narrative-checklists.md](references/narrative-checklists.md). If a character can die or be absent, always write **alternate branches** for every important beat of that character.
 
-## Kiểm tra bắt buộc trước khi giao
-- [ ] Audit sạch: không có jump hỏng, không có flag mới bị đọc mà không được set
-- [ ] Mỗi flag mới có payoff được ghi lại
-- [ ] Không có ludonarrative dissonance: cơ chế thưởng đúng điều câu chuyện đề cao, hoặc sự lệch là có chủ đích
-- [ ] Mục tiêu của người chơi khớp với mục tiêu của nhân vật; nếu người chơi biết khác nhân vật thì sự chênh lệch đó là có chủ đích
-- [ ] Có beat cảm xúc thấp, không phải khoảnh khắc nào cũng cao trào
-- [ ] Mỗi mảnh lore có ngữ cảnh trong thế giới game và có thể bỏ qua
-- [ ] Đã xử lý trường hợp nhân vật vắng mặt hoặc đã chết
-- [ ] Text sẵn sàng cho localization (không ghép chuỗi trong code)
+## Required checks before delivery
+- [ ] Audit is clean: no broken jumps, no new flags that are read but never set
+- [ ] Every new flag has a documented payoff
+- [ ] No ludonarrative dissonance: mechanics reward what the story values, or the mismatch is intentional
+- [ ] The player's goal matches the character's goal; if the player knows something the character doesn't, that gap is intentional
+- [ ] There are low-emotion beats; not every moment is a climax
+- [ ] Every piece of lore has in-world context and is skippable
+- [ ] Cases where a character is absent or dead are handled
+- [ ] Text is localization-ready (no string concatenation in code)

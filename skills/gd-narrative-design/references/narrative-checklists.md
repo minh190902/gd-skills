@@ -1,57 +1,57 @@
-# Narrative — checklists & bảng tham chiếu
+# Narrative — checklists & reference tables
 
-Nguồn: gamedesign.guide (narrative, emotion arc, player fantasy, NDD template, terminology) — CC BY 4.0, diễn giải.
+Source: gamedesign.guide (narrative, emotion arc, player fantasy, NDD template, terminology) — CC BY 4.0, paraphrased.
 
-## 4 lớp của Thomas Grip
+## Thomas Grip's 4 layers
 
-| Lớp | Câu hỏi | Kiểm |
+| Layer | Question | Check |
 |---|---|---|
-| Gameplay | Gameplay có khớp với câu chuyện? | Flow, challenge, feedback |
-| Narrative goals | Nhiệm vụ có phục vụ mục tiêu truyện? | Bí ẩn, xung đột, căng thẳng |
-| Narrative background | Lore được truyền tải thế nào? | Ghi chú, NPC, môi trường, codex |
-| Mental modeling | Người chơi ráp sự kiện lại thế nào? | Rõ ràng, nhịp |
+| Gameplay | Does the gameplay match the story? | Flow, challenge, feedback |
+| Narrative goals | Do the objectives serve the story goals? | Mystery, conflict, tension |
+| Narrative background | How is lore delivered? | Notes, NPCs, environment, codex |
+| Mental modeling | How does the player piece events together? | Clarity, pacing |
 
-## Checklist narrative (8)
-1. Người chơi học câu chuyện *trong khi* chơi?
-2. Cơ chế hỗ trợ theme và tone?
-3. Mục tiêu truyện và gameplay thẳng hàng?
-4. Có chỗ cho agency và diễn giải?
-5. Trình bày củng cố câu chuyện?
-6. Không mâu thuẫn với những gì gameplay thưởng?
-7. Mỗi mảnh lore có ngữ cảnh trong thế giới?
-8. Cutscene/đoạn đọc dài là cần thiết và skip được?
+## Narrative checklist (8)
+1. Does the player learn the story *while* playing?
+2. Do the mechanics support the theme and tone?
+3. Are story goals and gameplay goals aligned?
+4. Is there room for agency and interpretation?
+5. Does the presentation reinforce the story?
+6. No contradiction with what the gameplay rewards?
+7. Does every piece of lore have in-world context?
+8. Are cutscenes/long reading sections necessary and skippable?
 
-## Loại narrative
-Linear · Branching · Enacted (kể qua hành động) · Emergent · Environmental · Evocative · Fragmented. Game có combat/simulation: tận dụng log hành động và hệ quả gameplay (nhân vật chết, công trình bị phá) làm narrative (Enacted), không chỉ dựa vào dialogue.
+## Narrative types
+Linear · Branching · Enacted (told through actions) · Emergent · Environmental · Evocative · Fragmented. Games with combat/simulation: use action logs and gameplay consequences (characters dying, buildings destroyed) as narrative (Enacted), not just dialogue.
 
 ## Agency & choice
-- **Agency** = cảm giác lựa chọn thay đổi kết quả. Control là thực thi; agency là hệ quả.
-- Checklist agency: option khác biệt; hiệu ứng không chỉ bề ngoài; feedback nối lựa chọn → kết quả; luật nhất quán; phản ánh danh tính; từ nhỏ đến lớn; không có lựa chọn giả.
-- **Choice illusion:** các option cảm giác ý nghĩa nhưng hội tụ. Chấp nhận được nếu *hành trình* khác biệt và không lạm dụng; phải trung thực về cảm xúc. Test: "Người chơi có cảm thấy lựa chọn này là *của mình*?"
-- **Ludonarrative dissonance:** cơ chế ủng hộ tone? hành vi khớp giọng nhân vật? phần thưởng khớp khung đạo đức? bất hòa (nếu có) là chủ ý? Test: "Gameplay có khác đi nếu bỏ hết cutscene?"
+- **Agency** = the feeling that choices change outcomes. Control is execution; agency is consequence.
+- Agency checklist: distinct options; effects that are more than cosmetic; feedback linking choice → outcome; consistent rules; reflects identity; small to large; no fake choices.
+- **Choice illusion:** options feel meaningful but converge. Acceptable if the *journey* differs and it is not overused; it must be emotionally honest. Test: "Does the player feel this choice is *theirs*?"
+- **Ludonarrative dissonance:** do mechanics support the tone? does behavior match the character's voice? do rewards match the moral frame? is the dissonance (if any) intentional? Test: "Would the gameplay be different if all cutscenes were removed?"
 
 ## Player fantasy (Role · Power · Responsibility · Emotion)
-1. Người chơi trở thành ai? 2. Cơ chế có khớp? 3. Feedback củng cố? 4. Narrative, art, pacing ủng hộ? 5. Có tự biểu đạt hay chỉ làm theo lệnh? 6. Khi có gì đó "sai sai", hệ thống nào đang mâu thuẫn với fantasy?
-Playtest hỏi: "Bạn cảm thấy mình là ai?"
+1. Who does the player become? 2. Do the mechanics match? 3. Does feedback reinforce it? 4. Do narrative, art and pacing support it? 5. Is there self-expression or just following orders? 6. When something feels "off", which system is contradicting the fantasy?
+Playtest question: "Who did you feel you were?"
 
 ## Emotion arc
-Khối: Tension, Relief, Reversal, Resolution. *Nếu mọi khoảnh khắc đều căng, không gì còn căng.* Hình dạng: Tension–Release, Descent & Recovery, Escalation Spiral, Emotional Fracture, Plateau & Reflection.
-Quy trình: chọn phạm vi (1 stage) → cảm xúc mục tiêu đầu/giữa/cuối → driver hệ thống cho mỗi beat (cơ chế, feedback, narrative) → chèn 1 beat cảm xúc thấp → playtest so sánh cảm nhận với bản đồ.
+Building blocks: Tension, Relief, Reversal, Resolution. *If every moment is tense, nothing is tense.* Shapes: Tension–Release, Descent & Recovery, Escalation Spiral, Emotional Fracture, Plateau & Reflection.
+Process: pick a scope (1 stage) → target emotion at start/middle/end → system driver for each beat (mechanics, feedback, narrative) → insert 1 low-emotion beat → playtest and compare perceptions against the map.
 
 ## Character arc table
-| Name | Archetype | Narrative role (mentor, rival…) | Inner conflict | Outer conflict | Transformation | Vai trò người chơi trong arc | Nhánh khi đã chết |
+| Name | Archetype | Narrative role (mentor, rival…) | Inner conflict | Outer conflict | Transformation | Player's role in the arc | Branch if dead |
 |---|---|---|---|---|---|---|---|
 
-## Dialogue sheet (khi cần review ngoài .dialogue)
+## Dialogue sheet (when review is needed outside .dialogue)
 ID (title) · Context · Speaker · Line · Conditions · Tags · Variations · Tone · Delivery timing · Localization note.
 
 ## Quest / content checklist
-- 5 câu hỏi cho mỗi mảnh nội dung: ngữ cảnh truyện (vì sao tồn tại, ai tạo), động lực người chơi (vì sao quan tâm, payoff gì), rõ ràng cấu trúc, reactivity & biến thể, tích hợp với hệ thống/progression/theme.
-- Checklist: ngữ cảnh rõ; có động lực & payoff; flow trực quan; kết quả phản ứng theo hành động; nối vào progression; phần thưởng xứng đáng và hữu ích; tone khớp bible; **mọi nhánh đã test, không ngõ cụt**; flag & fail state đã xác minh; sẵn sàng localization.
-- Pattern: quest nhánh với hệ quả mềm, micro-arc, NPC có trạng thái lặp theo tiến độ, flavor text gắn với chức năng.
+- 5 questions for every piece of content: story context (why it exists, who created it), player motivation (why care, what payoff), structural clarity, reactivity & variation, integration with systems/progression/theme.
+- Checklist: clear context; motivation & payoff present; intuitive flow; outcomes react to actions; tied into progression; rewards are deserved and useful; tone matches the bible; **every branch tested, no dead ends**; flags & fail states verified; localization-ready.
+- Patterns: branching quests with soft consequences, micro-arcs, NPCs with recurring states that track progress, flavor text tied to function.
 
 ## Lore
-Chỉ có giá trị khi tăng tone, sự nhất quán hoặc cảm xúc. Phải khám phá được và bỏ qua được. Để lại khoảng trống ("đất sét, không phải đá").
+Only valuable when it enhances tone, consistency or emotion. It must be discoverable and skippable. Leave gaps ("clay, not stone").
 
-## Narrative Design Doc (khi cần tài liệu tổng)
-1. Narrative goals (vai trò, nguyên tắc, format, cách truyền tải) 2. Tone & style 3. World structure (setting, timeline, sự thật lore cốt lõi, phe phái, luật ma thuật) 4. Player role & position 5. Story structure (3 hồi, mỗi hồi: sự kiện + phản chiếu gameplay) 6. Character arcs 7. Dialogue format 8. Choice & consequence 9. Narrative-system integration (combat, crafting, UI) 10. Iteration & playtest.
+## Narrative Design Doc (when a master document is needed)
+1. Narrative goals (role, principles, format, delivery) 2. Tone & style 3. World structure (setting, timeline, core lore truths, factions, magic rules) 4. Player role & position 5. Story structure (3 acts, each act: events + gameplay reflection) 6. Character arcs 7. Dialogue format 8. Choice & consequence 9. Narrative-system integration (combat, crafting, UI) 10. Iteration & playtest.

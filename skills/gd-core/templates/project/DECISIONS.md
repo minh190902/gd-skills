@@ -1,11 +1,11 @@
-# DECISIONS — Nhật ký quyết định thiết kế
+# DECISIONS — Design decision log
 
-> Mỗi quyết định đã chốt là một mục. Không xóa mục cũ: khi đổi ý, thêm mục mới ghi "Thay thế D-xxx" và đánh dấu mục cũ *Superseded*.
+> Each settled decision is one entry. Never delete old entries: when you change your mind, add a new entry saying "Supersedes D-xxx" and mark the old one *Superseded*.
 
-### D-001 · <Quyết định ngắn> · *Active* (YYYY-MM-DD)
-- **Quyết định:** 
-- **Vì sao:** (pillar / lý do)
-- **Đã loại:** 
-- **Ảnh hưởng:** (hệ thống / file)
-- **Rủi ro đã chấp nhận:** 
-- **Nguồn:** (thảo luận, commit, tài liệu)
+### D-001 · <Short decision> · *Active* (YYYY-MM-DD)
+- **Decision:** 
+- **Why:** (pillar / rationale)
+- **Rejected:** 
+- **Impact:** (systems / files)
+- **Accepted risks:** 
+- **Source:** (discussion, commit, doc)

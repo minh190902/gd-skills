@@ -1,23 +1,42 @@
 name: CI
 
+# Kept deliberately cheap: one Linux job, oldest supported Python (catches compatibility issues),
+# runs only when code-relevant files change, cancels superseded runs, hard 5-minute cap.
 on:
   push:
     branches: [main]
+    paths:
+      - "skills/**"
+      - "tools/**"
+      - "tests/**"
+      - ".claude-plugin/**"
+      - ".github/workflows/ci.yml"
   pull_request:
+    paths:
+      - "skills/**"
+      - "tools/**"
+      - "tests/**"
+      - ".claude-plugin/**"
+      - ".github/workflows/ci.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   validate-and-test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        python: ["3.9", "3.13"]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python }}
+          python-version: "3.9"
       - name: Validate skills
         run: python tools/validate.py
       - name: Regression tests
-        run: python -m unittest discover -s tests -v
+        run: python -m unittest discover -s tests

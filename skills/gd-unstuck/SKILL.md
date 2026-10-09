@@ -1,35 +1,35 @@
 ---
 name: gd-unstuck
-description: Help the user when they feel confused, overwhelmed or stuck on game design or project direction — untangle a messy set of questions into facts to look up, decisions to make and worries to park, find the one blocking decision, recommend, and give the next small step. Use when the user says they are "rối", "bối rối", "không biết bắt đầu từ đâu", "loạn quá", "không hiểu sao", asks many tangled questions at once, contradicts earlier ideas, or seems lost about how systems fit together.
+description: Help the user when they feel confused, overwhelmed or stuck on game design or project direction — untangle a messy set of questions into facts to look up, decisions to make and worries to park, find the one blocking decision, recommend, and give the next small step. Use when the user says they are "confused", "lost", "don't know where to start", "it's all a mess", "I don't get why" (in any language), asks many tangled questions at once, contradicts earlier ideas, or seems lost about how systems fit together.
 ---
 
-# GD Unstuck — gỡ rối
+# GD Unstuck — untangling
 
-Khi đang rối, người dùng không cần thêm thông tin; họ cần **giữ ít thứ hơn trong đầu**. Mục tiêu cuối cùng là một quyết định được chốt hoặc một bước nhỏ tiếp theo, còn mọi thứ khác được ghi lại.
+When confused, the user does not need more information; they need to **hold fewer things in their head**. The end goal is one settled decision or one small next step, with everything else written down.
 
-## Quy trình
+## Process
 
-1. **Đừng giảng giải ngay.** Coi tin nhắn của người dùng là phần họ trút hết ra. Nếu tin nhắn quá ngắn để hiểu, chỉ hỏi một câu: "Điều gì làm bạn bận tâm nhất lúc này?"
-2. **Phản chiếu lại:** tách tin nhắn thành danh sách đánh số, mỗi mục một dòng ngắn, dùng chính lời của người dùng. Hỏi lại nếu có mục hiểu sai.
-3. **Phân loại** từng mục:
+1. **Don't lecture right away.** Treat the user's message as their brain dump. If the message is too short to understand, ask just one question: "What's bothering you most right now?"
+2. **Reflect back:** split the message into a numbered list, one short line per item, using the user's own words. Ask again if any item was misunderstood.
+3. **Classify** each item:
 
-   | Loại | Xử lý |
+   | Type | Handling |
    |---|---|
-   | ❓ **Sự thật tra được** | Tra ngay (code, `system_map.py`, tài liệu) và trả lời kèm bằng chứng |
-   | ⚖ **Quyết định cần chốt** | Gom lại, rồi tìm quyết định chặn các quyết định khác (bước 4) |
-   | ✅ **Đã quyết rồi** | Trích mục tương ứng trong DECISIONS.md, nhắc lại, không cần nghĩ lại |
-   | 🅿 **Lo lắng cho tương lai** | Đưa vào parking lot trong STATE.md |
-   | 🚫 **Không phải vấn đề** | Giải thích ngắn vì sao |
+   | ❓ **Fact to look up** | Look it up right away (code, `system_map.py`, docs) and answer with evidence |
+   | ⚖ **Decision to make** | Group them, then find the decision blocking the others (step 4) |
+   | ✅ **Already decided** | Quote the matching entry in DECISIONS.md, restate it, no need to rethink |
+   | 🅿 **Worry about the future** | Put it in the parking lot in STATE.md |
+   | 🚫 **Not a problem** | Briefly explain why |
 
-4. **Tìm quyết định đang chặn đường**: quyết định mà các quyết định khác phụ thuộc vào. Vẽ chuỗi phụ thuộc ngắn nếu giúp ích (`A → B → C`). Nó thường nằm ở lớp sớm nhất bị vỡ trong Game Map (Player → Structure → Cognition → Dynamics → Perception), hoặc ở pillars trong PROJECT.md.
-5. **Với quyết định đó:** đưa 2–3 phương án, bảng đánh đổi ngắn (pillar được phục vụ · hệ thống bị ảnh hưởng · chi phí), và **một khuyến nghị kèm lý do**. Nếu thật sự thiếu dữ liệu để chọn, đề xuất cách rẻ nhất để có dữ liệu: một prototype vài giờ, chạy mô phỏng, hoặc đọc code.
-6. **Bước tiếp theo nhỏ nhất**: khoảng 1–2 giờ, kết quả quan sát được.
-7. **Ghi lại:** quyết định đã chốt vào DECISIONS.md, lo lắng vào parking lot, bước tiếp theo vào mục "Tiếp theo" trong STATE.md (qua `gd-status`). Nói rõ với người dùng là mọi thứ đã được ghi, họ không cần nhớ nữa.
+4. **Find the blocking decision**: the one the other decisions depend on. Draw a short dependency chain if it helps (`A → B → C`). It usually sits at the earliest broken layer of the Game Map (Player → Structure → Cognition → Dynamics → Perception), or in the pillars in PROJECT.md.
+5. **For that decision:** give 2–3 options, a short trade-off table (pillar served · systems affected · cost), and **one recommendation with reasons**. If there is genuinely not enough data to choose, propose the cheapest way to get it: a prototype of a few hours, a simulation run, or reading the code.
+6. **Smallest next step**: about 1–2 hours, with an observable result.
+7. **Record:** the settled decision in DECISIONS.md, worries in the parking lot, the next step in the "Next" section of STATE.md (via `gd-status`). Tell the user explicitly that everything has been written down, so they no longer need to remember it.
 
-## Khi rối về việc các hệ thống liên quan nhau thế nào
-Vẽ sơ đồ ASCII đơn giản: core loop lấy từ PROJECT.md, đặt từng hệ thống vào đúng phase, và vẽ mũi tên cho các biến state chúng dùng chung (lấy từ `system_map.py` hoặc SYSTEMS.md). Một hình vẽ đúng thay được mười đoạn giải thích.
+## When confused about how systems relate
+Draw a simple ASCII diagram: the core loop from PROJECT.md, each system placed in its phase, and arrows for the state variables they share (from `system_map.py` or SYSTEMS.md). One correct picture replaces ten paragraphs of explanation.
 
-## Cách nói
-- Ngắn, rõ, từng bước. Không liệt kê 10 phương án.
-- Dùng ví dụ cụ thể từ chính game của người dùng (tên nhân vật, màn chơi, màn hình), không nói lý thuyết chung chung.
-- Kết thúc bằng: quyết định đã chốt (nếu có), bước tiếp theo, và chỗ đã ghi lại.
+## How to talk
+- Short, clear, step by step. Don't list 10 options.
+- Use concrete examples from the user's own game (character names, levels, screens), not generic theory.
+- End with: the settled decision (if any), the next step, and where things were recorded.

@@ -1,36 +1,36 @@
-# Playtest: <tên> — YYYY-MM-DD
+# Playtest: <name> — YYYY-MM-DD
 
 ## Plan
 - **Build / commit:** 
-- **Changelog từ lần trước:** 
-- **Mục tiêu (≤2 câu):** 
-- **Hạng mục:** Feel & Flow / Balance / Clarity / Emotion / Retention hook
-- **Loại test:** 
-- **Tester:** (kiểu: blind / explorer / optimizer / chaos)
-- **Phạm vi chơi:** Stage … → …
-- **Capture:** quay màn hình ☐ · think-aloud ☐ · log sự kiện ☐ · khảo sát ☐
+- **Changelog since last test:** 
+- **Goal (≤2 sentences):** 
+- **Category:** Feel & Flow / Balance / Clarity / Emotion / Retention hook
+- **Test type:** 
+- **Testers:** (type: blind / explorer / optimizer / chaos)
+- **Play scope:** Stage … → …
+- **Capture:** screen recording ☐ · think-aloud ☐ · event log ☐ · survey ☐
 
-### Khảo sát 5 câu
+### 5-question survey
 1. 
 2. 
 3. 
 4. 
-5. (Điểm muốn chơi tiếp 1–5)
+5. (Desire-to-keep-playing score 1–5)
 
-### Ghi chú cho người điều phối
-Không giải thích. Không sửa giữa chừng. Ghi timestamp cho: dừng lâu, lặp lại, bỏ qua, cảm xúc, câu hỏi của tester.
+### Facilitator notes
+Don't explain. Don't fix mid-session. Timestamp: long pauses, repetitions, skips, emotions, tester questions.
 
 ## Observations
-| Tester | Timestamp | Màn/Stage | Hành vi | Lời nói | Diễn giải (triệu chứng → nguyên nhân?) |
+| Tester | Timestamp | Stage | Behavior | Quote | Interpretation (symptom → cause?) |
 |---|---|---|---|---|---|
 
-## Patterns (≥2 tester)
+## Patterns (≥2 testers)
 - 
 
 ## Triage
-| # | Vấn đề | Pillar | Mức (Critical/Important/Nice) | Lớp Game Map |
+| # | Problem | Pillar | Severity (Critical/Important/Nice) | Game Map layer |
 |---|---|---|---|---|
 
 ## Decision log
-| Vấn đề | Thay đổi | Owner | Hạn | Pillar | Xác nhận lần test sau bằng |
+| Problem | Change | Owner | Deadline | Pillar | Validate next test by |
 |---|---|---|---|---|---|

@@ -1,64 +1,64 @@
 ---
 name: gd-feature-spec
-description: Write a buildable design spec for a new game feature, mechanic or system BEFORE implementing it (Intention → Functionality → Parameters, state table, edge cases, dependencies, KPIs, validation plan). Use when the user asks to add/design/plan a feature, start a new sprint item, "làm tính năng X", "thêm hệ thống Y", or when a request to code a gameplay feature has no spec yet. Produces a spec file under docs/specs that maps to data resources and code.
+description: Write a buildable design spec for a new game feature, mechanic or system BEFORE implementing it (Intention → Functionality → Parameters, state table, edge cases, dependencies, KPIs, validation plan). Use when the user asks to add/design/plan a feature, start a new sprint item, "build feature X", "add system Y" (in any language), or when a request to code a gameplay feature has no spec yet. Produces a spec file under docs/specs that maps to data resources and code.
 ---
 
 # GD Feature Spec
 
-Mục tiêu: một spec mà **dev implement không phải hỏi lại, designer phản biện được, QA test được các edge case**. Đừng viết thành tiểu thuyết: khoảng 1 trang là đủ cho prototype, viết đầy đủ khi hệ thống đã ổn định.
+Goal: a spec that **devs can implement without asking back, designers can challenge, and QA can test edge cases from**. Don't write a novel: about 1 page is enough for a prototype; write it out in full once the system has stabilized.
 
-## Quy trình
+## Process
 
-### 0. Thu thập bối cảnh (bắt buộc)
-- Đọc `PROJECT.md` và `SYSTEMS.md` trong design dir (quy ước ở `gd-core`).
-- Ý tưởng đã qua `gd-design-review` chưa? Chưa thì chạy review trước.
-- Grep code và data liên quan: đã có hệ thống nào làm việc tương tự chưa? **Nếu một hệ thống hiện có đã đáp ứng khoảng 70% nhu cầu, đề xuất mở rộng nó thay vì thêm mới.**
-- Đọc GDD/PRD liên quan (vị trí ghi trong PROJECT.md).
+### 0. Gather context (required)
+- Read `PROJECT.md` and `SYSTEMS.md` in the design dir (convention in `gd-core`).
+- Has the idea been through `gd-design-review`? If not, run the review first.
+- Grep the related code and data: is there already a system doing something similar? **If an existing system already covers about 70% of the need, propose extending it instead of adding a new one.**
+- Read the related GDD/PRD (location listed in PROJECT.md).
 
-### 1. Intention (vì sao tồn tại)
-- **Vấn đề của người chơi** mà tính năng giải quyết (need/gap nào trong Game Map)? Vì sao làm *bây giờ*?
-- **Pillar** mà nó phục vụ (ít nhất 1; không có thì dừng lại và báo là scope creep).
-- **Trải nghiệm mong muốn** trong 1 câu, và **hành vi** muốn khơi gợi.
-- **Kiểm tra fantasy:** tính năng làm player fantasy trong PROJECT.md mạnh hơn hay yếu đi?
+### 1. Intention (why it exists)
+- **Player problem** the feature solves (which need/gap in the Game Map)? Why *now*?
+- **Pillar** it serves (at least 1; if none, stop and flag it as scope creep).
+- **Desired experience** in 1 sentence, and the **behavior** you want to encourage.
+- **Fantasy check:** does the feature strengthen or weaken the player fantasy in PROJECT.md?
 
-### 2. Functionality (hoạt động thế nào)
-- **Interaction loop** dạng `Action → Feedback → Gain/Spend/Unlock`, nối ra meta loop.
-- **Feature block** cho mỗi hành động: *Goal · Conditions · Player input · System response · Edge cases*.
-- **Bảng state:** `Input → Required state → Result`. Từ 3 trạng thái trở lên thì dùng FSM, ghi entry/exit và cue cho mỗi lần chuyển. Tránh nhiều boolean chồng nhau.
-- **Action logic** theo thứ tự: kiểm tra điều kiện → áp kết quả → cập nhật state → phát event/signal → nối sang bước tiếp hoặc cooldown.
-- **Feedback** ở 3 mức (nhỏ / chuẩn / lớn), mạnh yếu tương xứng với hệ quả, và hiển thị ở đâu trên màn hình.
-- **Điều kiện thất bại**, và cách thất bại dạy người chơi điều gì thay vì phạt vô cớ.
-- **Độ minh bạch của luật:** người chơi thấy được gì, cái gì được giấu có chủ đích.
+### 2. Functionality (how it works)
+- **Interaction loop** in the form `Action → Feedback → Gain/Spend/Unlock`, connected to the meta loop.
+- **Feature block** for each action: *Goal · Conditions · Player input · System response · Edge cases*.
+- **State table:** `Input → Required state → Result`. With 3 or more states, use an FSM and note entry/exit and a cue for each transition. Avoid overlapping booleans.
+- **Action logic** in order: check conditions → apply result → update state → emit event/signal → chain to the next step or a cooldown.
+- **Feedback** at 3 levels (small / standard / big), with intensity proportional to the consequence, and where it is shown on screen.
+- **Failure conditions**, and how failure teaches the player something instead of punishing them for no reason.
+- **Rule transparency:** what the player can see, and what is deliberately hidden.
 
-### 3. Parameters (con số)
-Bảng tham số gồm: giá trị khởi đầu, đơn vị, phạm vi hợp lệ, và **chỗ đặt trong code/data** (Resource, config). Không hard-code số trong logic. Với tham số tăng theo tier, lấy quy tắc ×1.2/tier làm điểm xuất phát (xem `gd-economy-balance`).
+### 3. Parameters (numbers)
+Parameter table with: starting value, unit, valid range, and **where it lives in code/data** (Resource, config). Do not hard-code numbers in logic. For parameters that scale by tier, use the ×1.2/tier rule as a starting point (see `gd-economy-balance`).
 
-### 4. Dependencies & rủi ro
-- Bảng **Hệ thống · Kiểu thay đổi · Mức rủi ro**: signal/event mới, save/load, dialogue, UI.
-- Chạy `system_map.py --impact` (thuộc gd-design-review) cho từng biến state bị chạm, và **ghi danh sách reader bị ảnh hưởng vào spec**.
-- **Save/Load:** state nào cần lưu lâu dài phải được serialize, kèm migration cho save cũ.
-- **Hook cho narrative:** flag hoặc hàm cầu nối để dialogue phản ứng với tính năng.
-- **Ý định và tác động thực tế:** người chơi có thể tối ưu hóa làm mất ý đồ thiết kế bằng cách nào?
+### 4. Dependencies & risks
+- A **System · Change type · Risk level** table: new signals/events, save/load, dialogue, UI.
+- Run `system_map.py --impact` (part of gd-design-review) for each state variable touched, and **write the list of affected readers into the spec**.
+- **Save/Load:** any state that needs to persist must be serialized, with a migration for old saves.
+- **Narrative hooks:** flags or bridge functions so dialogue can react to the feature.
+- **Intent vs actual impact:** how could players optimize away the design intent?
 
 ### 5. Validation
-- **KPI / tín hiệu:** đo được, liên quan, có thời hạn. Nếu chưa có telemetry thì dùng quan sát playtest và unit test cho logic.
-- **Giả thuyết · Cách kiểm tra · Ngưỡng · Phương án dự phòng.**
-- **Kế hoạch iteration:** v0.1 (prototype thô, chứng minh cảm giác) → v0.3 → v0.6 → v1.0.
-- **Test case cần viết**, ít nhất một test cho mỗi edge case.
+- **KPIs / signals:** measurable, relevant, time-bound. If there is no telemetry yet, use playtest observation and unit tests for the logic.
+- **Hypothesis · How to test · Threshold · Fallback.**
+- **Iteration plan:** v0.1 (rough prototype, proves the feel) → v0.3 → v0.6 → v1.0.
+- **Test cases to write**, at least one test per edge case.
 
-### 6. Ghi file và bàn giao
-- Lưu vào `<game_root>/docs/specs/<feature-kebab>.md` theo [templates/feature-spec.md](templates/feature-spec.md). Changelog đặt ở đầu file, gắn tag `WIP`/`Final`, có mục "Open questions".
-- Kết thúc bằng **danh sách task implement** theo chuẩn code của dự án (ghi trong PROJECT.md), rồi hỏi người dùng có muốn bắt đầu không.
+### 6. Write the file and hand off
+- Save to `<game_root>/docs/specs/<feature-kebab>.md` following [templates/feature-spec.md](templates/feature-spec.md). Changelog at the top of the file, tagged `WIP`/`Final`, with an "Open questions" section.
+- Finish with an **implementation task list** following the project's coding standards (listed in PROJECT.md), then ask the user whether to start.
 
-## Checklist chất lượng
-- [ ] Giải quyết một vấn đề đã được định nghĩa, gắn với pillar
-- [ ] Intention, Functionality và Parameters tách riêng
-- [ ] Mọi input đều có output và feedback; edge case đã được xử lý (spam, thiếu tài nguyên, đối tượng bị xóa giữa chừng, save/load giữa chừng)
-- [ ] Không trùng chức năng với hệ thống hiện có, hoặc có giải thích vì sao
-- [ ] Các reader của state dùng chung đã được liệt kê và kiểm tra
-- [ ] Tham số nằm trong data/config và có phạm vi hợp lệ
-- [ ] Đã đánh giá ảnh hưởng tới UX (cognitive load trên nền tảng), economy và balance
-- [ ] Có kế hoạch validation và kế hoạch iteration
-- [ ] Dev implement được mà không phải hỏi; QA viết được test
+## Quality checklist
+- [ ] Solves a defined problem, tied to a pillar
+- [ ] Intention, Functionality and Parameters kept separate
+- [ ] Every input has an output and feedback; edge cases handled (spam, insufficient resources, object deleted mid-action, save/load mid-action)
+- [ ] Does not duplicate an existing system, or explains why
+- [ ] Readers of shared state are listed and checked
+- [ ] Parameters live in data/config and have valid ranges
+- [ ] Impact on UX (cognitive load on the platform), economy and balance assessed
+- [ ] Has a validation plan and an iteration plan
+- [ ] Devs can implement without asking; QA can write tests
 
-**Mẹo:** dùng chính spec làm prompt để sinh code. Nếu code sinh ra phải sửa nhiều, spec còn thiếu.
+**Tip:** use the spec itself as the prompt for generating code. If the generated code needs a lot of fixing, the spec is missing something.

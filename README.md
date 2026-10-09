@@ -2,72 +2,70 @@
 
 [![CI](https://github.com/minh190902/gd-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/minh190902/gd-skills/actions/workflows/ci.yml) ![version](https://img.shields.io/badge/version-0.1.0-blue) ![license](https://img.shields.io/badge/license-MIT-green)
 
-Bộ 12 skill giúp Claude Code làm việc như một **game designer có quy trình**:
-- **phản biện ý tưởng** bằng bằng chứng, không gật đầu mặc định;
-- **chặn chuyện thêm tính năng này làm vỡ logic tính năng khác**, nhờ bản đồ ai ghi/đọc state;
-- **gỡ rối** khi bạn bị ngợp;
-- **luôn biết dự án đang ở đâu.**
+A set of 12 skills that make Claude Code work like a **game designer with a process**:
+- **challenges ideas** with evidence instead of nodding along by default;
+- **stops a new feature from breaking the logic of another**, using a map of who writes/reads state;
+- **untangles things** when you feel overwhelmed;
+- **always knows where the project stands.**
 
-Ngoài ra còn có các quy trình viết spec, audit hệ thống, thiết kế narrative, cân bằng kinh tế, nhịp độ, UX, playtest và phân tích game tham khảo.
+It also includes workflows for writing specs, auditing systems, narrative design, economy balancing, pacing, UX, playtests and analyzing reference games.
 
-Phương pháp dựa trên [Game Design Guide](https://gamedesign.guide) (CC BY 4.0, xem [NOTICE.md](NOTICE.md)). Các công cụ đi kèm hỗ trợ **Godot 4 / GDScript** và **Nathan Hoad Dialogue Manager**; phần quy trình dùng được cho mọi engine.
-
-> *English summary:* 12 Claude Code skills for game design. They challenge ideas with evidence, map which systems write and read shared state (so new features don't silently break old ones), help untangle confusion, and keep a one-page project STATE. They also cover feature specs and audits, narrative consequence audits, Monte Carlo economy simulation, pacing, UX audits, playtests and game analysis. The skill text is in Vietnamese; descriptions are in English.
+The method is based on [Game Design Guide](https://gamedesign.guide) (CC BY 4.0, see [NOTICE.md](NOTICE.md)). The bundled tools support **Godot 4 / GDScript** and **Nathan Hoad Dialogue Manager**; the workflows work with any engine.
 
 ## Skills
 
-| Skill | Dùng khi |
+| Skill | Use when |
 |---|---|
-| `gd-core` | Câu hỏi thiết kế chung; thiết lập design dir cho game mới; định tuyến sang skill khác |
-| `gd-status` | Đầu/cuối phiên: "đang ở đâu, làm gì tiếp" (STATE.md) |
-| `gd-design-review` | **Mỗi khi đưa ra ý tưởng**: kiểm tra ảnh hưởng, xung đột, phản đối kèm mức độ |
-| `gd-unstuck` | Khi rối: tách vấn đề, tìm quyết định đang chặn, chọn bước tiếp theo |
-| `gd-feature-spec` | Viết spec trước khi code |
-| `gd-feature-audit` | Giữ, gộp hay cắt tính năng; ma trận chồng chéo |
-| `gd-narrative-design` | Lựa chọn và hệ quả, trả flag, arc nhân vật |
-| `gd-economy-balance` | Nguồn thu/khoản chi, đường cong giá trị, mô phỏng kinh tế |
-| `gd-pacing-progression` | Nhịp độ, lịch mở khóa, FTUE |
-| `gd-ux-audit` | Audit màn hình, mức độ S1–S4 |
-| `gd-playtest` | Kế hoạch test, phân loại kết quả, nhật ký quyết định |
-| `gd-game-analysis` | Mổ xẻ game tham khảo và rút ra việc cần làm |
+| `gd-core` | General design questions; setting up a design dir for a new game; routing to other skills |
+| `gd-status` | Start/end of a session: "where are we, what's next" (STATE.md) |
+| `gd-design-review` | **Every time an idea comes up**: checks impact and conflicts, raises objections with severity |
+| `gd-unstuck` | When confused: splits the problem, finds the blocking decision, picks the next step |
+| `gd-feature-spec` | Writing a spec before coding |
+| `gd-feature-audit` | Keep, merge or cut features; overlap matrix |
+| `gd-narrative-design` | Choice and consequence, flag payoffs, character arcs |
+| `gd-economy-balance` | Sources/sinks, value curves, economy simulation |
+| `gd-pacing-progression` | Pacing, unlock schedule, FTUE |
+| `gd-ux-audit` | Screen audits, S1–S4 severity |
+| `gd-playtest` | Test plans, result triage, decision log |
+| `gd-game-analysis` | Deconstructing reference games and extracting action items |
 
-## Cài đặt
+## Installation
 
-Yêu cầu: Claude Code, Python 3.9+ (chỉ dùng thư viện chuẩn).
+Requirements: Claude Code, Python 3.9+ (standard library only).
 
-### Cách 1: Plugin marketplace (Claude Code)
+### Option 1: Plugin marketplace (Claude Code)
 ```
 /plugin marketplace add minh190902/gd-skills
 /plugin install gd-skills@gd-skills
 ```
-Skill sẽ có tên dạng `gd-skills:gd-core`. Sau đó mở game và yêu cầu Claude "thiết lập design dir cho game này" (theo mục 1 của `gd-core`).
+Skills will be named like `gd-skills:gd-core`. Then open your game and ask Claude to "set up the design dir for this game" (per Section 1 of `gd-core`).
 
-### Cách 2: Chép vào repo game (khuyên dùng cho team)
-Cách này giữ skill trong git của repo game, nên cả team dùng cùng một phiên bản.
+### Option 2: Copy into the game repo (recommended for teams)
+This keeps the skills in the game repo's git, so the whole team uses the same version.
 ```bash
 git clone https://github.com/minh190902/gd-skills
-python gd-skills/tools/install.py --target <repo_game> --init <thư_mục_game>
+python gd-skills/tools/install.py --target <game_repo> --init <game_dir>
 ```
-- `--target`: repo nhận skill, chép vào `<repo>/.claude/skills/gd-*`.
-- `--init`: tạo `<thư_mục_game>/docs/design/` từ template (không ghi đè file đã có) và chèn khối quy tắc vào `CLAUDE.md` của repo.
-- `--global`: cài vào `~/.claude/skills/` để dùng cho mọi dự án.
-- `--dry-run`: chỉ in ra những gì sẽ làm.
+- `--target`: the repo receiving the skills, copied to `<repo>/.claude/skills/gd-*`.
+- `--init`: creates `<game_dir>/docs/design/` from the templates (without overwriting existing files) and inserts the rules block into the repo's `CLAUDE.md`.
+- `--global`: installs into `~/.claude/skills/` for use in every project.
+- `--dry-run`: only prints what would be done.
 
-**Cập nhật:** `git pull` rồi chạy lại đúng lệnh cũ. Thư mục `gd-*` được thay mới hoàn toàn; tài liệu thiết kế của bạn được giữ nguyên.
+**Updating:** `git pull`, then rerun the same command. The `gd-*` folders are fully replaced; your design docs are kept intact.
 
-## Mỗi game có một design dir
+## Each game has a design dir
 
 ```
 <game_root>/docs/design/
-├── PROJECT.md      # định danh, fantasy, pillars, core loop, ràng buộc nền tảng, rủi ro
-├── STATE.md        # đang ở đâu, tiếp theo, câu hỏi mở, parking lot (≤ 1 trang)
-├── DECISIONS.md    # quyết định đã chốt và lý do
-├── SYSTEMS.md      # mục đích từng hệ thống + bản đồ phụ thuộc tự sinh
-└── gd.config.json  # cấu hình cho công cụ
+├── PROJECT.md      # identity, fantasy, pillars, core loop, platform constraints, risks
+├── STATE.md        # where we are, next, open questions, parking lot (≤ 1 page)
+├── DECISIONS.md    # settled decisions and their rationale
+├── SYSTEMS.md      # purpose of each system + auto-generated dependency map
+└── gd.config.json  # configuration for the tools
 ```
-Skill dùng chung, còn dữ liệu nằm trong từng game. Monorepo nhiều game thì mỗi game có design dir riêng.
+The skills are shared; the data lives in each game. In a monorepo with several games, each game has its own design dir.
 
-`gd.config.json` (mọi khóa đều tùy chọn):
+`gd.config.json` (all keys are optional):
 ```json
 {
   "state_owners":    {"GameState": "scripts/game_state.gd"},
@@ -78,51 +76,51 @@ Skill dùng chung, còn dữ liệu nằm trong từng game. Monorepo nhiều ga
 }
 ```
 
-## Công cụ (Godot)
+## Tools (Godot)
 
 ```bash
-# Ai ghi/đọc biến state nào; bán kính ảnh hưởng; so sánh trước và sau khi sửa
+# Who writes/reads which state variable; blast radius; before/after comparison of an edit
 python -I skills/gd-design-review/scripts/system_map.py <game_root> [--impact gold] [--snapshot f | --diff f]
-# Flag set mà không đọc, flag đọc mà không set, jump hỏng, title mồ côi, bảng lựa chọn và hệ quả
+# Flags set but never read, flags read but never set, broken jumps, orphan titles, choice & consequence table
 python -I skills/gd-narrative-design/scripts/dialogue_audit.py <game_root> [--stage ch1] [--json]
-# Mô phỏng kinh tế theo màn; kiểm tra đường cong ×1.2
+# Per-stage economy simulation; ×1.2 curve check
 python -I skills/gd-economy-balance/scripts/economy_sim.py sim model.json | curve 100 120 150
 ```
-Các script dựa trên regex, không phải parser đầy đủ: hãy dùng kết quả làm bằng chứng để kiểm tra, không phải chân lý. Giới hạn được ghi trong docstring của từng script.
+The scripts are regex-based, not full parsers: treat their output as evidence to check, not as ground truth. Limitations are documented in each script's docstring.
 
-## Ví dụ cách dùng
+## Usage examples
 
-- *"Mình muốn thêm hệ thống tinh thần quân làm giảm loyalty khi thua."* → `gd-design-review` liệt kê mọi hệ thống đang ghi/đọc `loyalty`, nêu xung đột với các hệ thống khác cũng chạm vào loyalty, đưa phản đối 🔴/🟠/🟡 và kết luận Go / Park / Reject.
-- *"Rối quá, không biết nên làm combat hay story trước."* → `gd-unstuck`.
-- *"Tiếp tục thôi."* → `gd-status` đọc STATE.md, so với git, và đề xuất việc tiếp theo.
-- *"Lựa chọn của người chơi có thực sự quan trọng không?"* → `gd-narrative-design`, quy trình B.
+- *"I want to add a troop morale system that lowers loyalty after a defeat."* → `gd-design-review` lists every system writing/reading `loyalty`, flags conflicts with other systems that also touch loyalty, raises 🔴/🟠/🟡 objections and concludes Go / Park / Reject.
+- *"I'm so confused, I don't know whether to do combat or story first."* → `gd-unstuck`.
+- *"Let's continue."* → `gd-status` reads STATE.md, compares it with git, and suggests the next task.
+- *"Do the player's choices actually matter?"* → `gd-narrative-design`, workflow B.
 
-## Cấu trúc repo
+## Repo structure
 
 ```
 gd-skills/
 ├── .claude-plugin/          # plugin.json + marketplace.json (Claude Code plugin)
-├── .github/workflows/ci.yml # validate + test trên Ubuntu & Windows
-├── skills/                  # 12 skill gd-* (SKILL.md + references/ templates/ scripts/)
-│   └── gd-core/templates/project/   # khung design dir cho mỗi game
+├── .github/workflows/ci.yml # validate + tests (one cheap Linux job)
+├── skills/                  # 12 gd-* skills (SKILL.md + references/ templates/ scripts/)
+│   └── gd-core/templates/project/   # design dir skeleton for each game
 ├── tools/
-│   ├── install.py           # cài vào repo / global, khởi tạo design dir
-│   └── validate.py          # kiểm tra frontmatter, link, LF, JSON, version
+│   ├── install.py           # install into a repo / globally, initialize the design dir
+│   └── validate.py          # checks frontmatter, links, LF, JSON, version
 ├── tests/
-│   ├── fixtures/mini_game/  # game Godot nhỏ có lỗi cài sẵn
+│   ├── fixtures/mini_game/  # small Godot game with planted bugs
 │   └── test_tools.py
-├── CHANGELOG.md · CLAUDE.md (quy ước đóng góp) · LICENSE · NOTICE.md
+├── CHANGELOG.md · CLAUDE.md (contributor conventions) · LICENSE · NOTICE.md
 ```
 
-## Phát triển
+## Development
 
 ```bash
-python tools/validate.py                  # frontmatter, link, LF, JSON, version
-python -m unittest discover -s tests -v   # test hồi quy với fixture Godot nhỏ
-claude plugin validate .                  # kiểm tra manifest của Claude Code
+python tools/validate.py                  # frontmatter, links, LF, JSON, version
+python -m unittest discover -s tests -v   # regression tests against a small Godot fixture
+claude plugin validate .                  # Claude Code manifest check
 ```
-Quy ước cho người đóng góp: xem [CLAUDE.md](CLAUDE.md). Lịch sử thay đổi: [CHANGELOG.md](CHANGELOG.md).
+Contributor conventions: see [CLAUDE.md](CLAUDE.md). Change history: [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-Code và nội dung skill: [MIT](LICENSE). Phần phương pháp được diễn giải từ gamedesign.guide theo CC BY 4.0, ghi công trong [NOTICE.md](NOTICE.md).
+Code and skill content: [MIT](LICENSE). The method paraphrased from gamedesign.guide is under CC BY 4.0, credited in [NOTICE.md](NOTICE.md).

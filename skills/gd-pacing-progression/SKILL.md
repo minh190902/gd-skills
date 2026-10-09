@@ -5,57 +5,57 @@ description: Pacing, progression and onboarding design — level/stage tension m
 
 # GD Pacing & Progression
 
-Bốn bộ điều tiết của lớp Dynamics: **Progression** (thay đổi có chủ đích theo thời gian), **Complexity curve** (độ khó học cộng độ khó chơi), **Pacing** (nhịp căng và chùng), và **Balance** (xem `gd-economy-balance`). Complexity khác difficulty. Đọc `PROJECT.md` để biết độ dài phiên chơi và ràng buộc nền tảng.
+The four regulators of the Dynamics layer: **Progression** (intentional change over time), **Complexity curve** (difficulty to learn plus difficulty to play), **Pacing** (rhythm of tension and release), and **Balance** (see `gd-economy-balance`). Complexity is not difficulty. Read `PROJECT.md` for session length and platform constraints.
 
-## Quy trình A — Bản đồ nhịp của một chương / chuỗi màn
+## Workflow A — Pacing map of a chapter / stage sequence
 
-1. **Kiểm kê từng màn** (từ config/data của level và nội dung narrative): số wave hoặc thử thách, kẻ địch mới, nhân vật mới, cơ chế hoặc hệ thống *xuất hiện lần đầu*, các lựa chọn lớn, thời lượng ước tính.
-2. **Lập bảng nhịp** theo [templates/pacing-map.md](templates/pacing-map.md): mỗi hàng là một màn hoặc một lát 10–15 phút. Các cột: cơ chế mới · độ căng (L/M/H) · độ phức tạp (L/M/H) · cảm xúc mục tiêu · khoảng thở/phần thưởng · bất ngờ. Mã màu năng lượng: 🔴 cao · 🔵 bình tĩnh · 🟡 phần thưởng.
-3. **Kiểm tra các mẫu nhịp:**
-   - Có tương phản: không bao giờ căng tối đa liên tục.
-   - Mỗi cơ chế mới đi theo Học → Thử → Nghỉ.
-   - Có gài trước rồi mới trả: mối nguy hoặc bí ẩn được đặt trước khi giải quyết.
-   - Có khoảng lặng trước va chạm lớn.
-   - Phần thưởng xen giữa các đoạn áp lực.
-   - Mỗi màn có ít nhất một khoảnh khắc lặng.
-4. **Chẩn đoán lỗi:** nhịp phẳng → chán; căng liên tục → kiệt sức; quá dày → tê liệt; giữa game yếu → người chơi bỏ.
-5. **Đề xuất** sắp xếp lại, dời thời điểm mở khóa, hoặc thêm khoảng thở, kèm thay đổi cụ thể trong data/nội dung.
+1. **Inventory each stage** (from level config/data and narrative content): number of waves or challenges, new enemies, new characters, mechanics or systems *appearing for the first time*, major choices, estimated duration.
+2. **Build a pacing table** using [templates/pacing-map.md](templates/pacing-map.md): each row is a stage or a 10–15 minute slice. Columns: new mechanic · tension (L/M/H) · complexity (L/M/H) · target emotion · breathing room/reward · surprise. Energy color code: 🔴 high · 🔵 calm · 🟡 reward.
+3. **Check pacing patterns:**
+   - Contrast exists: never sustained maximum tension.
+   - Each new mechanic follows Learn → Try → Rest.
+   - Setup before payoff: a threat or mystery is planted before it is resolved.
+   - A lull before a big clash.
+   - Rewards interleaved between pressure sections.
+   - Each stage has at least one quiet moment.
+4. **Diagnose problems:** flat pacing → boredom; constant tension → exhaustion; too dense → paralysis; weak mid-game → players quit.
+5. **Propose** reordering, moving unlock timing, or adding breathing room, with concrete changes to data/content.
 
-## Quy trình B — Complexity curve (lịch mở khóa hệ thống)
+## Workflow B — Complexity curve (system unlock schedule)
 
-1. Chia game thành **3 hồi**. Với mỗi hồi, ghi cơ chế hoặc hệ thống mới nào xuất hiện và nó tương tác với cái cũ ra sao.
-2. 7 luật giới thiệu cơ chế:
-   - Mỗi lần chỉ một cơ chế.
-   - Xây trên thứ người chơi đã thành thạo.
-   - Đưa ra lúc người chơi còn dư sức.
-   - Rải đều qua các hồi.
-   - Dạy trong ngữ cảnh.
-   - Lên lịch khoảng thở.
-   - Cắt bớt chồng chéo ở cuối game.
-3. Đánh dấu các điểm nghỉ và điểm đỉnh (nơi nhiều hệ thống chồng lên nhau, boss).
-4. Tùy chọn: **đỉnh giả**, tức là thêm một lớp mới đúng lúc người chơi tưởng mình đã thấy hết.
-5. Đầu ra là bảng `Hệ thống · Mở khóa hiện tại · Mở khóa đề xuất · Cách dạy · Lý do`, rồi kiểm tra tutorial hiện có có khớp với lịch này không. Danh sách hệ thống lấy từ SYSTEMS.md.
+1. Split the game into **3 acts**. For each act, note which new mechanics or systems appear and how they interact with existing ones.
+2. 7 rules for introducing mechanics:
+   - One mechanic at a time.
+   - Build on what the player has already mastered.
+   - Introduce it while the player still has capacity to spare.
+   - Spread evenly across acts.
+   - Teach in context.
+   - Schedule breathing room.
+   - Trim overlap in the late game.
+3. Mark rest points and peak points (where many systems overlap, bosses).
+4. Optional: a **false peak**, i.e. add a new layer right when the player thinks they have seen everything.
+5. The output is a `System · Current unlock · Proposed unlock · How it's taught · Reason` table, then check whether the existing tutorial matches this schedule. Take the system list from SYSTEMS.md.
 
-## Quy trình C — FTUE / 15 phút đầu
+## Workflow C — FTUE / first 15 minutes
 
-Nhịp chuẩn: **Hook** (hình ảnh, chủ đề hoặc câu chuyện) → **dạy một hành động cốt lõi** → thử thách đơn giản dùng hành động đó → **thưởng ngay** → hé lộ core loop → gợi ý người chơi có thể trở thành gì.
+Standard rhythm: **Hook** (visuals, theme or story) → **teach one core action** → a simple challenge using that action → **immediate reward** → reveal the core loop → hint at what the player could become.
 
 Checklist:
-- [ ] Người chơi biết phải làm gì trong 10 giây đầu?
-- [ ] Hành động chính xuất hiện ngay?
-- [ ] Thấy được toàn bộ core loop trong 5–10 phút đầu?
-- [ ] Có phần thưởng trước khi đòi người chơi cam kết?
-- [ ] Cảm được tone và fantasy ghi trong PROJECT.md?
-- [ ] Tutorial dạy qua hành động, tách từng khái niệm trước khi trộn, bỏ qua được, hợp tone?
-- [ ] *"Nếu người chơi quên rằng mình đang ở tutorial, bạn đã làm đúng."*
+- [ ] Does the player know what to do in the first 10 seconds?
+- [ ] Does the main action appear right away?
+- [ ] Is the full core loop visible within the first 5–10 minutes?
+- [ ] Is there a reward before asking the player to commit?
+- [ ] Can the player feel the tone and fantasy described in PROJECT.md?
+- [ ] Does the tutorial teach through action, isolate each concept before mixing, allow skipping, and fit the tone?
+- [ ] *"If the player forgets they are in a tutorial, you did it right."*
 
-Cách kiểm tra: mô tả 15 phút đầu theo từng lát 3 phút, chấm thấp/vừa/cao, đánh dấu khoảng thở, bất ngờ, chỗ chuyển cơ chế, và ít nhất một khoảnh khắc lặng.
+How to check: describe the first 15 minutes in 3-minute slices, rate each low/medium/high, and mark breathing room, surprises, mechanic transitions, and at least one quiet moment.
 
 ## Progression
-- Các loại: chỉ số, không gian, câu chuyện, cơ chế, ngoại hình, hệ thống. Các cấu trúc: tuyến tính, phân nhánh, module, lặp lại, động.
-- **Progression tốt cho người chơi thêm lựa chọn.** Progression tệ là cùng một lối chơi, chỉ có số to hơn. Mỗi lần lên cấp nên mở ra một *lựa chọn* mới, không chỉ cộng chỉ số.
-- Checklist: sự tăng trưởng có rõ? có mốc để mong chờ? có thay đổi lối chơi cốt lõi? nhịp có cân đối? có nhiều lớp? có hỗ trợ theme?
-- Bản đồ mốc: vẽ các mốc theo từng màn, rồi tìm những đoạn dài quá 2 màn mà không có mốc nào.
+- Types: stats, spatial, story, mechanical, cosmetic, systemic. Structures: linear, branching, modular, cyclical, dynamic.
+- **Good progression gives the player more choices.** Bad progression is the same playstyle with bigger numbers. Each level-up should open a new *choice*, not just add stats.
+- Checklist: is growth clear? are there milestones to look forward to? does it change core play? is the pacing balanced? are there multiple layers? does it support the theme?
+- Milestone map: plot milestones per stage, then look for stretches longer than 2 stages with no milestone.
 
-## Phiên chơi
-Mỗi màn nên vừa với một phiên chơi điển hình (ghi trong PROJECT.md) và có điểm dừng tự nhiên, kèm save ở điểm dừng. Màn nào vượt quá khoảng 1,5 lần độ dài phiên thì cân nhắc chia nhỏ.
+## Sessions
+Each stage should fit one typical play session (noted in PROJECT.md) and have a natural stopping point, with a save at that point. Consider splitting any stage that exceeds about 1.5× the session length.

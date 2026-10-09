@@ -28,6 +28,11 @@ def version():
     return json.loads((REPO / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))["version"]
 
 
+def write_lf(path: Path, text: str):
+    with open(path, "w", encoding="utf-8", newline="\n") as f:   # Path.write_text(newline=) needs 3.10
+        f.write(text)
+
+
 def act(dry, msg, fn=None):
     print(("[dry-run] " if dry else "") + msg)
     if not dry and fn:
@@ -67,7 +72,7 @@ def init_project(target: Path, game_root: Path, dry: bool):
     else:
         new = (text.rstrip() + "\n\n" if text.strip() else "") + block + "\n"
         msg = f"append  gd-skills block to {claude}"
-    act(dry, msg, lambda: claude.write_text(new, encoding="utf-8", newline="\n"))
+    act(dry, msg, lambda: write_lf(claude, new))
     if fresh:
         print(f"\nNext: open the game in Claude Code and ask it to fill {rel}/PROJECT.md and gd.config.json "
               f"(skill gd-core, section 1).")

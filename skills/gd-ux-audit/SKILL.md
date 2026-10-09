@@ -5,65 +5,65 @@ description: Audit the UX of an existing game screen or flow — clarity mapping
 
 # GD UX Audit
 
-**Lỗi UX là khoảng cách giữa điều người chơi muốn, điều giao diện gợi ý, và điều hệ thống thực sự làm.** Dấu hiệu nhận biết: người chơi phải hỏi "mình có làm X được không?".
+**A UX failure is the gap between what the player wants, what the interface suggests, and what the system actually does.** The telltale sign: the player has to ask "can I do X?".
 
-Đọc ràng buộc nền tảng trong `PROJECT.md` trước: orientation, cách nhập liệu, kích thước vùng chạm/click tối thiểu, độ dài phiên chơi, metaphor UI và bảng màu.
+Read the platform constraints in `PROJECT.md` first: orientation, input method, minimum touch/click target size, session length, UI metaphor and color palette.
 
-## Quy trình
+## Workflow
 
-### 1. Xác định phạm vi và đọc màn hình
-- Màn hình hoặc flow nào? Người chơi vào đây để làm gì, và vào từ đâu?
-- Đọc scene/layout và script của màn, theme, sketch, cùng phần đặc tả UI liên quan. Nếu được, hãy chạy game và chụp màn hình: audit trên hình thật tốt hơn đọc code.
+### 1. Define the scope and read the screen
+- Which screen or flow? What does the player come here to do, and where do they come from?
+- Read the screen's scene/layout and scripts, the theme, sketches, and the relevant UI spec. If possible, run the game and take screenshots: auditing real visuals beats reading code.
 
 ### 2. User flow
-Liệt kê từng bước Input → Điều hướng → Feedback → Kết quả, từ lúc vào đến lúc xong. Đếm số bước/thao tác. Đánh dấu chỗ người chơi do dự, các nhánh lỗi và cách phục hồi. *Không áp dụng máy móc luật 3-click*: một flow 4 bước rõ ràng tốt hơn 1 click khó hiểu. Hãy đánh giá theo khả năng đoán trước, mức do dự và công sức bỏ ra.
+List each Input → Navigation → Feedback → Outcome step, from entry to completion. Count the steps/actions. Mark where the player hesitates, the error branches and how they recover. *Do not apply the 3-click rule mechanically*: a clear 4-step flow beats one confusing click. Judge by predictability, hesitation and effort.
 
 ### 3. Clarity mapping
-1. Chọn một khoảnh khắc gameplay trên màn này.
-2. Liệt kê **mọi tín hiệu**, cả UI lẫn môi trường.
-3. Xếp hạng từ quan trọng nhất đến tùy chọn.
-4. Tín hiệu quan trọng có nằm gần chỗ người chơi đang tập trung không?
-5. Có được nhấn mạnh thêm bằng màu, âm thanh hoặc chuyển động không?
-6. Các trạng thái (sẵn sàng, đang hồi chiêu, nguy hiểm, không đủ tài nguyên) có được báo hiệu không?
-7. Thông tin thừa đã được bỏ chưa?
+1. Pick one gameplay moment on this screen.
+2. List **every signal**, both UI and environmental.
+3. Rank them from most important to optional.
+4. Are the important signals close to where the player is focusing?
+5. Are they reinforced with color, sound or motion?
+6. Are states (ready, on cooldown, danger, insufficient resources) signaled?
+7. Has redundant information been removed?
 
-### 4. Quét 6 loại lỗi
-| Loại | Ví dụ |
+### 4. Scan for 6 failure types
+| Type | Example |
 |---|---|
-| Quá tải nhận thức | Quá nhiều chỉ số trên một thẻ cùng lúc |
-| Affordance khó hiểu | Thứ bấm được trông không giống bấm được (không có trạng thái hover/pressed) |
-| Lặp lại gây mệt | Phải qua 4 menu để làm một việc |
-| Thiếu feedback | Hành động xong mà không có xác nhận rõ ràng |
-| Khó điều hướng | Không có đường quay lại, mất ngữ cảnh |
-| Chặn nhịp chơi | Popup chặn đúng lúc căng thẳng |
+| Cognitive overload | Too many stats on one card at once |
+| Unclear affordance | Something clickable doesn't look clickable (no hover/pressed state) |
+| Repetition fatigue | Going through 4 menus to do one thing |
+| Missing feedback | An action completes without clear confirmation |
+| Hard navigation | No way back, lost context |
+| Flow interruption | A popup blocks right at a tense moment |
 
-Cũng để ý **nợ UX vô hình**: hệ thống cũ không được cải tiến, UI rối dần khi thêm nội dung, tooltip phải gánh thay cho thiết kế kém.
+Also watch for **invisible UX debt**: legacy systems that never got improved, UI that gets messier as content is added, tooltips compensating for bad design.
 
-### 5. Kiểm tra 5 khía cạnh
-- **Clarity:** người chơi hiểu mình làm được gì và chuyện gì vừa xảy ra.
-- **Control:** input phản hồi nhạy và đoán trước được.
-- **Feedback:** mọi hành động đều được xác nhận, mức độ tương xứng với hệ quả.
-- **Rhythm:** tôn trọng sự chú ý và độ dài phiên chơi.
-- **Emotion:** gợi đúng cảm xúc và fantasy.
+### 5. Check the 5 dimensions
+- **Clarity:** the player understands what they can do and what just happened.
+- **Control:** input is responsive and predictable.
+- **Feedback:** every action is acknowledged, proportionate to its consequence.
+- **Rhythm:** respects attention and session length.
+- **Emotion:** evokes the right emotion and fantasy.
 
-Kiểm tra thêm: lỗi có hoàn tác được hoặc ngăn trước được không, và màn hình có dùng được trong điều kiện khó (người chơi mệt, màn hình nhỏ, chơi một tay) không.
+Also check: can mistakes be undone or prevented, and is the screen usable in tough conditions (tired player, small screen, one-handed play)?
 
-### 6. Chấm mức độ và đề xuất sửa
-- **S1 Blocker:** người chơi không hoàn thành được mục tiêu, hoặc hiểu sai và mất tài nguyên/tiến độ.
-- **S2 Major:** vẫn hoàn thành được nhưng do dự rõ rệt, thao tác sai thường xuyên, hoặc bỏ lỡ thông tin quan trọng.
-- **S3 Minor:** vướng nhẹ, chậm, thiếu chăm chút.
-- **S4 Polish:** cải thiện cảm giác hoặc thẩm mỹ.
+### 6. Rate severity and propose fixes
+- **S1 Blocker:** the player cannot complete the goal, or misunderstands and loses resources/progress.
+- **S2 Major:** still completable but with noticeable hesitation, frequent misclicks, or missed important information.
+- **S3 Minor:** slight friction, slowness, lack of polish.
+- **S4 Polish:** improves feel or aesthetics.
 
-Mỗi phát hiện gồm: vị trí (đường dẫn node/element), mô tả, loại lỗi, mức độ, bằng chứng, **đề xuất sửa cụ thể**, và công sức ước tính. Việc sửa tuân theo chuẩn code/UI của dự án (ghi trong PROJECT.md).
+Each finding includes: location (node/element path), description, failure type, severity, evidence, **a concrete fix**, and estimated effort. Fixes follow the project's code/UI standards (noted in PROJECT.md).
 
-### 7. Đầu ra
-Lưu vào `<game_root>/docs/ux/<YYYY-MM-DD>-<screen>.md` theo [templates/ux-report.md](templates/ux-report.md). Khi trình bày: đưa bảng phát hiện xếp theo mức độ trước, rồi top 3 việc nên sửa ngay.
+### 7. Output
+Save to `<game_root>/docs/ux/<YYYY-MM-DD>-<screen>.md` using [templates/ux-report.md](templates/ux-report.md). When presenting: show the findings table sorted by severity first, then the top 3 things to fix now.
 
-## Checklist nhanh
-- [ ] Dùng được mà không cần hướng dẫn?
-- [ ] Không có chỗ người chơi do dự hoặc bấm thử lung tung?
-- [ ] Feedback tức thì và rõ ràng?
-- [ ] UI vẫn ổn khi nội dung tăng gấp 3?
-- [ ] Không có popup thừa làm mất sự chú ý?
-- [ ] UX củng cố tone, nhịp và fantasy?
-- [ ] Icon, màu và bố cục vẫn truyền đạt được mục đích khi bỏ hết chữ?
+## Quick checklist
+- [ ] Usable without instructions?
+- [ ] No spots where the player hesitates or taps around at random?
+- [ ] Feedback is immediate and clear?
+- [ ] UI still holds up when content triples?
+- [ ] No unnecessary popups stealing attention?
+- [ ] UX reinforces tone, pacing and fantasy?
+- [ ] Icons, colors and layout still communicate their purpose with all text removed?

@@ -1,58 +1,58 @@
 ---
 name: gd-game-analysis
-description: Analyze or deconstruct a reference game (or an open-source game repo) and extract actionable lessons for our projects — core loop, systems, progression/economy, UX/FTUE, narrative, monetization, market fit, and system-level comparison/benchmark between games. Use when the user shares a game, store page, video, review set or repo to study ("phân tích game X", "học gì từ Y", "so sánh với Z"), when researching competitors, or when writing documents like "Cultivation Simulator Analysis.md".
+description: Analyze or deconstruct a reference game (or an open-source game repo) and extract actionable lessons for our projects — core loop, systems, progression/economy, UX/FTUE, narrative, monetization, market fit, and system-level comparison/benchmark between games. Use when the user shares a game, store page, video, review set or repo to study ("analyze game X", "what can we learn from Y", "compare with Z"; in any language), when researching competitors, or when writing documents like "Cultivation Simulator Analysis.md".
 ---
 
 # GD Game Analysis
 
-Mục đích không phải tóm tắt game người khác, mà là **rút ra quyết định cho game của chúng ta**. Mọi phân tích kết thúc bằng các khuyến nghị có thể thành ticket, gắn với pillar của dự án đích.
+The purpose is not to summarize someone else's game, but to **extract decisions for our own game**. Every analysis ends with recommendations that can become tickets, tied to the pillars of the target project.
 
-## Quy trình
+## Process
 
-### 1. Xác định câu hỏi & dự án đích
-Phân tích cho game nào của chúng ta? Câu hỏi cụ thể là gì ("họ làm hệ quả dài hạn thế nào?", "họ giữ kinh tế căng ra sao?")? Đọc `PROJECT.md` trong design dir của game đích (quy ước ở `gd-core`).
+### 1. Define the question & target project
+Which of our games is the analysis for? What is the specific question ("how do they handle long-term consequences?", "how do they keep the economy tight?")? Read `PROJECT.md` in the target game's design dir (convention in `gd-core`).
 
-### 2. Thu thập nguồn — chọn lăng kính phù hợp
-| Lăng kính | Cho insight về | Cách |
+### 2. Gather sources — choose the right lens
+| Lens | Gives insight into | How |
 |---|---|---|
-| Chơi / xem gameplay | Hành vi | Ghi hành động lặp lại, chỗ dừng, do dự, cảm xúc, chỗ vỡ nhập tâm |
-| Reviews (Steam, store, Reddit) | Cảm xúc | Gắn tag: pacing, feedback, economy, tone, kỳ vọng. Review tiêu cực thường giá trị nhất |
-| MDA | Nhân quả | Mechanics → Dynamics → Aesthetics (8 loại fun: Challenge, Fantasy, Narrative, Discovery, Expression, Fellowship, Submission, Sensation) |
-| AERM | Bền vững kinh doanh | Acquisition, Engagement, Retention, Monetization |
-| Sơ đồ | Hệ thống | Mind map, flowchart quyết định/state, sơ đồ dòng tài nguyên |
-| Source code (repo mã nguồn mở) | Cách implement | Đọc vòng lặp chính, data model, cách hệ quả được lưu & đọc |
+| Play / watch gameplay | Behavior | Note repeated actions, stopping points, hesitation, emotions, immersion breaks |
+| Reviews (Steam, store, Reddit) | Emotion | Tag: pacing, feedback, economy, tone, expectations. Negative reviews are often the most valuable |
+| MDA | Cause and effect | Mechanics → Dynamics → Aesthetics (8 kinds of fun: Challenge, Fantasy, Narrative, Discovery, Expression, Fellowship, Submission, Sensation) |
+| AERM | Business sustainability | Acquisition, Engagement, Retention, Monetization |
+| Diagrams | Systems | Mind map, decision/state flowchart, resource flow diagram |
+| Source code (open-source repo) | Implementation | Read the main loop, data model, how consequences are stored & read |
 
-Dùng WebSearch/WebFetch cho store page, wiki, review; dùng Explore agent cho repo lớn.
+Use WebSearch/WebFetch for store pages, wikis and reviews; use the Explore agent for large repos.
 
-### 3. 7 câu hỏi phân tích bất kỳ game nào
-1. Người chơi làm gì phần lớn thời gian? (core loop — vẽ dạng Action → Feedback → Progress)
-2. Hệ thống nào củng cố hoặc ngắt loop?
-3. Game dạy ở đâu và thế nào?
-4. Căng thẳng tăng/giảm khi nào, vì sao?
-5. Feedback nào đáng nhớ, thỏa mãn, hoặc gây bối rối?
-6. Theme, cơ chế và nhịp nối với nhau ra sao?
-7. Bạn có chơi tiếp không, điều gì kéo bạn quay lại?
+### 3. 7 questions for analyzing any game
+1. What does the player do most of the time? (core loop — draw it as Action → Feedback → Progress)
+2. Which systems reinforce or break the loop?
+3. Where and how does the game teach?
+4. When does tension rise/fall, and why?
+5. Which feedback is memorable, satisfying, or confusing?
+6. How do theme, mechanics and pacing connect?
+7. Would you keep playing, and what pulls you back?
 
-### 4. Feature breakdown (cho tính năng muốn học)
-Purpose · Core fit · Mental model · Feedback · Failure modes · Scalability · System hooks. *Hiểu vì sao nó hoạt động, trong bối cảnh nào, cho ai* — đừng copy tính năng thiếu bối cảnh.
+### 4. Feature breakdown (for features worth learning from)
+Purpose · Core fit · Mental model · Feedback · Failure modes · Scalability · System hooks. *Understand why it works, in what context, for whom* — don't copy features without their context.
 
-### 5. So sánh (khi có ≥2 game)
-So sánh **hệ thống và kết quả, không phải danh sách tính năng**, trên 7 chiều: Core loop · Cognitive load · Progression · Onboarding · Emotional hook · Monetization · Presentation. Hỏi: cùng ràng buộc gì? cùng vấn đề giải khác nhau thế nào? cái gì vắng mặt và vì sao? ý định vs tác động?
+### 5. Comparison (when there are ≥2 games)
+Compare **systems and outcomes, not feature lists**, across 7 dimensions: Core loop · Cognitive load · Progression · Onboarding · Emotional hook · Monetization · Presentation. Ask: what constraints do they share? How do they solve the same problem differently? What is absent, and why? Intent vs impact?
 
-Red flags so sánh lười: copy vì đối thủ có; "polished" không định nghĩa; copy hit mà bỏ bối cảnh; so khác thể loại/khác ngân sách không sắc thái; chỉ so hình ảnh.
+Red flags of lazy comparison: copying because a competitor has it; undefined "polished"; copying a hit while dropping its context; comparing across genres/budgets without nuance; comparing visuals only.
 
-### 6. Chuyển thành hành động cho dự án đích
-Với mỗi bài học:
-| Bài học | Bằng chứng (nguồn) | Áp dụng cho (hệ thống/file của ta) | Thay đổi đề xuất | Pillar | Effort | Rủi ro |
-Phân loại: **Áp dụng ngay / Thử nghiệm (prototype) / Ghi nhận (không phù hợp lúc này, vì sao)**. Tối đa ~5–7 khuyến nghị ưu tiên — ít mà chắc.
+### 6. Turn it into action for the target project
+For each lesson:
+| Lesson | Evidence (source) | Applies to (our system/file) | Proposed change | Pillar | Effort | Risk |
+Classify: **Apply now / Experiment (prototype) / Note (not a fit right now, and why)**. At most ~5–7 prioritized recommendations — few but solid.
 
 ### 7. Output
-Lưu `<game_root>/docs/analysis/<game-kebab>.md` (hoặc `docs/analysis/` cấp repo nếu phân tích dùng chung cho nhiều game) theo [templates/deconstruction.md](templates/deconstruction.md). Phần "Key takeaways" và bảng hành động đặt **lên đầu** file.
+Save to `<game_root>/docs/analysis/<game-kebab>.md` (or repo-level `docs/analysis/` if the analysis is shared across several games) following [templates/deconstruction.md](templates/deconstruction.md). Put the "Key takeaways" section and the action table **at the top** of the file.
 
 ## Checklist
-- [ ] Có câu hỏi phân tích & dự án đích rõ ràng
-- [ ] Phân tích hệ thống, không liệt kê tính năng
-- [ ] Biết *vì sao* nó hoạt động, cho ai
-- [ ] Gồm cả cảm xúc và UX, không chỉ cơ chế
-- [ ] Mọi khuyến nghị có bằng chứng, gắn file/hệ thống của ta, thành ticket được
-- [ ] Ghi rõ những gì cố ý *không* áp dụng
+- [ ] Clear analysis question & target project
+- [ ] Analyzes systems, does not just list features
+- [ ] Knows *why* it works, and for whom
+- [ ] Covers emotion and UX, not just mechanics
+- [ ] Every recommendation has evidence, is tied to our files/systems, and can become a ticket
+- [ ] States explicitly what is deliberately *not* applied

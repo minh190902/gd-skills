@@ -1,22 +1,22 @@
-# STATE — <Tên game> đang ở đâu
+# STATE — Where <Game name> stands
 
-> Cập nhật: YYYY-MM-DD · Một trang duy nhất. Skill `gd-status` đọc đầu phiên, cập nhật cuối phiên.
-> Nếu tài liệu khác (PROGRESS, TODO) mâu thuẫn với file này → file này đúng.
+> Updated: YYYY-MM-DD · A single page. The `gd-status` skill reads it at session start and updates it at session end.
+> If another doc (PROGRESS, TODO) contradicts this file → this file wins.
 
-## Milestone hiện tại
-**<tên>** — Tiêu chí xong (kiểm được): 
+## Current milestone
+**<name>** — Done criteria (verifiable): 
 
-## Đang làm (≤ 2)
+## In progress (≤ 2)
 - 
 
-## Tiếp theo (≤ 5, theo ưu tiên)
+## Next (≤ 5, by priority)
 1. 
 
-## Câu hỏi mở
+## Open questions
 1. 
 
-## Parking lot (ý tưởng / lo lắng chưa làm)
+## Parking lot (ideas / worries not acted on yet)
 - 
 
-## Nhật ký phiên (5 gần nhất)
+## Session log (last 5)
 - YYYY-MM-DD · 

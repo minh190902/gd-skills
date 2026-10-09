@@ -1,11 +1,11 @@
-# CLAUDE.md — gd-skills (repo nguồn của bộ skill)
+# CLAUDE.md — gd-skills (source repo for the skill set)
 
-Đây là repo **nguồn** của bộ skill `gd-*`. Không phải game. Khi sửa:
+This is the **source** repo for the `gd-*` skills. It is not a game. When editing:
 
-- Skill nằm ở `skills/<name>/SKILL.md`. Frontmatter: `name` trùng tên thư mục; `description` bằng tiếng Anh, tối đa 1024 ký tự, không chứa `<` hoặc `>`, nêu rõ **khi nào dùng** (trigger). Nội dung bằng tiếng Việt, giữ thuật ngữ tiếng Anh. Mỗi SKILL.md dưới 500 dòng; chi tiết dài đưa vào `references/` hoặc `templates/`.
-- **Không ghi gì đặc thù của một game cụ thể** vào skill. Thông tin riêng của game nằm trong design dir của game đó (PROJECT.md, gd.config.json). Ví dụ minh họa thì để chung chung.
-- Đường dẫn script trong SKILL.md viết dạng `<skill_dir>/scripts/...`. Skill khác tham chiếu tới thì ghi tên skill (ví dụ: "system_map.py thuộc gd-design-review"). Không ghi cứng `.claude/skills/...`, vì khi cài dạng plugin đường dẫn sẽ khác.
-- Script chỉ dùng thư viện chuẩn của Python, chạy với `python -I`, in UTF-8. Mỗi hành vi mới cần có fixture và test trong `tests/`.
-- Mọi file dùng LF (đã có `.gitattributes`). Trên Windows, khi ghi file bằng Python phải dùng `newline="\n"`.
-- Trước khi commit: `python tools/validate.py && python -m unittest discover -s tests && claude plugin validate .`
-- Phát hành bản mới: tăng version trong `.claude-plugin/plugin.json` và `marketplace.json` (cả hai chỗ), rồi thêm mục vào CHANGELOG.md.
+- Skills live in `skills/<name>/SKILL.md`. Frontmatter: `name` matches the folder name; `description` in English, at most 1024 characters, no `<` or `>`, stating clearly **when to use** it (triggers). Content in English. Keep each SKILL.md under 500 lines; move long details into `references/` or `templates/`.
+- **Never write anything specific to one game** into a skill. Game-specific information lives in that game's design dir (PROJECT.md, gd.config.json). Keep illustrative examples generic.
+- Write script paths in SKILL.md as `<skill_dir>/scripts/...`. When another skill refers to one, name the skill (e.g. "system_map.py from gd-design-review"). Never hard-code `.claude/skills/...`, because the path differs when installed as a plugin.
+- Scripts use only the Python standard library, run with `python -I`, and print UTF-8. Every new behavior needs a fixture and a test in `tests/`.
+- All files use LF (enforced by `.gitattributes`). On Windows, when writing files from Python, use `newline="\n"`.
+- Before committing: `python tools/validate.py && python -m unittest discover -s tests && claude plugin validate .`
+- Releasing a new version: bump the version in `.claude-plugin/plugin.json` and `marketplace.json` (both places), then add an entry to CHANGELOG.md.

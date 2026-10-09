@@ -1,26 +1,26 @@
-# UX Audit: <Màn hình / flow> — YYYY-MM-DD
+# UX Audit: <Screen / flow> — YYYY-MM-DD
 
-**Mục tiêu người chơi trên màn này:** 
-**Điểm vào / ra:** 
-**Nguồn đã xem:** .tscn, script, sketch, PRD_09, screenshot
+**Player goal on this screen:** 
+**Entry / exit points:** 
+**Sources reviewed:** .tscn, script, sketch, PRD_09, screenshot
 
 ## User flow
-| # | Input | Navigation | Feedback | Outcome | Do dự? |
+| # | Input | Navigation | Feedback | Outcome | Hesitation? |
 |---|---|---|---|---|---|
 
-Tổng số bước: … · Nhánh lỗi & phục hồi: …
+Total steps: … · Error branches & recovery: …
 
-## Clarity map (khoảnh khắc: …)
-| Tín hiệu | Ưu tiên | Vị trí | Củng cố (màu/âm/chuyển động) | Vấn đề |
+## Clarity map (moment: …)
+| Signal | Priority | Location | Reinforcement (color/sound/motion) | Issue |
 |---|---|---|---|---|
 
-## Phát hiện
-| ID | Mức | Loại | Vị trí (node path) | Mô tả | Đề xuất sửa | Effort |
+## Findings
+| ID | Severity | Type | Location (node path) | Description | Proposed fix | Effort |
 |---|---|---|---|---|---|---|
 | UX-1 | S1/S2/S3/S4 | | | | | S/M/L |
 
-## 5 khía cạnh
-| Khía cạnh | Đánh giá | Ghi chú |
+## 5 dimensions
+| Dimension | Rating | Notes |
 |---|---|---|
 | Clarity | | |
 | Control | | |
@@ -28,7 +28,7 @@ Tổng số bước: … · Nhánh lỗi & phục hồi: …
 | Rhythm | | |
 | Emotion | | |
 
-## Top 3 nên sửa ngay
+## Top 3 to fix now
 1. 
 2. 
 3. 

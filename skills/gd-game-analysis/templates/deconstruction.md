@@ -1,21 +1,21 @@
-# Phân tích: <Tên game> → bài học cho <Dự án đích>
+# Analysis: <Game name> → lessons for <Target project>
 
-**Ngày:** YYYY-MM-DD · **Câu hỏi phân tích:** … · **Nguồn:** (link store, video, review, repo)
+**Date:** YYYY-MM-DD · **Analysis question:** … · **Sources:** (store link, video, reviews, repo)
 
-## Key takeaways (đọc phần này trước)
-**Điều họ làm tốt (≤5):**
+## Key takeaways (read this first)
+**What they do well (≤5):**
 1. 
 
-**Hành động cho dự án của ta:**
-| # | Bài học | Áp dụng cho | Thay đổi đề xuất | Pillar | Effort | Loại |
+**Actions for our project:**
+| # | Lesson | Applies to | Proposed change | Pillar | Effort | Type |
 |---|---|---|---|---|---|---|
-| 1 | | | | | S/M/L | Ngay / Thử nghiệm / Ghi nhận |
+| 1 | | | | | S/M/L | Now / Experiment / Note |
 
-**Cố ý không áp dụng:** … (vì …)
+**Deliberately not applied:** … (because …)
 
 ---
 
-## 1. Thông tin chung
+## 1. General info
 Title · Developer · Release · Platform · Genre · Monetization · Target audience
 
 ## 2. Core gameplay
@@ -24,26 +24,26 @@ Title · Developer · Release · Platform · Genre · Monetization · Target aud
 - **Player agency:** 
 
 ## 3. Progression & economy
-- Cấu trúc kinh tế (source → pool → sink):
-- Hệ thống phần thưởng:
+- Economy structure (source → pool → sink):
+- Reward systems:
 
-| Loại thưởng | Cách trao | Tần suất | Loại động lực | Ghi chú |
+| Reward type | How it's granted | Frequency | Motivation type | Notes |
 |---|---|---|---|---|
 
 ## 4. UX, UI & onboarding
-| Bước FTUE | Phút | Ma sát |
+| FTUE step | Minute | Friction |
 |---|---|---|
 
-## 5. Narrative & cảm xúc
-Loại narrative · cách hệ quả được lưu & trả · emotion arc · fantasy
+## 5. Narrative & emotion
+Narrative type · how consequences are stored & paid off · emotion arc · fantasy
 
-## 6. Monetization (nếu liên quan)
+## 6. Monetization (if relevant)
 
-## 7. Technical (nếu có source)
-Vòng lặp chính, data model, pattern đáng học (file:line)
+## 7. Technical (if source is available)
+Main loop, data model, patterns worth learning (file:line)
 
-## 8. Feature breakdown: <tính năng chính muốn học>
-| Bước | Phát hiện |
+## 8. Feature breakdown: <main feature to learn from>
+| Step | Finding |
 |---|---|
 | Purpose | |
 | Core fit | |
@@ -53,8 +53,8 @@ Vòng lặp chính, data model, pattern đáng học (file:line)
 | Scalability | |
 | System hooks | |
 
-## 9. So sánh (tùy chọn)
-| Chiều | <Game này> | <Dự án ta> | Ghi chú |
+## 9. Comparison (optional)
+| Dimension | <This game> | <Our project> | Notes |
 |---|---|---|---|
 | Core loop | | | |
 | Cognitive load | | | |
@@ -65,4 +65,4 @@ Vòng lặp chính, data model, pattern đáng học (file:line)
 | Presentation | | | |
 
 ## 10. Market fit
-Đối thủ · USP · SWOT ngắn · phản hồi người chơi (tích cực/tiêu cực)
+Competitors · USP · short SWOT · player feedback (positive/negative)
