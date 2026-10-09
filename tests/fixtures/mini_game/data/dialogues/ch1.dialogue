@@ -1,0 +1,25 @@
+~ start
+Narrator: The village burns.
+- Help the villagers
+	do Bridge.change_morale(1)
+	do Bridge.set_flag("helped")
+	=> after
+- Walk away
+	do Bridge.set_flag("ignored_flag")
+	=> after
+- Hesitate
+	=> pause
+- Look for a secret [if Bridge.check_flag("never_set")]
+	=> nowhere
+
+~ pause
+Narrator: You wait.
+=> after
+
+~ after
+Narrator: Dawn.
+=> END
+
+~ orphan
+Narrator: Nobody reaches this.
+=> END

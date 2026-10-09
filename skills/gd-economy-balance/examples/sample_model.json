@@ -1,0 +1,19 @@
+{
+  "currency": "gold",
+  "_source": "Illustrative example (a stage-based defense RPG with hero salaries). Replace every number with values extracted from your code.",
+  "start": 300,
+  "stages": [
+    {"name": "stage_0", "sources": {"base_reward": 150, "loot": [100, 200], "tax": [50, 100]},
+     "sinks": [{"name": "salary", "amount": [200, 500], "mandatory": true},
+               {"name": "repair", "amount": [50, 100], "priority": 1},
+               {"name": "shop", "amount": [50, 200], "priority": 2}]},
+    {"name": "stage_4", "sources": {"base_reward": 350, "loot": [100, 200], "tax": [50, 100]},
+     "sinks": [{"name": "salary", "amount": [200, 500], "mandatory": true},
+               {"name": "repair", "amount": [80, 160], "priority": 1},
+               {"name": "shop", "amount": [50, 200], "priority": 2}]},
+    {"name": "stage_8", "sources": {"base_reward": 1000, "loot": [100, 200], "tax": [50, 100]},
+     "sinks": [{"name": "salary", "amount": [200, 500], "mandatory": true},
+               {"name": "repair", "amount": [200, 400], "priority": 1},
+               {"name": "shop", "amount": [50, 200], "priority": 2}]}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "_doc": "Config for gd-* tools. Paths are relative to the game root (folder with project.godot). Remove keys you don't need; every key is optional.",
+  "state_owners": {"GameState": "scripts/game_state.gd"},
+  "instance_owners": {},
+  "save_systems": ["SaveLoadManager"],
+  "ignore_dirs": ["addons", ".godot", "test", "tests"],
+  "flag_set_fns": ["set_flag"],
+  "flag_read_fns": ["check_flag", "get_flag"],
+  "entry_title_patterns": ["^start$", "_intro$"]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "game-design-skills",
+  "owner": {"name": "mignh", "url": "https://github.com/minh190902"},
+  "metadata": {"description": "Game design workflow skills for Claude Code", "version": "0.1.0"},
+  "plugins": [
+    {
+      "name": "game-design-skills",
+      "source": "./",
+      "description": "12 gd-* skills: design review, project compass, feature spec/audit, narrative, economy, pacing, UX, playtest, analysis.",
+      "version": "0.1.0",
+      "category": "development"
+    }
+  ]
+}

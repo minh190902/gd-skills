@@ -1,0 +1,10 @@
+config_version=5
+
+[application]
+config/name="MiniGame"
+
+[autoload]
+
+GameState="*res://scripts/game_state.gd"
+Bridge="*res://scripts/bridge.gd"
+SaveLoadManager="*res://scripts/save_load_manager.gd"

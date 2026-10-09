@@ -1,0 +1,8 @@
+{
+  "name": "game-design-skills",
+  "version": "0.1.0",
+  "description": "Game design skills for Claude Code: design review that challenges ideas with evidence, project compass (STATE/DECISIONS/SYSTEMS), feature spec & audit, narrative consequence audit, economy simulation, pacing, UX audit, playtest, game analysis. Godot-aware tools.",
+  "author": {"name": "mignh", "url": "https://github.com/minh190902"},
+  "license": "MIT",
+  "keywords": ["game-design", "godot", "narrative", "balance", "ux", "playtest", "skills"]
+}

@@ -1,0 +1,5 @@
+{
+  "state_owners": {"GameState": "scripts/game_state.gd"},
+  "instance_owners": {"UnitData": "scripts/unit_data.gd"},
+  "save_systems": ["SaveLoadManager"]
+}
