@@ -47,6 +47,7 @@ def install_skills(dest: Path, dry: bool):
 
 def init_project(target: Path, game_root: Path, dry: bool):
     design = game_root / "docs" / "design"
+    fresh = not (design / "PROJECT.md").exists()
     act(dry, f"mkdir   {design}", lambda: design.mkdir(parents=True, exist_ok=True))
     for f in sorted(TEMPLATES.iterdir()):
         if f.name == "CLAUDE.snippet.md":
@@ -67,8 +68,9 @@ def init_project(target: Path, game_root: Path, dry: bool):
         new = (text.rstrip() + "\n\n" if text.strip() else "") + block + "\n"
         msg = f"append  gd-skills block to {claude}"
     act(dry, msg, lambda: claude.write_text(new, encoding="utf-8", newline="\n"))
-    print(f"\nNext: open the game in Claude Code and ask it to fill {rel}/PROJECT.md and gd.config.json "
-          f"(skill gd-core, section 1).")
+    if fresh:
+        print(f"\nNext: open the game in Claude Code and ask it to fill {rel}/PROJECT.md and gd.config.json "
+              f"(skill gd-core, section 1).")
 
 
 def main():
