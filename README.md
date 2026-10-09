@@ -1,4 +1,6 @@
-# Game Design Skills for Claude Code
+# gd-skills — Game Design Skills for Claude Code
+
+[![CI](https://github.com/minh190902/gd-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/minh190902/gd-skills/actions/workflows/ci.yml) ![version](https://img.shields.io/badge/version-0.1.0-blue) ![license](https://img.shields.io/badge/license-MIT-green)
 
 Bộ 12 skill giúp Claude Code làm việc như một **game designer có quy trình**:
 - **phản biện ý tưởng** bằng bằng chứng, không gật đầu mặc định;
@@ -31,20 +33,20 @@ Phương pháp dựa trên [Game Design Guide](https://gamedesign.guide) (CC BY 
 
 ## Cài đặt
 
-Yêu cầu: Claude Code, Python 3.8+ (chỉ dùng thư viện chuẩn).
+Yêu cầu: Claude Code, Python 3.9+ (chỉ dùng thư viện chuẩn).
 
 ### Cách 1: Plugin marketplace (Claude Code)
 ```
-/plugin marketplace add minh190902/game-design-skills
-/plugin install game-design-skills@game-design-skills
+/plugin marketplace add minh190902/gd-skills
+/plugin install gd-skills@gd-skills
 ```
-Skill sẽ có tên dạng `game-design-skills:gd-core`. Sau đó mở game và yêu cầu Claude "thiết lập design dir cho game này" (theo mục 1 của `gd-core`).
+Skill sẽ có tên dạng `gd-skills:gd-core`. Sau đó mở game và yêu cầu Claude "thiết lập design dir cho game này" (theo mục 1 của `gd-core`).
 
 ### Cách 2: Chép vào repo game (khuyên dùng cho team)
 Cách này giữ skill trong git của repo game, nên cả team dùng cùng một phiên bản.
 ```bash
-git clone https://github.com/minh190902/game-design-skills
-python game-design-skills/tools/install.py --target <repo_game> --init <thư_mục_game>
+git clone https://github.com/minh190902/gd-skills
+python gd-skills/tools/install.py --target <repo_game> --init <thư_mục_game>
 ```
 - `--target`: repo nhận skill, chép vào `<repo>/.claude/skills/gd-*`.
 - `--init`: tạo `<thư_mục_game>/docs/design/` từ template (không ghi đè file đã có) và chèn khối quy tắc vào `CLAUDE.md` của repo.
@@ -94,6 +96,23 @@ Các script dựa trên regex, không phải parser đầy đủ: hãy dùng k�
 - *"Rối quá, không biết nên làm combat hay story trước."* → `gd-unstuck`.
 - *"Tiếp tục thôi."* → `gd-status` đọc STATE.md, so với git, và đề xuất việc tiếp theo.
 - *"Lựa chọn của người chơi có thực sự quan trọng không?"* → `gd-narrative-design`, quy trình B.
+
+## Cấu trúc repo
+
+```
+gd-skills/
+├── .claude-plugin/          # plugin.json + marketplace.json (Claude Code plugin)
+├── .github/workflows/ci.yml # validate + test trên Ubuntu & Windows
+├── skills/                  # 12 skill gd-* (SKILL.md + references/ templates/ scripts/)
+│   └── gd-core/templates/project/   # khung design dir cho mỗi game
+├── tools/
+│   ├── install.py           # cài vào repo / global, khởi tạo design dir
+│   └── validate.py          # kiểm tra frontmatter, link, LF, JSON, version
+├── tests/
+│   ├── fixtures/mini_game/  # game Godot nhỏ có lỗi cài sẵn
+│   └── test_tools.py
+├── CHANGELOG.md · CLAUDE.md (quy ước đóng góp) · LICENSE · NOTICE.md
+```
 
 ## Phát triển
 

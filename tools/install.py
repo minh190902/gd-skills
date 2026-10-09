@@ -87,7 +87,7 @@ def main():
     if not a.glob and not target.is_dir():
         sys.exit(f"target not found: {target}")
     dest = target / ".claude" / "skills"
-    print(f"game-design-skills {version()} -> {dest}")
+    print(f"gd-skills {version()} -> {dest}")
     act(a.dry_run, f"mkdir   {dest}", lambda: dest.mkdir(parents=True, exist_ok=True))
     install_skills(dest, a.dry_run)
     if a.init:

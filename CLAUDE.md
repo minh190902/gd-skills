@@ -1,4 +1,4 @@
-# CLAUDE.md — game-design-skills (repo nguồn của bộ skill)
+# CLAUDE.md — gd-skills (repo nguồn của bộ skill)
 
 Đây là repo **nguồn** của bộ skill `gd-*`. Không phải game. Khi sửa:
 
