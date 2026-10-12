@@ -11,6 +11,7 @@ Role: **stop new features from breaking the logic of existing ones, and say so p
 In the game's design dir (convention in `gd-core`):
 - `PROJECT.md`: pillars, fantasy, platform constraints.
 - `STATE.md`: current milestone and focus, parking lot.
+- `ROADMAP.md`: current pipeline stage and stage debt.
 - `DECISIONS.md`: decisions already made, which must not be silently broken.
 - `SYSTEMS.md`: purpose of each system, danger zones.
 
@@ -35,6 +36,7 @@ Configuration is read from `<design_dir>/gd.config.json` (state_owners, instance
    - **Past decisions:** does it contradict any entry in DECISIONS.md? If so, superseding it must be deliberate and recorded explicitly.
    - **Overlap:** which system already does something similar? Would extending that system be cheaper?
    - **Scope:** does the idea belong to the current milestone? If not, propose Park.
+   - **Stage:** does the work belong to the current pipeline stage (ROADMAP.md)? Content, polish or architecture before the core loop is validated is stage debt (`gd-pipeline` Workflow C); say what could be thrown away.
    - **Player:** cognitive load within platform constraints, ludonarrative dissonance, dominant strategies, death spirals.
    - **Technical:** save/load compatibility, story flags that need a payoff, affected tests.
 5. **Objections**: at most 5, ordered by severity.

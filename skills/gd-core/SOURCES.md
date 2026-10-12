@@ -13,6 +13,7 @@ Additions NOT on the site (our own):
 - The UX severity scale (S1–S4) and UX report template in `gd-ux-audit`.
 - Balance formulas (diminishing returns, soft cap, sink/faucet ratio) in `gd-economy-balance/references/balance-math.md` — standard industry knowledge (Schreiber & Romero, *Game Balance*).
 - The `dialogue_audit.py` and `economy_sim.py` scripts.
-- The design dir convention (PROJECT / STATE / DECISIONS / SYSTEMS) and the gd-status, gd-design-review, gd-unstuck skills.
+- The design dir convention (PROJECT / STATE / DECISIONS / SYSTEMS / ROADMAP) and the gd-status, gd-design-review, gd-unstuck skills.
+- `gd-pipeline`, `gd-production-plan`, `gd-go-to-market` (added 2026-10-12): the common industry stage sequence (concept → prototype → vertical slice → production → alpha → beta → launch) with an explicit Validate stage and stage gates; production estimating practice; indie marketing practice as commonly taught (e.g. Chris Zukowski, howtomarketagame.com) and the Steamworks documentation (partner.steamgames.com/doc). Store facts are dated and must be re-verified.
 
 Further reading (from the site's bibliography): *The Art of Game Design* (Schell), *Game Feel* (Swink), *The Gamer's Brain* (Hodent), *Game Balance* (Schreiber & Romero), *Advanced Game Design: A Systems Approach* (Sellers), *Game Design Workshop* (Fullerton), *Thinking in Systems* (Meadows), *Writing for Games* (Nicklin).

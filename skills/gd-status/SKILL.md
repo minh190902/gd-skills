@@ -10,25 +10,26 @@ The problem to avoid: after a few weeks you no longer know where you are, and th
 | File | Answers the question | Who updates it |
 |---|---|---|
 | `STATE.md` | Where are we, what's next, what's still undecided? (≤ 1 page) | This skill, at the end of each session |
+| `ROADMAP.md` | Which pipeline stage, which gate items are left? | `gd-pipeline`; this skill ticks gate items as work finishes |
 | `DECISIONS.md` | Why is the game the way it is? | `gd-design-review`, `gd-unstuck` when a decision is made |
 | `SYSTEMS.md` | Which systems exist, and which system touches which variable? | `gd-design-review` after each change |
 | The project's PROGRESS / CHANGELOG (if any) | What has been finished (history) | Archived when a milestone closes |
 
 ## Start of session — "where are we?"
-1. Read STATE.md and PROJECT.md.
+1. Read STATE.md, PROJECT.md and ROADMAP.md (no ROADMAP → offer `gd-pipeline` Workflow D).
 2. Check for **drift**: run `git log --since=<STATE's last-updated date>` and `git status`. Are there commits or changes not recorded in STATE? Any changes outside the current focus?
 3. Answer in ≤ 8 lines:
-   - **Milestone:** … · **Focus:** …
+   - **Stage:** … · **Milestone:** … · **Focus:** …
    - **Last time:** …
    - **Next:** (the first item in "Next")
    - **Still undecided:** …
-   - **Drift:** (if any)
-4. Ask the user whether to take the next item or change direction. If changing direction, run the new idea through `gd-design-review` first.
+   - **Drift:** (if any; also work that belongs to a later stage → stage debt)
+4. Check that "Next" serves the current stage's gate; if it does not, say so and suggest the next gate item (`gd-pipeline` Workflow A). Ask the user whether to take the next item or change direction. If changing direction, run the new idea through `gd-design-review` first.
 
 ## End of session / task finished
 1. Remove finished work from "In progress". Add one line to the "Session log": date · what was done · commit.
 2. Update "Next" (≤ 5, by priority), "Open questions" and "Parking lot".
-3. Record any new decision in DECISIONS.md. If systems changed, run `system_map.py` and update SYSTEMS.md.
+3. Tick finished gate items in ROADMAP.md (with evidence). If every gate item of the stage is ticked, propose a gate review (`gd-pipeline` Workflow B). Record any new decision in DECISIONS.md. If systems changed, run `system_map.py` and update SYSTEMS.md.
 4. Keep STATE ≤ 1 page: the session log keeps only the 5 most recent lines; older lines move to the project's history file.
 5. Update the `Updated:` date at the top of the file.
 

@@ -113,13 +113,15 @@ class InstallTest(unittest.TestCase):
             for _ in range(2):
                 run(INSTALL, "--target", repo, "--init", game)
             skills = sorted(p.name for p in (repo / ".claude" / "skills").iterdir() if p.is_dir())
-            self.assertEqual(len(skills), 12)
+            self.assertEqual(len(skills), 15)
             self.assertTrue((game / "docs" / "design" / "PROJECT.md").exists())
+            self.assertTrue((game / "docs" / "design" / "ROADMAP.md").exists())
             self.assertFalse((game / "docs" / "design" / "CLAUDE.snippet.md").exists())
             claude = (repo / "CLAUDE.md").read_text(encoding="utf-8")
             self.assertTrue(claude.startswith("# Existing rules"))
             self.assertEqual(claude.count("<!-- gd-skills:begin -->"), 1)
             self.assertIn("my_game/docs/design/STATE.md", claude)
+            self.assertIn("my_game/docs/design/ROADMAP.md", claude)
 
     def test_existing_design_docs_are_kept(self):
         with tempfile.TemporaryDirectory() as d:

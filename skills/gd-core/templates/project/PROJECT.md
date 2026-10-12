@@ -9,6 +9,13 @@
 - **Platform & constraints** (orientation, input, session length): 
 - **Reference games / inspiration:** 
 
+## Business targets
+- **Business model and price range:** 
+- **Intended length** (first playthrough / with replay): 
+- **Team and time budget** (people, hours/week, months): 
+- **Money budget and runway:** 
+- **Target launch window:** 
+
 ## Player fantasy
 - **Role** (who the player becomes): 
 - **Power** (what they can do): 

@@ -3,6 +3,8 @@
 > Updated: YYYY-MM-DD · A single page. The `gd-status` skill reads it at session start and updates it at session end.
 > If another doc (PROGRESS, TODO) contradicts this file → this file wins.
 
+**Stage:** <n · name> (see ROADMAP.md)
+
 ## Current milestone
 **<name>** — Done criteria (verifiable): 
 

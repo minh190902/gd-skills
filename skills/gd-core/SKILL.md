@@ -1,6 +1,6 @@
 ---
 name: gd-core
-description: Game design lens, project setup and router for the gd-* skills. Use whenever a request involves game design thinking rather than pure coding — brainstorming a mechanic or system, "should we add X", "why is this not fun", choosing between design options, defining pillars or the core loop, writing a 1-pager/concept — and when a game has no docs/design/PROJECT.md yet (set it up). Routes to gd-status, gd-design-review, gd-unstuck, gd-feature-spec, gd-feature-audit, gd-narrative-design, gd-economy-balance, gd-pacing-progression, gd-ux-audit, gd-playtest, gd-game-analysis.
+description: Game design lens, project setup and router for the gd-* skills. Use whenever a request involves game design thinking rather than pure coding — brainstorming a mechanic or system, "should we add X", "why is this not fun", choosing between design options, defining pillars or the core loop, writing a 1-pager/concept — and when a game has no docs/design/PROJECT.md yet (set it up). Routes to gd-pipeline (stage, next step, gates), gd-status, gd-design-review, gd-unstuck, gd-feature-spec, gd-feature-audit, gd-narrative-design, gd-economy-balance, gd-pacing-progression, gd-ux-audit, gd-playtest, gd-game-analysis, gd-production-plan, gd-go-to-market.
 ---
 
 # GD Core — design lens, project setup, routing
@@ -15,11 +15,12 @@ Each game has a **design dir**: `<game_root>/docs/design/` (game_root = the fold
 |---|---|
 | `PROJECT.md` | Identity, fantasy, pillars, core loop, platform constraints, data locations, known risks. **Read it before giving any design opinion.** |
 | `STATE.md` | Where we are, what's next, open questions, parking lot (`gd-status`) |
+| `ROADMAP.md` | Pipeline stage (idea → launch), gate checklists, commercial and business tracks, stage debt (`gd-pipeline`) |
 | `DECISIONS.md` | Settled decisions and their rationale (`gd-design-review`, `gd-unstuck`) |
 | `SYSTEMS.md` | Purpose of each system + map of who writes/reads state (`gd-design-review`) |
 | `gd.config.json` | Configuration for the scripts (state owners, flag functions…) |
 
-Skill output docs live next to the design dir: `<game_root>/docs/{specs,audits,narrative,balance,ux,playtest,analysis}/`.
+Skill output docs live next to the design dir: `<game_root>/docs/{specs,audits,narrative,balance,ux,playtest,analysis,production,marketing}/`.
 
 **Finding the design dir:** search for `**/docs/design/PROJECT.md`. With several games (monorepo), pick the game matching the file/folder under discussion; if unclear, ask.
 
@@ -29,12 +30,14 @@ Skill output docs live next to the design dir: `<game_root>/docs/{specs,audits,n
 3. Adjust `gd.config.json` to the actual code: state owners (autoloads holding state), instance owners (Resources such as HeroData), names of the set/check flag functions.
 4. Run `system_map.py` (part of gd-design-review) to fill the auto-generated part of SYSTEMS.md. Write the "Purpose" section from the header comment of each file.
 5. Fill in STATE.md from recent `git log` and existing TODOs.
-6. Offer to add `templates/project/CLAUDE.snippet.md` to the repo's CLAUDE.md (replacing `{{DESIGN_DIR}}`) so the rules are always applied.
+6. Fill in ROADMAP.md and the `Stage:` line of STATE.md per `gd-pipeline` Workflow D (find the current stage from evidence, list stage debt).
+7. Offer to add `templates/project/CLAUDE.snippet.md` to the repo's CLAUDE.md (replacing `{{DESIGN_DIR}}`) so the rules are always applied.
 
 ## 2. Routing
 
 | The user wants to… | Use |
 |---|---|
+| "What should I do next", "guide me", new to game dev, "are we doing it the right way", closing a stage | `gd-pipeline` |
 | Start/end a session, "where are we", "what's next" | `gd-status` |
 | Propose an idea, change gameplay / story / a system | `gd-design-review` (**always run before building**) |
 | Untangle confusion, too many questions, doesn't know where to start | `gd-unstuck` |
@@ -46,9 +49,13 @@ Skill output docs live next to the design dir: `<game_root>/docs/{specs,audits,n
 | A confusing or cluttered screen/flow, missing feedback | `gd-ux-audit` |
 | Plan a test, process feedback | `gd-playtest` |
 | Analyze a reference game / competitor | `gd-game-analysis` |
+| Scope, time estimate, milestones, cuts, budget | `gd-production-plan` |
+| Positioning, store page, wishlists, demo/festival, price, launch, publisher, business setup | `gd-go-to-market` |
 | An open design question that fits no category yet | Continue with this skill (Sections 3–5) |
 
-Typical chain: design-review → feature-spec → economy-balance → playtest → status.
+Typical chain: design-review → feature-spec → economy-balance → playtest → status. Over the whole project, `gd-pipeline` decides which of these the current stage needs.
+
+**Beginners:** when the user is new to making games or asks what to do, start with `gd-pipeline` Workflow A (one step at a time, jargon explained) rather than answering with a full plan.
 
 ## 3. Game Map — 5 layers for thinking about any problem
 

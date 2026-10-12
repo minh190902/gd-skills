@@ -2,7 +2,8 @@
 
 [![CI](https://github.com/minh190902/gd-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/minh190902/gd-skills/actions/workflows/ci.yml) ![version](https://img.shields.io/badge/version-0.1.0-blue) ![license](https://img.shields.io/badge/license-MIT-green)
 
-A set of 12 skills that make Claude Code work like a **game designer with a process**:
+A set of 15 skills that make Claude Code work like a **small game studio with a process** — a producer, a designer and a marketing lead:
+- **walks you through the whole pipeline**, from idea to launch, one step at a time, with written gates between stages (works for first-time developers);
 - **challenges ideas** with evidence instead of nodding along by default;
 - **stops a new feature from breaking the logic of another**, using a map of who writes/reads state;
 - **untangles things** when you feel overwhelmed;
@@ -16,6 +17,7 @@ The method is based on [Game Design Guide](https://gamedesign.guide) (CC BY 4.0,
 
 | Skill | Use when |
 |---|---|
+| `gd-pipeline` | "What do I do next?", "guide me", are we doing it right: stage, gates, one step at a time (ROADMAP.md) |
 | `gd-core` | General design questions; setting up a design dir for a new game; routing to other skills |
 | `gd-status` | Start/end of a session: "where are we, what's next" (STATE.md) |
 | `gd-design-review` | **Every time an idea comes up**: checks impact and conflicts, raises objections with severity |
@@ -28,6 +30,8 @@ The method is based on [Game Design Guide](https://gamedesign.guide) (CC BY 4.0,
 | `gd-ux-audit` | Screen audits, S1–S4 severity |
 | `gd-playtest` | Test plans, result triage, decision log |
 | `gd-game-analysis` | Deconstructing reference games and extracting action items |
+| `gd-production-plan` | Scope, time estimates, milestones, cut list, risks, budget |
+| `gd-go-to-market` | Positioning, Steam page, wishlists, demo/festival, launch, publisher, business setup |
 
 ## Installation
 
@@ -59,6 +63,7 @@ python gd-skills/tools/install.py --target <game_repo> --init <game_dir>
 <game_root>/docs/design/
 ├── PROJECT.md      # identity, fantasy, pillars, core loop, platform constraints, risks
 ├── STATE.md        # where we are, next, open questions, parking lot (≤ 1 page)
+├── ROADMAP.md      # pipeline stage, gate checklists, commercial/business tracks, stage debt
 ├── DECISIONS.md    # settled decisions and their rationale
 ├── SYSTEMS.md      # purpose of each system + auto-generated dependency map
 └── gd.config.json  # configuration for the tools
@@ -92,6 +97,9 @@ The scripts are regex-based, not full parsers: treat their output as evidence to
 
 - *"I want to add a troop morale system that lowers loyalty after a defeat."* → `gd-design-review` lists every system writing/reading `loyalty`, flags conflicts with other systems that also touch loyalty, raises 🔴/🟠/🟡 objections and concludes Go / Park / Reject.
 - *"I'm so confused, I don't know whether to do combat or story first."* → `gd-unstuck`.
+- *"I've never made a game. What do I do next?"* → `gd-pipeline` finds the stage from ROADMAP.md and answers with one step: why, how, done when.
+- *"How long will this take me alone?"* → `gd-production-plan`.
+- *"When should I open the Steam page?"* → `gd-go-to-market`.
 - *"Let's continue."* → `gd-status` reads STATE.md, compares it with git, and suggests the next task.
 - *"Do the player's choices actually matter?"* → `gd-narrative-design`, workflow B.
 
@@ -101,7 +109,7 @@ The scripts are regex-based, not full parsers: treat their output as evidence to
 gd-skills/
 ├── .claude-plugin/          # plugin.json + marketplace.json (Claude Code plugin)
 ├── .github/workflows/ci.yml # validate + tests (one cheap Linux job)
-├── skills/                  # 12 gd-* skills (SKILL.md + references/ templates/ scripts/)
+├── skills/                  # 15 gd-* skills (SKILL.md + references/ templates/ scripts/)
 │   └── gd-core/templates/project/   # design dir skeleton for each game
 ├── tools/
 │   ├── install.py           # install into a repo / globally, initialize the design dir
