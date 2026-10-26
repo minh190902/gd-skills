@@ -123,6 +123,24 @@ class InstallTest(unittest.TestCase):
             self.assertIn("my_game/docs/design/STATE.md", claude)
             self.assertIn("my_game/docs/design/ROADMAP.md", claude)
 
+    def test_rules_go_to_agents_md_when_claude_md_imports_it(self):
+        with tempfile.TemporaryDirectory() as d:
+            repo = Path(d)
+            (repo / "AGENTS.md").write_text("# Shared rules\n", encoding="utf-8")
+            (repo / "CLAUDE.md").write_text("# Claude\n\n<!-- gd-skills:begin -->\nold\n<!-- gd-skills:end -->\n\n@AGENTS.md\n",
+                                            encoding="utf-8")
+            for _ in range(2):
+                run(INSTALL, "--target", repo, "--init", repo, "--agents")
+            agents = (repo / "AGENTS.md").read_text(encoding="utf-8")
+            claude = (repo / "CLAUDE.md").read_text(encoding="utf-8")
+            self.assertTrue(agents.startswith("# Shared rules"))
+            self.assertEqual(agents.count("<!-- gd-skills:begin -->"), 1)
+            self.assertNotIn("gd-skills:begin", claude)
+            self.assertIn("@AGENTS.md", claude)
+            shared = sorted(p.name for p in (repo / ".agents" / "skills").iterdir() if p.is_dir())
+            self.assertEqual(shared, sorted(p.name for p in (repo / ".claude" / "skills").iterdir() if p.is_dir()))
+            self.assertTrue((repo / ".agents" / "skills" / ".gd-skills-version").exists())
+
     def test_existing_design_docs_are_kept(self):
         with tempfile.TemporaryDirectory() as d:
             repo = Path(d)

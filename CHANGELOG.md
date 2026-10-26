@@ -2,6 +2,12 @@
 
 Format based on [Keep a Changelog](https://keepachangelog.com/), versioning per [SemVer](https://semver.org/).
 
+## [0.2.1] - 2026-10-26
+
+### Added
+- `tools/install.py --agents`: also install the skills into `<target>/.agents/skills`, so agents that read that folder never run an older hand-copied version.
+- The rules block goes into `AGENTS.md` when `CLAUDE.md` imports it (`@AGENTS.md`); an old block in `CLAUDE.md` is removed. One rules file for Claude Code, Codex and other agents.
+
 ## [0.2.0] - 2026-10-12
 ### Added
 - `gd-pipeline`: 10-stage studio pipeline (Spark → Launch) with written gates, commercial and business tracks, stage debt, gate review verdicts, and a beginner "guide me" mode that gives one step at a time. Glossary for first-time developers.
