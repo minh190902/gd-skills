@@ -1,5 +1,8 @@
 {
   "state_owners": {"GameState": "src/core/types.ts"},
   "instance_owners": {"Hero": "src/core/types.ts"},
-  "state_aliases": {"GameState": ["game.state"]}
+  "state_aliases": {"GameState": ["game.state"]},
+  "flag_sources": ["src/**/*.ts"],
+  "flag_set_patterns": ["\\b[sS]\\.flags\\.(\\w+)\\s*(?:[-+*/]?=(?!=)|\\+\\+|--)"],
+  "flag_read_patterns": ["\\b[sS]\\.flags\\.(\\w+)\\b"]
 }

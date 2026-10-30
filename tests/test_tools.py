@@ -99,7 +99,7 @@ class SystemMapTsTest(unittest.TestCase):
 
     def test_nested_index_mutator_and_instance_writes(self):
         self.assertEqual(self.state["walls"]["writers"], ["battle"])
-        self.assertEqual(self.state["flags"]["writers"], ["battle"])  # hud's parts.push( is a method
+        self.assertEqual(self.state["flags"]["writers"], ["battle", "story"])  # not hud: parts.push( is a method
         self.assertEqual(self.state["log"]["writers"], ["menu", "shop"])   # newGame (bulk) skipped
         self.assertEqual(self.state["loyalty"]["writers"], ["battle"])
 
@@ -116,7 +116,11 @@ class SystemMapTsTest(unittest.TestCase):
 class DialogueAuditTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.r = json.loads(run(DIALOGUE_AUDIT, FIXTURE, "--json"))
+        code, out = run_rc(DIALOGUE_AUDIT, FIXTURE, "--json")
+        cls.code, cls.r = code, json.loads(out)
+
+    def test_broken_jump_fails(self):
+        self.assertEqual(self.code, 1)
 
     def test_flags(self):
         self.assertEqual([f for f, _ in self.r["set_never_read"]], ["ignored_flag"])
@@ -131,6 +135,21 @@ class DialogueAuditTest(unittest.TestCase):
         self.assertEqual(texts, ["Hesitate", "Look for a secret"])
         help_row = self.r["choice_table"][0]
         self.assertEqual(help_row["effects"], ["change_morale(1)", 'set_flag("helped")'])
+
+
+class CodeFlagAuditTest(unittest.TestCase):
+    def test_flags_in_typescript_without_dialogue_files(self):
+        code, out = run_rc(DIALOGUE_AUDIT, WEB_FIXTURE, "--json")
+        self.assertEqual(code, 0)                                 # flag problems are warnings
+        r = json.loads(out)
+        self.assertEqual((r["files"], r["code_files"] > 0), (0, True))
+        self.assertEqual([f for f, _ in r["set_never_read"]], ["debts", "helped_widow"])
+        self.assertEqual([f for f, _ in r["read_never_set"]], ["knows_tunel"])
+        self.assertEqual(run_rc(DIALOGUE_AUDIT, WEB_FIXTURE, "--strict")[0], 1)
+
+    def test_nothing_to_scan_exits_2(self):
+        with tempfile.TemporaryDirectory() as d:
+            self.assertEqual(run_rc(DIALOGUE_AUDIT, d)[0], 2)
 
 
 class EconomySimTest(unittest.TestCase):

@@ -9,15 +9,21 @@ Finds the narrative bugs that playtests miss:
   - choices with no mechanical effect  -> cosmetic choice (fine only if intentional)
   - a Choice & Consequence table (every `do` / `set` under each option)
 
-Usage (game_root = folder containing project.godot):
-  python -I dialogue_audit.py <game_root> [--stage NAME] [--json] [--config PATH]
+Usage (game_root = folder containing project.godot, or any game root when flag_sources is set):
+  python -I dialogue_audit.py <game_root> [--stage NAME] [--json] [--strict] [--config PATH]
   --stage filters the choice table to files whose name contains NAME (e.g. "stage_3")
+Exit codes: 0 ok · 1 broken jumps (with --strict also flag problems and orphan titles) ·
+2 game root missing, or no .dialogue files and no flag_sources.
 
 Config: <game_root>/docs/design/gd.config.json, keys used here (all optional):
   "flag_set_fns":  ["set_flag"]                               function names that set a flag
   "flag_read_fns": ["check_flag", "get_flag", "get_flag_value"]
   "entry_title_patterns": ["^start$", "_intro$"]               titles entered from code
   "ignore_dirs": ["addons", ".godot", "test", "tests"]
+Flags kept in code or data (any engine, no .dialogue needed), one capture group = the flag name:
+  "flag_sources":       ["src/**/*.ts", "data/**/*.json"]          globs relative to the game root
+  "flag_set_patterns":  ["\\\\bS\\\\.f\\\\.(\\\\w+)\\\\s*(?:[-+*/]?=(?!=)|\\\\+\\\\+|--)"]   S.f.x = 1, +=, ++ (JSON-escaped)
+  "flag_read_patterns": ["\\\\bS\\\\.f\\\\.(\\\\w+)\\\\b"]
 A flag also counts as READ when its name appears as a string literal in any .gd/.tres file
 (registries often store flag names as data). Dynamic names ("x_%d") must be checked by hand.
 """
@@ -99,15 +105,41 @@ def files(root, pattern, ignore):
             yield p
 
 
+def scan_code_flags(root, sources, cfg):
+    """Flags kept in code or data (TS, JSON, GDScript…): every match of a set pattern is a write; a read
+    pattern match that starts inside a set match is the same write, not a read."""
+    set_res = [re.compile(p) for p in cfg.get("flag_set_patterns", [])]
+    read_res = [re.compile(p) for p in cfg.get("flag_read_patterns", [])]
+    sets, reads = [], []
+    for p in sources:
+        text = p.read_text(encoding="utf-8", errors="ignore")
+        rel = p.relative_to(root).as_posix()
+        spans = []
+        for rx in set_res:
+            for m in rx.finditer(text):
+                spans.append((m.start(), m.end()))
+                sets.append((m.group(1), rel, text.count("\n", 0, m.start()) + 1))
+        for rx in read_res:
+            for m in rx.finditer(text):
+                if not any(a <= m.start() < b for a, b in spans):
+                    reads.append((m.group(1), rel, text.count("\n", 0, m.start()) + 1))
+    return sets, reads
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("root", type=Path)
     ap.add_argument("--stage")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--config")
+    ap.add_argument("--strict", action="store_true",
+                    help="also fail on flags set-but-never-read / read-but-never-set and orphan titles")
     a = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
     root = a.root.resolve()
+    if not root.is_dir():
+        print(f"game root not found: {root}", file=sys.stderr)
+        sys.exit(2)
     cfg = load_config(root, a.config)
     ignore = set(cfg.get("ignore_dirs", ["addons", ".godot", "test", "tests"]))
     set_fns = cfg.get("flag_set_fns", ["set_flag"])
@@ -117,14 +149,19 @@ def main():
     entry_res = [re.compile(p) for p in cfg.get("entry_title_patterns", ["^start$", "_intro$"])]
 
     dfiles = sorted(files(root, "*.dialogue", ignore))
-    if not dfiles:
-        sys.exit(f"No .dialogue files under {root}")
+    sources = sorted({p for g in cfg.get("flag_sources", []) for p in root.glob(g)
+                      if p.is_file() and not ignore & set(p.relative_to(root).as_posix().split("/")[:-1])})
+    if not dfiles and not sources:
+        print(f"No .dialogue files under {root} and no flag_sources in gd.config.json", file=sys.stderr)
+        sys.exit(2)
     titles, jumps, sets, reads, choices, effect_titles = {}, [], [], [], [], set()
     for f in dfiles:
         t, j, s, r, c, e = parse_dialogue(f, re_set, re_read)
         titles.update({k: (f.name, v) for k, v in t.items()})
         jumps += j; sets += s; reads += r; choices += c
         effect_titles |= e
+    s, r = scan_code_flags(root, sources, cfg)
+    sets += s; reads += r
 
     literals, dynamic = set(), []
     for p in list(files(root, "*.gd", ignore)) + list(files(root, "*.tres", ignore)):
@@ -139,7 +176,7 @@ def main():
     entry = (literals & titles.keys()) | {t for t in titles if any(r.search(t) for r in entry_res)}
 
     report = {
-        "files": len(dfiles), "titles": len(titles), "choices": len(choices),
+        "files": len(dfiles), "code_files": len(sources), "titles": len(titles), "choices": len(choices),
         "flags_set": len(set_names), "flags_read": len(read_names & set_names),
         "set_never_read": sorted({f: f"{fl}:{ln}" for f, fl, ln in sets if f not in read_names}.items()),
         "read_never_set": sorted({f: f"{fl}:{ln}" for f, fl, ln in reads if f not in set_names}.items()),
@@ -153,13 +190,15 @@ def main():
     }
     table = [c for c in choices if not a.stage or a.stage in c["file"]]
 
+    failed = bool(report["broken_jumps"]) or (a.strict and bool(
+        report["set_never_read"] or report["read_never_set"] or report["orphan_titles"]))
     if a.json:
         report["choice_table"] = table
         print(json.dumps(report, ensure_ascii=False, indent=2))
-        return
+        sys.exit(1 if failed else 0)
 
     print(f"# Dialogue audit — {root.name}\n")
-    print(f"{report['files']} files · {report['titles']} titles · {report['choices']} choices · "
+    print(f"{report['files']} dialogue files · {report['code_files']} code files · {report['titles']} titles · {report['choices']} choices · "
           f"{report['flags_set']} flags set · {report['flags_read']} of them read\n")
     sections = [
         ("Flags SET but never READ (consequence never paid off — choice illusion?)", report["set_never_read"]),
@@ -180,6 +219,7 @@ def main():
         eff = "<br>".join(c["effects"]) or ("(effects in target title)" if c["jump"] in effect_titles else "—")
         print(f"| {c['file']}:{c['line']} | {c['title']} | {c['text'].replace('|', '/')} | "
               f"{'✓' if c['conditional'] else ''} | {eff.replace('|', '/')} | {c['jump'] or ''} |")
+    sys.exit(1 if failed else 0)
 
 
 if __name__ == "__main__":
