@@ -1,0 +1,5 @@
+{
+  "state_owners": {"GameState": "src/core/types.ts"},
+  "instance_owners": {"Hero": "src/core/types.ts"},
+  "state_aliases": {"GameState": ["game.state"]}
+}

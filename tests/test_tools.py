@@ -12,6 +12,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 FIXTURE = REPO / "tests" / "fixtures" / "mini_game"
+WEB_FIXTURE = REPO / "tests" / "fixtures" / "mini_web"
 SYSTEM_MAP = REPO / "skills" / "gd-design-review" / "scripts" / "system_map.py"
 DIALOGUE_AUDIT = REPO / "skills" / "gd-narrative-design" / "scripts" / "dialogue_audit.py"
 ECONOMY_SIM = REPO / "skills" / "gd-economy-balance" / "scripts" / "economy_sim.py"
@@ -78,6 +79,38 @@ class SystemMapTest(unittest.TestCase):
             snap = Path(d) / "snap.json"
             run(SYSTEM_MAP, FIXTURE, "--snapshot", snap)
             self.assertIn("## Added (0)", run(SYSTEM_MAP, FIXTURE, "--diff", snap))
+
+
+class SystemMapTsTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.map = json.loads(run(SYSTEM_MAP, WEB_FIXTURE, "--json"))
+        cls.state = cls.map["state"]
+
+    def test_detects_typescript(self):
+        self.assertEqual(self.map["language"], "ts")
+        self.assertIn("unusedCounter", self.state)              # optional field of the interface
+
+    def test_writes_through_aliases_and_one_hop_calls(self):
+        self.assertEqual(self.state["gold"]["writers"], ["battle", "menu", "rules", "shop"])
+        self.assertEqual(self.state["gold"]["readers"], ["hud"])  # `as GameState` alias
+        self.assertTrue(self.state["gold"]["contested"])
+        self.assertEqual(self.state["morale"]["writers"], ["rules", "shop"])   # menu is 2 hops away
+
+    def test_nested_index_mutator_and_instance_writes(self):
+        self.assertEqual(self.state["walls"]["writers"], ["battle"])
+        self.assertEqual(self.state["flags"]["writers"], ["battle"])  # hud's parts.push( is a method
+        self.assertEqual(self.state["log"]["writers"], ["menu", "shop"])   # newGame (bulk) skipped
+        self.assertEqual(self.state["loyalty"]["writers"], ["battle"])
+
+    def test_skips_comments_save_tests_and_node_modules(self):
+        everyone = set(self.map["systems"])
+        for name in ("save", "shop.test", "index"):
+            self.assertNotIn(name, everyone)
+        self.assertNotIn("battle", self.state["morale"]["writers"])   # commented-out writes
+
+    def test_missing_root_exits_2(self):
+        self.assertEqual(run_rc(SYSTEM_MAP, REPO / "no_such_dir")[0], 2)
 
 
 class DialogueAuditTest(unittest.TestCase):
