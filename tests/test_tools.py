@@ -162,6 +162,25 @@ class EconomySimTest(unittest.TestCase):
         out = run(ECONOMY_SIM, "curve", "100", "120", "200")
         self.assertIn("×1.20 | ok", out)
         self.assertIn("SPIKE", out)
+        self.assertEqual(run_rc(ECONOMY_SIM, "curve", "100", "120", "200", "--strict")[0], 1)
+        self.assertEqual(run_rc(ECONOMY_SIM, "curve", "100", "200", "--band", "1.5", "3", "--strict")[0], 0)
+
+    def test_sim_json_and_bad_model(self):
+        r = json.loads(run(ECONOMY_SIM, "sim", REPO / "skills/gd-economy-balance/examples/sample_model.json",
+                           "--runs", "200", "--json"))
+        self.assertEqual(r["stages"][0]["stage"], "stage_0")
+        with tempfile.TemporaryDirectory() as d:
+            bad = Path(d) / "bad.json"
+            bad.write_text('{"stages": [{"name": "s", "sources": {"x": [5, 1]}}]}', encoding="utf-8")
+            self.assertEqual(run_rc(ECONOMY_SIM, "sim", bad)[0], 2)
+
+    def test_growth_doubling_and_explosion(self):
+        r = json.loads(run(ECONOMY_SIM, "growth", "--base", "10", "--rate", "1.15", "--levels", "50", "--json"))
+        self.assertAlmostEqual(r["doubles_every"], 4.96, places=2)
+        self.assertEqual(r["flags"], [])
+        code, out = run_rc(ECONOMY_SIM, "growth", "--base", "10", "--rate", "1.5", "--levels", "50", "--strict")
+        self.assertEqual(code, 1)
+        self.assertIn("637,621,500", out)    # last level costs ×1.5^50 the first
 
 
 class DocsCheckTest(unittest.TestCase):
