@@ -17,6 +17,8 @@ DIALOGUE_AUDIT = REPO / "skills" / "gd-narrative-design" / "scripts" / "dialogue
 ECONOMY_SIM = REPO / "skills" / "gd-economy-balance" / "scripts" / "economy_sim.py"
 INSTALL = REPO / "tools" / "install.py"
 VALIDATE = REPO / "tools" / "validate.py"
+DOCS_CHECK = REPO / "skills" / "gd-core" / "scripts" / "docs_check.py"
+TEMPLATES = REPO / "skills" / "gd-core" / "templates" / "project"
 
 
 def run(*args):
@@ -25,6 +27,13 @@ def run(*args):
     if out.returncode != 0:
         raise AssertionError(f"{args} failed:\n{out.stdout}\n{out.stderr}")
     return out.stdout
+
+
+def run_rc(*args):
+    """(exit code, stdout) without failing on a non-zero exit."""
+    out = subprocess.run([sys.executable, "-I", *map(str, args)], capture_output=True, text=True,
+                         encoding="utf-8")
+    return out.returncode, out.stdout
 
 
 def table_row(md, var):
@@ -101,6 +110,66 @@ class EconomySimTest(unittest.TestCase):
         out = run(ECONOMY_SIM, "curve", "100", "120", "200")
         self.assertIn("×1.20 | ok", out)
         self.assertIn("SPIKE", out)
+
+
+class DocsCheckTest(unittest.TestCase):
+    def make_design_dir(self, root):
+        design = root / "docs" / "design"
+        design.mkdir(parents=True)
+        for name in ("STATE.md", "DECISIONS.md", "ROADMAP.md"):
+            shutil.copy(TEMPLATES / name, design / name)
+        return design
+
+    def test_templates_pass_strict(self):
+        with tempfile.TemporaryDirectory() as d:
+            self.make_design_dir(Path(d))
+            code, out = run_rc(DOCS_CHECK, d, "--strict")
+            self.assertEqual(code, 0, out)
+
+    def test_state_limits_and_stage_drift(self):
+        with tempfile.TemporaryDirectory() as d:
+            design = self.make_design_dir(Path(d))
+            state = (design / "STATE.md").read_text(encoding="utf-8")
+            state = state.replace("**Stage:** <n · name>", "**Stage:** 3 · Validate")
+            state = state.replace("## In progress (≤ 2)\n- \n", "## In progress (≤ 2)\n- a\n- b\n- c\n")
+            (design / "STATE.md").write_text(state + "x" * 700 + "\n", encoding="utf-8")
+            code, out = run_rc(DOCS_CHECK, d)
+            self.assertEqual(code, 0, out)                       # warnings only
+            self.assertIn("3 items in progress (max 2)", out)
+            self.assertIn("line is 700 characters", out)
+            self.assertIn("STATE says stage 3, ROADMAP says stage 0", out)
+            self.assertEqual(run_rc(DOCS_CHECK, d, "--strict")[0], 1)
+
+    def test_translated_headings_via_config(self):
+        with tempfile.TemporaryDirectory() as d:
+            design = Path(d)
+            (design / "STATE.md").write_text("## Đang làm\n- a\n- b\n- c\n", encoding="utf-8")
+            (design / "gd.config.json").write_text('{"docs": {"in_progress_headings": ["Đang làm"]}}',
+                                                   encoding="utf-8")
+            self.assertIn("3 items in progress", run_rc(DOCS_CHECK, d)[1])
+
+    def test_decision_index_and_duplicates(self):
+        with tempfile.TemporaryDirectory() as d:
+            design = self.make_design_dir(Path(d))
+            path = design / "DECISIONS.md"
+            entry = "### D-002 · Second · *Active* (2026-01-02)\n- **Decision:** x\n"
+            path.write_text(path.read_text(encoding="utf-8") + "\n" + entry, encoding="utf-8")
+            run(DOCS_CHECK, d, "--fix")
+            text = path.read_text(encoding="utf-8")
+            self.assertIn("| D-002 | Second | Active | 2026-01-02 |", text)
+            self.assertLess(text.index("<!-- index:end -->"), text.index("### D-001"))
+            self.assertEqual(run_rc(DOCS_CHECK, d, "--strict")[0], 0)   # fixed index is current
+            path.write_text(text + "\n### D-002 · Again · *Active* (2026-01-03)\n", encoding="utf-8")
+            code, out = run_rc(DOCS_CHECK, d)
+            self.assertEqual(code, 1)
+            self.assertIn("duplicate decision ID D-002", out)
+            self.assertIn("decision index is out of date", out)
+            report = json.loads(run_rc(DOCS_CHECK, d, "--json")[1])
+            self.assertEqual((report["tool"], report["error_count"]), ("docs_check", 2))
+
+    def test_missing_target_exits_2(self):
+        with tempfile.TemporaryDirectory() as d:
+            self.assertEqual(run_rc(DOCS_CHECK, d)[0], 2)
 
 
 class InstallTest(unittest.TestCase):
