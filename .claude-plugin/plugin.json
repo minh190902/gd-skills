@@ -1,7 +1,7 @@
 {
   "name": "gd-skills",
-  "version": "0.2.1",
-  "description": "Game design skills for Claude Code: studio pipeline from idea to launch with stage gates and a beginner step-by-step mode, production planning, go-to-market, design review that challenges ideas with evidence, project compass (STATE/DECISIONS/SYSTEMS), feature spec & audit, narrative consequence audit, economy simulation, pacing, UX audit, playtest, game analysis. Godot-aware tools.",
+  "version": "0.3.0",
+  "description": "Game design skills for Claude Code: studio pipeline from idea to launch with stage gates and a beginner step-by-step mode, production planning, go-to-market, design review that challenges ideas with evidence, project compass (STATE/DECISIONS/SYSTEMS), feature spec & audit, narrative consequence audit, economy simulation, pacing, UX audit, playtest, game analysis. Tools for Godot (GDScript, Dialogue Manager) and TypeScript/JavaScript games: state dependency map, story flag audit, economy simulation, design docs check. Prototype skill with keep/kill criteria.",
   "author": {"name": "mignh", "url": "https://github.com/minh190902"},
   "license": "MIT",
   "keywords": ["game-design", "godot", "narrative", "balance", "ux", "playtest", "skills"]

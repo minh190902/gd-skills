@@ -253,7 +253,7 @@ class InstallTest(unittest.TestCase):
             for _ in range(2):
                 run(INSTALL, "--target", repo, "--init", game)
             skills = sorted(p.name for p in (repo / ".claude" / "skills").iterdir() if p.is_dir())
-            self.assertEqual(len(skills), 15)
+            self.assertEqual(len(skills), 16)
             self.assertTrue((game / "docs" / "design" / "PROJECT.md").exists())
             self.assertTrue((game / "docs" / "design" / "ROADMAP.md").exists())
             self.assertFalse((game / "docs" / "design" / "CLAUDE.snippet.md").exists())
@@ -294,6 +294,49 @@ class InstallTest(unittest.TestCase):
 class ValidateTest(unittest.TestCase):
     def test_repo_is_valid(self):
         self.assertIn("0 errors", run(VALIDATE))
+
+    def broken_copy(self, d, rel, old, new):
+        root = Path(d) / "repo"
+        for part in ("skills", ".claude-plugin"):
+            shutil.copytree(REPO / part, root / part, ignore=shutil.ignore_patterns("__pycache__"))
+        for f in ("README.md", "CHANGELOG.md"):
+            shutil.copy(REPO / f, root / f)
+        path = root / rel
+        text = path.read_text(encoding="utf-8")
+        self.assertIn(old, text)
+        path.write_bytes(text.replace(old, new, 1).encode("utf-8"))
+        return root
+
+    def assert_caught(self, rel, old, new, message):
+        with tempfile.TemporaryDirectory() as d:
+            code, out = run_rc(VALIDATE, "--root", self.broken_copy(d, rel, old, new))
+            self.assertEqual(code, 1, out)
+            self.assertIn(message, out)
+
+    def test_catches_missing_boundary_section(self):
+        self.assert_caught("skills/gd-unstuck/SKILL.md", "## When not to use", "## Elsewhere", "no 'When not to use'")
+
+    def test_catches_unknown_skill_and_extra_frontmatter(self):
+        self.assert_caught("skills/gd-status/SKILL.md", "→ `gd-unstuck`.", "→ `gd-unstuk`.", "unknown skill 'gd-unstuk'")
+        self.assert_caught("skills/gd-status/SKILL.md", "name: gd-status\n", "name: gd-status\nlicense: MIT\n",
+                           "exactly name and description")
+
+    def test_catches_orphan_file_and_routing_gap(self):
+        self.assert_caught("skills/gd-prototype/SKILL.md", "[templates/prototype-brief.md](templates/prototype-brief.md)",
+                           "the brief template", "orphan file")
+
+    def test_catches_new_skill_missing_from_routing_and_readme(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = self.broken_copy(d, "README.md", "A set of 16 skills", "A set of 17 skills")
+            new = root / "skills" / "gd-newthing"
+            new.mkdir()
+            new.joinpath("SKILL.md").write_bytes(
+                b"---\nname: gd-newthing\ndescription: Does a thing. Use when the thing is needed.\n---\n\n"
+                b"# New\n\n## When not to use\n- Other things: `gd-core`.\n")
+            code, out = run_rc(VALIDATE, "--root", root)
+            self.assertEqual(code, 1, out)
+            self.assertIn("gd-core routing does not mention `gd-newthing`", out)
+            self.assertIn("README.md does not list `gd-newthing`", out)
 
 
 if __name__ == "__main__":
