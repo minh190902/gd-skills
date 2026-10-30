@@ -7,6 +7,10 @@ description: Write a buildable design spec for a new game feature, mechanic or s
 
 Goal: a spec that **devs can implement without asking back, designers can challenge, and QA can test edge cases from**. Don't write a novel: about 1 page is enough for a prototype; write it out in full once the system has stabilized.
 
+## When not to use
+- The idea has not been challenged yet → `gd-design-review` first (a spec makes a weak idea look finished).
+- The open question is "is this fun at all" → `gd-prototype` with a one-page minimal spec, then the full spec after a keep.
+
 ## Process
 
 ### 0. Gather context (required)
@@ -39,6 +43,7 @@ Parameter table with: starting value, unit, valid range, and **where it lives in
 - **Save/Load:** any state that needs to persist must be serialized, with a migration for old saves.
 - **Narrative hooks:** flags or bridge functions so dialogue can react to the feature.
 - **Intent vs actual impact:** how could players optimize away the design intent?
+- **Changing an existing rule:** put the new rule behind a switch and keep a parity baseline (a frozen earlier build or recorded runs on fixed seeds) so old and new can be compared; see `gd-prototype` Workflow D.
 
 ### 5. Validation
 - **KPIs / signals:** measurable, relevant, time-bound. If there is no telemetry yet, use playtest observation and unit tests for the logic.

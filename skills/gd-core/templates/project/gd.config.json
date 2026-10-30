@@ -1,5 +1,5 @@
 {
-  "_doc": "Config for gd-* tools. Paths are relative to the game root (folder with project.godot). Remove keys you don't need; every key is optional.",
+  "_doc": "Config for gd-* tools. Paths are relative to the game root (folder with project.godot, package.json or the engine's project file). Remove keys you don't need; every key is optional. TypeScript example: language ts, state_owners {GameState: src/core/types.ts}. Story flags in code: flag_sources + flag_set_patterns/flag_read_patterns (see dialogue_audit.py). Docs limits and translated headings: docs (see docs_check.py).",
   "state_owners": {"GameState": "scripts/game_state.gd"},
   "instance_owners": {},
   "save_systems": ["SaveLoadManager"],

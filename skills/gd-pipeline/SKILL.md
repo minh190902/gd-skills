@@ -9,6 +9,10 @@ Role: act as the **producer** of a small studio. Know which stage the game is in
 
 Design dir convention: see `gd-core`. This skill owns `<design_dir>/ROADMAP.md` (template in gd-core `templates/project/ROADMAP.md`).
 
+## When not to use
+- Session start/end bookkeeping (STATE.md, drift) → `gd-status`.
+- Doing the work of a step (prototype, spec, playtest, plan) → the specialist skill in §6; come back here to tick the gate.
+
 ## 1. The 10 stages (detail and gate criteria: [references/stages.md](references/stages.md))
 
 | # | Stage | Question it answers | Typical length (solo) |
@@ -75,7 +79,7 @@ Use when every gate item of a stage looks done, when the user wants to move on, 
    | **Pivot** | Keep what works, change the core; restart at Concept or Find the Fun |
    | **Kill / shelve** | The evidence says this game will not reach its goal; archive and learn |
 
-5. The user decides. Record the verdict in ROADMAP.md (gate log) and in DECISIONS.md; update the stage in STATE.md.
+5. The user decides. When the verdict or the open items need the user's choice, present them as **decision cards** (gd-core [references/decision-cards.md](../gd-core/references/decision-cards.md)): one card per decision, options, a marked recommendation, evidence and visuals. Record the verdict in ROADMAP.md (gate log) and in DECISIONS.md; update the stage in STATE.md.
 
 ## 4. Workflow C — Stage guard (doing work out of order)
 
@@ -101,8 +105,8 @@ Exceptions that are fine early: a short moodboard or art test (helps the hook te
 | Stage | Main skills |
 |---|---|
 | 0 Spark, 1 Concept | `gd-core` (§5–6 pillars, 1-pager, idea scoring), `gd-game-analysis` (competitors), `gd-go-to-market` (positioning, market check) |
-| 2 Find the Fun | `gd-feature-spec` (1-page minimal spec), `gd-design-review`, `gd-economy-balance` (rough numbers), `gd-playtest` (self-test log) |
-| 3 Validate | `gd-playtest` (plan with go/no-go criteria, process results), `gd-ux-audit` |
+| 2 Find the Fun | `gd-prototype` (brief, keep/kill criteria, self-test log, bots), `gd-feature-spec` (1-page minimal spec), `gd-design-review`, `gd-economy-balance` (rough numbers) |
+| 3 Validate | `gd-playtest` (plan with go/no-go criteria dated before testing, process results), `gd-prototype` (the build strangers play), `gd-ux-audit` |
 | 4 Pre-production | `gd-production-plan`, `gd-feature-spec`, `gd-feature-audit` (cut systems), `gd-pacing-progression`, `gd-narrative-design`, `gd-go-to-market` (name, store prep) |
 | 5 Vertical Slice | `gd-production-plan` (measure real unit cost, re-estimate), `gd-go-to-market` (store page, trailer), `gd-playtest` |
 | 6 Production | `gd-status` every session, `gd-design-review` for every change, specialist skills per system, `gd-playtest` each milestone |

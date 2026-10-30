@@ -7,6 +7,10 @@ description: Help the user when they feel confused, overwhelmed or stuck on game
 
 When confused, the user does not need more information; they need to **hold fewer things in their head**. The end goal is one settled decision or one small next step, with everything else written down.
 
+## When not to use
+- One clear idea to evaluate → `gd-design-review`.
+- "What do I do next" without confusion → `gd-pipeline` Workflow A.
+
 ## Process
 
 1. **Don't lecture right away.** Treat the user's message as their brain dump. If the message is too short to understand, ask just one question: "What's bothering you most right now?"
@@ -22,7 +26,7 @@ When confused, the user does not need more information; they need to **hold fewe
    | 🚫 **Not a problem** | Briefly explain why |
 
 4. **Find the blocking decision**: the one the other decisions depend on. Draw a short dependency chain if it helps (`A → B → C`). It usually sits at the earliest broken layer of the Game Map (Player → Structure → Cognition → Dynamics → Perception), or in the pillars in PROJECT.md.
-5. **For that decision:** give 2–3 options, a short trade-off table (pillar served · systems affected · cost), and **one recommendation with reasons**. If there is genuinely not enough data to choose, propose the cheapest way to get it: a prototype of a few hours, a simulation run, or reading the code.
+5. **For that decision:** give 2–3 options, a short trade-off table (pillar served · systems affected · cost), and **one recommendation with reasons**. If there is genuinely not enough data to choose, propose the cheapest way to get it: a prototype of a few hours, a simulation run, or reading the code. When the choice is visual or there are several decisions waiting, present them as **decision cards** (gd-core [references/decision-cards.md](../gd-core/references/decision-cards.md)) rather than a chat list.
 6. **Smallest next step**: about 1–2 hours, with an observable result.
 7. **Record:** the settled decision in DECISIONS.md, worries in the parking lot, the next step in the "Next" section of STATE.md (via `gd-status`). Tell the user explicitly that everything has been written down, so they no longer need to remember it.
 

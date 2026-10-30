@@ -37,7 +37,7 @@
 
 ### 2 · Find the Fun
 - [ ] Core loop playable end to end in one sitting
-- [ ] Developer played 10+ times, self-play log written
+- [ ] Developer played 10+ times, self-play log written (targeted sessions count)
 - [ ] Riskiest design question answered
 - [ ] Core loop stable for the last 1–2 iterations
 
@@ -98,6 +98,10 @@
 - [ ] (4) Name trademark/search check; store account; tax and payment setup; licenses
 - [ ] (5) Publisher decision; content disclosures prepared
 - [ ] (8) Rating questionnaires; EULA/privacy if needed; credits and licenses
+
+## Pending decisions
+<!-- One decision card per item the owner must settle (format: gd-core references/decision-cards.md).
+     Move each card to DECISIONS.md once chosen. -->
 
 ## Stage debt
 <!-- - <work> · belongs to stage <n> · done during stage <m> · risk: <one line> · revisit at: <gate> -->

@@ -35,11 +35,12 @@ The stage sequence is the usual industry order (concept → prototype → vertic
 - **Deliverables:** a playable prototype of the core loop only; a 1-page minimal spec per risky mechanic (`gd-feature-spec`); a self-play log (`playtest/<date>-selftest.md`): what was fun, what was boring, what changed.
 - **Gate:**
   - [ ] The core loop is playable end to end in one sitting (one full cycle at least)
-  - [ ] The developer has played it 10+ times and logged what is fun and what is not
+  - [ ] The developer has played it 10+ times and logged what is fun and what is not (short targeted sessions from prepared start points count; replaying known content mostly measures familiarity)
   - [ ] The riskiest design question (written at the start) has an answer
   - [ ] The loop has been stable (no redesign of the core) for the last 1–2 iterations
 - **Out of stage:** content beyond what one cycle needs, final art, polish, production code architecture, save systems, localization.
-- **Kill/pivot signals:** after several iterations the developer is bored of their own loop; the fun only appears with content that does not exist yet ("it will be fun once the story is in").
+- **Kill/pivot signals:** after several iterations the developer is bored of their own loop *even in fresh targeted scenarios* (boredom with content you know by heart is normal; strangers in Validate separate the two); the fun only appears with content that does not exist yet ("it will be fun once the story is in").
+- **Leaving the stage:** a keep verdict authorizes a rewrite in the real project later, not promoting the prototype code (`gd-prototype` Workflow E).
 - **Common mistakes:** building the prototype in production quality; testing with bots/simulations only (good for balance, blind to fun); adding systems to fix a loop instead of fixing the loop.
 
 ## 3 · Validate
@@ -57,6 +58,7 @@ The stage sequence is the usual industry order (concept → prototype → vertic
 - **Goal:** answer "can we build it, at what cost, looking like what?" before committing years.
 - **Deliverables:**
   - Art direction test: one target screenshot/mock at intended final quality, plus the production method (self-made, contracted, purchased, generated) and its cost per asset
+  - Art bible (one page: view and camera, scale, palette roles, shape language, line and texture density, lighting, what never changes) and an asset manifest (every asset with state, size, source and license); style choices made by blind scoring, not by an AI judge
   - Audio direction: references and method
   - Tech spike in the real engine: skeleton project, the riskiest technical feature, save/load, one build exported for the target platform
   - Feature specs for the systems kept after validation (`gd-feature-spec`); systems cut or merged (`gd-feature-audit`)

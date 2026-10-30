@@ -7,6 +7,10 @@ description: Audit existing game features/systems for purpose, core-loop fit, ov
 
 *"If removing it changes nothing, it's noise."* Goal: decide **Keep / Deepen / Merge / Rework / Cut** for each feature, based on evidence in the code and design docs, not on gut feeling.
 
+## When not to use
+- A *new* idea or change that is not built yet → `gd-design-review`.
+- A single screen that confuses players → `gd-ux-audit`.
+
 ## Process
 
 ### 1. Define the scope and gather evidence

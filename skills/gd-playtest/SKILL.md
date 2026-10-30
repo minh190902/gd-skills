@@ -7,6 +7,11 @@ description: Plan playtests and turn playtest feedback into decisions — test g
 
 *The biggest trap: collecting feedback you can't act on.* Goal: from a complete build → documented decisions within 72 hours.
 
+## When not to use
+- Self-testing a prototype to answer one design question → `gd-prototype`.
+- A screen problem you can already see without testers → `gd-ux-audit`.
+- Reviews or feedback about a *released* game for marketing → `gd-go-to-market`.
+
 ## Workflow A — Plan a playtest
 
 1. **Goal ≤ 2 sentences**, pick 1–2 categories:
@@ -19,9 +24,18 @@ description: Plan playtests and turn playtest feedback into decisions — test g
    | Emotion | Do they feel the highs and lows? | Self-report per beat |
    | Retention hook | Do they want another session? | Return-intent score 1–5 |
 
+   For a go/no-go test (stage 3, Validate), write the criteria with thresholds (e.g. "4 of 6 strangers finish the first cycle without help") and **date them before the first tester plays**. Do not edit them afterwards; add a note instead. Criteria written after seeing results bend to fit them.
 2. **Test type** (small & frequent first): team internal → blind internal (hasn't seen the game) → friends/family → focus group → closed alpha → public demo.
-3. **Pick testers** (3–5 people, mixed types): *blind* (onboarding) · *careful explorer* (over-explains) · *optimizer* (exploits) · *chaos agent* (system limits).
-4. **Prepare capture** — check before testing: phone screen recording, think-aloud, event logs (if possible: add temporary logs for key events: stage start/end, resources, character deaths, dialogue choices), a 5-question survey tied to the goal.
+3. **Pick testers** (3–5 people, mixed types): *blind* (onboarding) · *careful explorer* (over-explains) · *optimizer* (exploits) · *chaos agent* (system limits). Strangers from the target audience for Validate; friends and family only for "does it run".
+
+   Non-human testers are cheap and fast, but each answers a different question:
+
+   | Tester | Can judge | Cannot judge |
+   |---|---|---|
+   | Bots on the real rules (several strategies, many seeds) | balance, exploits, death spirals, pacing numbers | fun, clarity, feel |
+   | AI agent playing a text or screenshot build | clarity problems: unclear goals, missing information, where it got stuck | fun, taste, feel, real player motivation |
+   | AI judge scoring art or UI | obvious defects (broken shapes, unreadable text, wrong size) | style and taste — agreement with the owner's or players' preferences is often poor; use blind scoring by people for those |
+4. **Prepare capture** — check before testing: screen recording, think-aloud, event logs (if possible: add temporary logs for key events: stage start/end, resources, character deaths, dialogue choices), a 5-question survey tied to the goal. Record the **build/commit and the random seed** of every session. With remote testers and no telemetry server, a **copyable run report** shown at the end of the game (a short code the tester pastes back, decoded by a script) carries the numbers without any backend.
 5. **Observation script** for the facilitator: *never explain during the test*; don't fix mid-session; note silences, sighs, long pauses.
 6. Output: `<game_root>/docs/playtest/<YYYY-MM-DD>-plan.md` using [templates/playtest.md](templates/playtest.md) (Plan section). Record the build/commit hash and changelog.
 
@@ -46,6 +60,9 @@ description: Plan playtests and turn playtest feedback into decisions — test g
 4. **Group & triage:** by pillar and severity → **Critical / Important / Nice-to-have** (parking lot). Fixes estimated at >1 day → prototype spike first.
 5. **Decision log:** Problem · Proposed change · Owner · Deadline · Pillar served · How to validate in the next test.
 6. Turn each decision into a ticket (add to the project backlog if the user agrees; important decisions → DECISIONS.md) and call the appropriate skill: UX → `gd-ux-audit`, numbers → `gd-economy-balance`, story → `gd-narrative-design`, features → `gd-feature-spec`/`gd-feature-audit`.
+
+## Taste and style choices
+Choosing between art styles, UI looks or names is a taste judgment. Collect it with **blind scoring by people** (the owner, then a few target players): show the options side by side on one page without labels or the author's preference, score each 1–10, and keep the page so the result can be read back. Use AI scoring only to drop broken candidates before the people see them.
 
 ## Insight → Action (applies to EVERY analysis)
 Pattern ("skips dialogue after 10s") → ask why → check context (onboarding or endgame) → hypothesis → next step (try a shortened version) → track impact.

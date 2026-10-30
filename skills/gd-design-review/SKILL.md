@@ -15,7 +15,7 @@ In the game's design dir (convention in `gd-core`):
 - `DECISIONS.md`: decisions already made, which must not be silently broken.
 - `SYSTEMS.md`: purpose of each system, danger zones.
 
-## Tool: dependency map (Godot / GDScript)
+## Tool: dependency map (Godot / GDScript, TypeScript / JavaScript)
 `<skill_dir>` is the directory containing this skill.
 ```bash
 python -I <skill_dir>/scripts/system_map.py <game_root>                  # how many systems write/read each variable
@@ -24,7 +24,12 @@ python -I <skill_dir>/scripts/system_map.py <game_root> --impact <sys>   # blast
 python -I <skill_dir>/scripts/system_map.py <game_root> --snapshot <scratch>/before.json
 python -I <skill_dir>/scripts/system_map.py <game_root> --diff <scratch>/before.json
 ```
-Configuration is read from `<design_dir>/gd.config.json` (state_owners, instance_owners…). Variables marked ⚠ (≥ 4 writing systems) are **danger zones**: every new writer must agree on meaning and value range with every other writer. The script is a regex-based heuristic: treat its output as evidence to check, not as ground truth. For other engines, build the who-writes / who-reads table manually with grep.
+Configuration is read from `<design_dir>/gd.config.json` (state_owners, instance_owners…). The language is detected (`project.godot` → GDScript, `package.json`/`tsconfig.json` → TypeScript/JavaScript) or set with `"language"`. For TypeScript, a state owner is an interface, type or class (`{"GameState": "src/core/types.ts"}`); aliases are found from type annotations, `as` casts and imports of an exported state variable; cross-file calls count `call_depth` hops (default 1). `--json` prints the map for other tools. Variables marked ⚠ (≥ 4 writing systems) are **danger zones**: every new writer must agree on meaning and value range with every other writer. The script is a regex-based heuristic: treat its output as evidence to check, not as ground truth. For other languages (C#, C++, Lua…), build the who-writes / who-reads table manually with grep.
+
+## When not to use
+- Writing the full spec of an idea that already passed review → `gd-feature-spec`.
+- Judging features that already exist (keep, merge, cut) → `gd-feature-audit`.
+- The user is overwhelmed by many tangled questions rather than one idea → `gd-unstuck`.
 
 ## Review process (before building)
 

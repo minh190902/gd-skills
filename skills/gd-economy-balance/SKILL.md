@@ -7,12 +7,20 @@ description: Economy and balance design — resource sources/sinks, currency flo
 
 Balance is *"making every choice worth considering"*: a dynamic equilibrium that depends on perception and changes over time. The goal is not to make everything equal. Read `PROJECT.md` for the design intent, e.g. a "harsh" or "generous" economy, because that is the yardstick for judging the numbers.
 
+## When not to use
+- When content and systems appear over time (unlock order, difficulty *shape* across chapters) → `gd-pacing-progression`.
+- Whether players notice or understand the numbers → `gd-ux-audit` or `gd-playtest`.
+- Whether the game is fun at all → `gd-prototype`; balance cannot fix a flat loop.
+
 ## Tools
 `<skill_dir>` is the directory containing this skill.
 ```bash
 python -I <skill_dir>/scripts/economy_sim.py sim <model.json> --runs 2000   # Monte Carlo: sources → pool → sinks, per stage
 python -I <skill_dir>/scripts/economy_sim.py curve 150 200 250 300 350       # compare growth between tiers against the ×1.2 rule
+python -I <skill_dir>/scripts/economy_sim.py curve 10 20 45 --band 1.5 3     # another band (e.g. rare purchases)
+python -I <skill_dir>/scripts/economy_sim.py growth --base 10 --rate 1.15 --levels 50   # exponential cost curve: doubling, explosion
 ```
+Every command takes `--json` (for scripts) and `--strict` (exit 1 when a flag is raised); bad input exits 2.
 Model format: see the script's docstring and [examples/sample_model.json](examples/sample_model.json). That example is for illustration only; **always use numbers taken from the real code**. Save the project's model under `<game_root>/docs/balance/` so it can be rerun later.
 
 ## Workflow
@@ -32,6 +40,8 @@ Find every source, sink and formula in data/Resources and code. Record them as a
   Starting point for a "harsh but fair" economy: deficit 5–20% on hard stages, optional 30–70%, and carry-over that does not grow steadily across every stage. This is a starting point for playtesting, not the truth.
 - **Curves:** run `curve` for each tier sequence (rewards, prices, HP, power). The rule of thumb is roughly ×1.2 growth per tier. Jumps larger than ×1.3 should only be intentional (new chapter, boss encounter).
 - **Power and choice:** write formulas and a tier table with columns cost · power · efficiency (power/cost). See [references/balance-math.md](references/balance-math.md) for diminishing returns, soft caps, sources/sinks, feedback loops.
+- **Genre levers:** the usual knobs and failure signs for tower defense, RPG stats, roguelike loot, card games, survival/crafting and idle/prestige loops are in [references/genre-levers.md](references/genre-levers.md).
+- **Bots on the real rules** (once the game has playable code): a JSON model drifts from the code; a bot harness does not. Run scripted strategies (an optimizer, a newcomer who makes common mistakes, a random player) through the real game logic on many fixed seeds, write one result table per run to a file, and compare before/after tables for every change. Bots find dominant strategies, death spirals and pacing numbers; they cannot tell you whether it is fun (`gd-playtest`).
 
 ### 4. Check for dominant strategies
 - **Compare two competing options:** for each option, note power, limits and playstyle. Is any option practically mandatory? Is any option useless?

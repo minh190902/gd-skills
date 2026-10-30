@@ -8,6 +8,12 @@ Last reviewed: 2026-10. Store rules change; check the Steamworks documentation (
 - **Review process:** both the store page and the build are reviewed by Valve before going live; allow several business days for each.
 - **Content survey:** developers declare mature content and AI-generated content (pre-generated and live-generated) on the content survey; the disclosure appears on the store page.
 - **Wishlists:** wishlisters are notified at release and when the game is discounted by a meaningful amount.
+- **Timing traps reported in 2026 guides (verify):** a first-time developer account waits a period after paying the fee before it can release; tax and identity verification can take weeks; the Coming Soon minimum counts only from the moment the page is actually posted as Coming Soon; reviews take several business days, so submit the page and the build at least a week before the date you need.
+- **The build must contain what the page claims:** features, languages and controller support listed on the store page must be in the reviewed build.
+
+## itch.io
+- Keep a new page as a **draft** (or restricted) until it is ready: a game is shown in "most recent" lists only around its first public publish, and that moment cannot be repeated.
+- Browser (HTML) builds are the fastest way to get strangers to play during Validate; label them as prototypes.
 
 ## Steam Next Fest
 - Runs about three times a year (around February, June, October), one week each.

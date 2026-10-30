@@ -9,7 +9,7 @@ The shared foundation for every `gd-*` skill. Based on the **Game Map** model fr
 
 ## 1. Project conventions (every gd-* skill relies on these)
 
-Each game has a **design dir**: `<game_root>/docs/design/` (game_root = the folder containing `project.godot`, or the game's root for other engines).
+Each game has a **design dir**: `<game_root>/docs/design/` (game_root = the folder containing `project.godot`, `package.json`, or the engine's project file).
 
 | File | Role |
 |---|---|
@@ -20,20 +20,35 @@ Each game has a **design dir**: `<game_root>/docs/design/` (game_root = the fold
 | `SYSTEMS.md` | Purpose of each system + map of who writes/reads state (`gd-design-review`) |
 | `gd.config.json` | Configuration for the scripts (state owners, flag functions…) |
 
-Skill output docs live next to the design dir: `<game_root>/docs/{specs,audits,narrative,balance,ux,playtest,analysis,production,marketing}/`.
+Skill output docs live next to the design dir: `<game_root>/docs/{specs,prototypes,audits,narrative,balance,ux,playtest,analysis,production,marketing}/`.
 
 **Finding the design dir:** search for `**/docs/design/PROJECT.md`. With several games (monorepo), pick the game matching the file/folder under discussion; if unclear, ask.
 
 **No design dir yet → set it up:**
 1. Create `<game_root>/docs/design/`, then copy the files in [templates/project/](templates/project/) into it (skip `CLAUDE.snippet.md`). Do not overwrite existing files.
 2. Fill in `PROJECT.md` from the GDD/README/code. Where information is missing, write "TODO — ask the user"; do not invent.
-3. Adjust `gd.config.json` to the actual code: state owners (autoloads holding state), instance owners (Resources such as HeroData), names of the set/check flag functions.
+3. Adjust `gd.config.json` to the actual code: state owners (Godot autoloads holding state, or the TypeScript interface/class of the game state), instance owners (Resources or types such as HeroData), names of the set/check flag functions or the flag patterns for flags kept in code.
 4. Run `system_map.py` (part of gd-design-review) to fill the auto-generated part of SYSTEMS.md. Write the "Purpose" section from the header comment of each file.
 5. Fill in STATE.md from recent `git log` and existing TODOs.
 6. Fill in ROADMAP.md and the `Stage:` line of STATE.md per `gd-pipeline` Workflow D (find the current stage from evidence, list stage debt).
-7. Offer to add `templates/project/CLAUDE.snippet.md` to the repo's CLAUDE.md (replacing `{{DESIGN_DIR}}`) so the rules are always applied.
+7. Run `docs_check.py` (below) once to confirm the docs are consistent.
+8. Offer to add `templates/project/CLAUDE.snippet.md` to the repo's CLAUDE.md (replacing `{{DESIGN_DIR}}`) so the rules are always applied.
+
+## Tools across the skill set
+`<skill_dir>` is the directory of the skill that owns the script. All scripts use the Python standard library only, take `--json`, and exit 0 (ok), 1 (problems found), 2 (target missing or wrong kind).
+
+| Script | Skill | What it answers |
+|---|---|---|
+| `scripts/docs_check.py <game_root> [--fix] [--strict]` | gd-core | Is STATE one page, is the decision index current, do STATE and ROADMAP agree? |
+| `system_map.py <game_root> [--impact X]` | gd-design-review | Who writes / reads each state variable (GDScript, TypeScript/JavaScript) |
+| `dialogue_audit.py <game_root>` | gd-narrative-design | Flags never read / never set, broken jumps, cosmetic choices (Dialogue Manager files and flags in any code) |
+| `economy_sim.py sim/curve/growth` | gd-economy-balance | Deficit and tension per stage, tier growth, exponential cost curves |
+
+Decisions the user must make are presented as decision cards: [references/decision-cards.md](references/decision-cards.md).
 
 ## 2. Routing
+
+**When not to use this skill:** once the request clearly matches a specialist skill below, work from that skill; come back here only for design questions that fit none of them.
 
 | The user wants to… | Use |
 |---|---|
@@ -41,6 +56,7 @@ Skill output docs live next to the design dir: `<game_root>/docs/{specs,audits,n
 | Start/end a session, "where are we", "what's next" | `gd-status` |
 | Propose an idea, change gameplay / story / a system | `gd-design-review` (**always run before building**) |
 | Untangle confusion, too many questions, doesn't know where to start | `gd-unstuck` |
+| Prototype a mechanic or the core loop, "is it fun", keep or kill a prototype | `gd-prototype` |
 | Design a new feature before coding | `gd-feature-spec` |
 | Evaluate an existing feature: keep, merge or cut | `gd-feature-audit` |
 | Story, choice & consequence, dialogue, quests | `gd-narrative-design` |
@@ -53,7 +69,18 @@ Skill output docs live next to the design dir: `<game_root>/docs/{specs,audits,n
 | Positioning, store page, wishlists, demo/festival, price, launch, publisher, business setup | `gd-go-to-market` |
 | An open design question that fits no category yet | Continue with this skill (Sections 3–5) |
 
-Typical chain: design-review → feature-spec → economy-balance → playtest → status. Over the whole project, `gd-pipeline` decides which of these the current stage needs.
+Examples:
+
+| The user says | Skills, in order |
+|---|---|
+| "I want to add a reputation system" | `gd-design-review` → (Go) `gd-feature-spec` → `gd-economy-balance` if it has numbers |
+| "Is the core loop fun yet?" | `gd-prototype` (brief, criteria) → `gd-playtest` when strangers play |
+| "Players skip the tutorial" | `gd-playtest` (process feedback) → `gd-pacing-progression` (FTUE) → `gd-ux-audit` |
+| "Do my choices matter?" | `gd-narrative-design` Workflow B |
+| "What should I do next?" | `gd-status` (where we are) → `gd-pipeline` Workflow A (one step) |
+| "Too many systems, simplify" | `gd-feature-audit` → `gd-production-plan` (cut list) |
+
+Typical chain: design-review → feature-spec → prototype → economy-balance → playtest → status. Over the whole project, `gd-pipeline` decides which of these the current stage needs.
 
 **Beginners:** when the user is new to making games or asks what to do, start with `gd-pipeline` Workflow A (one step at a time, jargon explained) rather than answering with a full plan.
 

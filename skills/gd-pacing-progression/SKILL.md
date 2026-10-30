@@ -7,6 +7,11 @@ description: Pacing, progression and onboarding design — level/stage tension m
 
 The four regulators of the Dynamics layer: **Progression** (intentional change over time), **Complexity curve** (difficulty to learn plus difficulty to play), **Pacing** (rhythm of tension and release), and **Balance** (see `gd-economy-balance`). Complexity is not difficulty. Read `PROJECT.md` for session length and platform constraints.
 
+## When not to use
+- Difficulty expressed in numbers (enemy stats, prices, resource curves) → `gd-economy-balance`.
+- Layout or clarity of a tutorial screen → `gd-ux-audit`.
+- Whether a new mechanic should exist at all → `gd-design-review`.
+
 ## Workflow A — Pacing map of a chapter / stage sequence
 
 1. **Inventory each stage** (from level config/data and narrative content): number of waves or challenges, new enemies, new characters, mechanics or systems *appearing for the first time*, major choices, estimated duration.
@@ -18,6 +23,8 @@ The four regulators of the Dynamics layer: **Progression** (intentional change o
    - A lull before a big clash.
    - Rewards interleaved between pressure sections.
    - Each stage has at least one quiet moment.
+   - **Sawtooth, not a ramp:** intensity rises overall but dips for rests; each peak sits above the previous peak and each rest a little above the previous rest. More than two high beats in a row is a warning; the biggest beat is preceded by a rest.
+   Writing the beats as data (`{beat, type: teach|challenge|rest|climax, intensity 0..1}` per stage or slice) lets these rules be checked mechanically and keeps the map in sync with the content files.
 4. **Diagnose problems:** flat pacing → boredom; constant tension → exhaustion; too dense → paralysis; weak mid-game → players quit.
 5. **Propose** reordering, moving unlock timing, or adding breathing room, with concrete changes to data/content.
 
@@ -32,9 +39,11 @@ The four regulators of the Dynamics layer: **Progression** (intentional change o
    - Teach in context.
    - Schedule breathing room.
    - Trim overlap in the late game.
-3. Mark rest points and peak points (where many systems overlap, bosses).
-4. Optional: a **false peak**, i.e. add a new layer right when the player thinks they have seen everything.
-5. The output is a `System · Current unlock · Proposed unlock · How it's taught · Reason` table, then check whether the existing tutorial matches this schedule. Take the system list from SYSTEMS.md.
+3. Teach each mechanic in four beats: **Introduce** (safe, isolated) → **Develop** (combined with known mechanics) → **Twist** (a variation that breaks the expectation) → **Test** (it matters). A new mechanic meets the player before, never during, a test that can kill or cost progress.
+4. Mark rest points and peak points (where many systems overlap, bosses).
+5. Optional: a **false peak**, i.e. add a new layer right when the player thinks they have seen everything.
+6. **Reachability check** for unlocks, keys and tech trees: list each gate with what it *needs* and what it *grants*, then repeatedly unlock every gate whose needs are met. Anything never unlocked is a soft-lock or dead content; anything unlocked long before it is used is wasted pacing.
+7. The output is a `System · Current unlock · Proposed unlock · How it's taught · Reason` table, then check whether the existing tutorial matches this schedule. Take the system list from SYSTEMS.md.
 
 ## Workflow C — FTUE / first 15 minutes
 

@@ -9,6 +9,10 @@ Role: the marketing and business lead of a tiny studio. Marketing is not a phase
 
 **Facts that change:** store rules, fees, festival dates and deadlines change every year. Treat the numbers in [references/steam-notes.md](references/steam-notes.md) as a starting point, label them with the date checked, and verify on the official store documentation before acting on them. Label sales and wishlist numbers MEASURED / OFFICIAL / ESTIMATED as in `gd-game-analysis`.
 
+## When not to use
+- Whether the game is fun or validated → `gd-prototype`, `gd-playtest`; marketing cannot fix the core loop.
+- Scope, time and money planning → `gd-production-plan`.
+
 ## §A — Positioning (stage 1)
 1. **Genre first, then the twist.** Players browse by genre; lore does not sell a game in 5 seconds. Write the hook as: `<genre the player recognizes> + <what you do (verbs)> + <the one thing that is different>`.
 2. Avoid "X meets Y" unless the game really belongs to both genres; it sets the wrong expectations.

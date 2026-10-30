@@ -20,5 +20,5 @@
 ## Parking lot (ideas / worries not acted on yet)
 - 
 
-## Session log (last 5)
+## Session log (last 5; older lines go to the history file named in PROJECT.md, e.g. docs/design/HISTORY.md)
 - YYYY-MM-DD · 

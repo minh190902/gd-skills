@@ -7,6 +7,10 @@ description: Analyze or deconstruct a reference game (or an open-source game rep
 
 The purpose is not to summarize someone else's game, but to **extract decisions for our own game**. Every analysis ends with recommendations that can become tickets, tied to the pillars of the target project.
 
+## When not to use
+- Market numbers for positioning and pricing only (no design lessons) → `gd-go-to-market` §A.
+- Laying out one of our screens from genre conventions: this skill supplies the references, `gd-ux-audit` makes the call.
+
 ## Process
 
 ### 1. Define the question & target project

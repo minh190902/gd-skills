@@ -9,6 +9,10 @@ Role: the producer who counts. Designers add; this skill adds up. Output lives i
 
 Principle: **an estimate without a measured unit cost is a guess.** Label every number MEASURED (timed on real work), ESTIMATED (reasoned), or GUESS. First-time estimates are commonly short by 1.5–3×; plan for it explicitly instead of hoping.
 
+## When not to use
+- Which stage the project is in and what its gate needs → `gd-pipeline`.
+- Whether a single feature is worth keeping → `gd-feature-audit`.
+
 ## Workflow A — Scope inventory
 1. Read the design docs and list every **content unit type**: levels/maps, encounters/waves, enemy types, characters, events/storylets, dialogue lines or words, items, UI screens, systems, art assets (by kind), animations, music tracks, SFX, tutorial steps, localization words.
 2. Count each from the docs. Where the docs give no number, write "unknown" and ask; do not invent.
@@ -30,6 +34,7 @@ Principle: **an estimate without a measured unit cost is a guess.** Label every 
 When the estimate exceeds the budget:
 1. Cut Could items first, then reduce **counts** of the biggest unit types (fewer levels with more reuse beats fewer systems), then simplify systems, then cut whole systems (`gd-feature-audit`).
 2. Never cut what the pillars and the validated core loop depend on; cut breadth before depth.
+3. Quick triage for each remaining item, in order: does the core loop work without it? → move it later. Would a player notice it missing? → if not, cut. When unsure, the default answer is cut.
 3. Prefer reuse multipliers: systemic content (procedural, rule-driven events, combinable parts) over hand-authored content when the team is one person.
 4. Record each cut in DECISIONS.md and in the plan's cut list with the hours saved.
 5. Stop when Must + Should + buffers fit within ~85% of the time budget (leave slack).
@@ -47,6 +52,7 @@ Top 5–8 risks: description · likelihood (L/M/H) · impact (L/M/H) · early wa
 1. List costs: tools and licenses, purchased or contracted assets (art, music, SFX), store fees, localization, trailer/capsule art, marketing, festival or event costs, hardware, legal/accounting.
 2. List income/runway: savings, job, grants, publisher advance. Months of runway = available money / monthly burn.
 3. If runway < time estimate: cut scope, find funding (publisher with the vertical slice, grants), or change the work schedule. State it plainly; this is the user's decision.
+4. **Production method per asset kind, decided by Concept** (art, animation, music, SFX, voice, localization): self-made, AI-assisted, purchased or free-licensed packs (CC0), contracted, or generated in code. Write it in PROJECT.md business targets. When the money budget is zero, every plan item that assumes paying someone is a risk: list those items, propose the no-cost method, and re-estimate its unit cost with a measured sample.
 
 ## Workflow G — Re-estimate (every gate and every milestone)
 1. Replace estimates with actual hours where work is done; recompute the remaining total.

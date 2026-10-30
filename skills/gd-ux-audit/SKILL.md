@@ -9,11 +9,17 @@ description: Audit the UX of an existing game screen or flow — clarity mapping
 
 Read the platform constraints in `PROJECT.md` first: orientation, input method, minimum touch/click target size, session length, UI metaphor and color palette.
 
+## When not to use
+- Deciding what a screen should *contain* for a new system → `gd-feature-spec` first, then this audit on the result.
+- Tutorial order and when systems unlock → `gd-pacing-progression`.
+- Numbers shown on the screen being wrong or unbalanced → `gd-economy-balance`.
+
 ## Workflow
 
 ### 1. Define the scope and read the screen
 - Which screen or flow? What does the player come here to do, and where do they come from?
 - Read the screen's scene/layout and scripts, the theme, sketches, and the relevant UI spec. If possible, run the game and take screenshots: auditing real visuals beats reading code.
+- **New screen or a relayout:** start from how 2–3 reference games of the same genre lay out the same screen (HUD, management screen, map, inventory), with sources: screenshots, store pages, videos (`gd-game-analysis`). Players arrive with the genre's conventions; each layout option should follow one reference "lineage", not be a reshuffle of the current screen. Mark positions you inferred rather than observed.
 
 ### 2. User flow
 List each Input → Navigation → Feedback → Outcome step, from entry to completion. Count the steps/actions. Mark where the player hesitates, the error branches and how they recover. *Do not apply the 3-click rule mechanically*: a clear 4-step flow beats one confusing click. Judge by predictability, hesitation and effort.
@@ -47,6 +53,18 @@ Also watch for **invisible UX debt**: legacy systems that never got improved, UI
 - **Emotion:** evokes the right emotion and fantasy.
 
 Also check: can mistakes be undone or prevented, and is the screen usable in tough conditions (tired player, small screen, one-handed play)?
+
+Measurable floors (from platform accessibility guidelines; raise them if PROJECT.md says so):
+
+| Check | Floor |
+|---|---|
+| Body text size | about 18 px at 1080p on PC/monitor, about 26 px on TV/console; scalable up to 200% |
+| Contrast | 4.5:1 for text, 3:1 for large text and key icons |
+| Color | never the only carrier of a state (add icon, shape or text) |
+| Touch targets | at least about 9 mm (≈ 44–48 dp) |
+| Flashing | at most 3 flashes per second; offer reduced shake/flash options |
+| Localization room | text boxes survive about 30% longer strings (e.g. German) |
+| Feedback size | proportional to the event: small (tint, tick sound), medium (pop, short shake), large (hit-stop, big effect) — a routine action never gets the large tier |
 
 ### 6. Rate severity and propose fixes
 - **S1 Blocker:** the player cannot complete the goal, or misunderstands and loses resources/progress.

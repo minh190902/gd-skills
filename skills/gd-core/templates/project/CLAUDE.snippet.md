@@ -9,5 +9,6 @@ Design docs for this game: `{{DESIGN_DIR}}` (PROJECT, STATE, ROADMAP, DECISIONS,
 3. The user is confused or overwhelmed → `gd-unstuck`.
 4. Before changing code that writes shared state (see "Danger zones" in SYSTEMS.md) → run `system_map.py --impact` and check every reader.
 5. After editing dialogue → run `dialogue_audit.py`; leave no broken jumps and no new read-but-never-set flags.
-6. End of a session or task → update STATE.md, tick finished gate items in ROADMAP.md (and DECISIONS / SYSTEMS when they changed). New ideas that come up mid-task go to the parking lot.
+6. End of a session or task → update STATE.md, tick finished gate items in ROADMAP.md (and DECISIONS / SYSTEMS when they changed), then run `docs_check.py` (gd-core). New ideas that come up mid-task go to the parking lot.
+7. Prototyping or asking "is it fun" → `gd-prototype`: one question, keep/kill criteria written and dated before building. Decisions the user must make → decision cards (gd-core references/decision-cards.md), recorded in ROADMAP "Pending decisions".
 <!-- gd-skills:end -->
