@@ -36,7 +36,7 @@ The method is based on [Game Design Guide](https://gamedesign.guide) (CC BY 4.0,
 
 ## Installation
 
-Requirements: Claude Code, Python 3.9+ (standard library only).
+Requirements: Claude Code (or another agent that reads Agent Skills), Python 3.10+ (standard library only).
 
 ### Option 1: Plugin marketplace (Claude Code)
 ```

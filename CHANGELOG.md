@@ -23,6 +23,7 @@ Fit for non-Godot games and lessons from using the skills on a real project; ide
 
 ### Changed
 - Every skill has a "When not to use" section naming the sibling skill.
+- Minimum Python is now 3.10 (3.9 is end-of-life and no longer available on current CI runners); CI runs on a pinned ubuntu-24.04.
 - Check-script contract for every script: `--json`, `--strict` where it applies, exit 0 ok / 1 problems / 2 target missing. `dialogue_audit.py` now exits 1 on broken jumps.
 - `tools/validate.py`: frontmatter must be exactly name + description; description must say when to use; "When not to use" required; unknown `gd-*` names, orphan files, unresolved backticked paths, routing and README coverage, README skill count; SKILL.md over 500 lines is an error; `--root` for tests.
 - Gate 2 counts targeted self-test sessions; Pre-production adds an art bible, an asset manifest and blind style scoring; DECISIONS template carries the generated index; STATE names the history file; rules block runs `docs_check.py` and routes prototypes.
